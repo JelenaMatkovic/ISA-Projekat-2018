@@ -1,0 +1,13 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body{
+    margin : 0;
+}
+
+.form-container{
+    margin: 4% 30%;
+}
+
+.form-field{
+    min-width: 300px;
+}

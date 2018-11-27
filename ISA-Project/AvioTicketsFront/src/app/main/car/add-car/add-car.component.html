@@ -1,0 +1,37 @@
+<form class="form-container" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Name" formControlName="name" required>
+    <mat-error >Name is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Model" formControlName="model" required>
+    <mat-error>Model is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Brand" formControlName="brand" >
+    <mat-error>Model is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input type="number" placeholder="Year" formControlName="year" >
+    <mat-error>Year is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input type="number" placeholder="Price" formControlName="price" >
+    <mat-error> is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input type="number" placeholder="Seats" formControlName="seats" >
+    <mat-error>Model is required!</mat-error>
+  </mat-form-field>
+
+  <br>
+  <div fxLayout="row" fxLayout="start">
+    <button mat-raised-button color="primary" (click)="addRentACar()">Add Rent-a-car</button>
+  </div>
+</form>
