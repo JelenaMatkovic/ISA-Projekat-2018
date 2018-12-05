@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
-import isa.model.User;
+import isa.user.User;
 
 @Component
 public class TokenUtils {

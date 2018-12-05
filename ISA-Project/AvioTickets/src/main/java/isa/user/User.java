@@ -10,14 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-<<<<<<< HEAD:ISA-Project/AvioTickets/src/main/java/isa/model/User.java
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import isa.model.enums.UserType;
-=======
 import isa.user.enums.UserType;
->>>>>>> 79dd4fb12067f8fdcffc79f7a1f9d8affd491385:ISA-Project/AvioTickets/src/main/java/isa/user/User.java
 import lombok.Data;
 
 @Data

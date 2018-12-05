@@ -1,4 +1,4 @@
-package isa.controller;
+package isa.user;
  
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import isa.model.dto.TokenDTO;
-import isa.model.dto.UserDTO;
+import isa.user.TokenDTO;
+import isa.user.UserDTO;
 import isa.security.TokenUtils;
 
 @RestController
