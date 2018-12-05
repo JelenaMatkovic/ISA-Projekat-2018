@@ -34,12 +34,6 @@ public class UserController {
 		return new ResponseEntity<UserDTO>(userService.save(userDTO), HttpStatus.CREATED);	
 	}
 	
-	@PostMapping("/login")
-	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO, HttpServletRequest request) { 
-		UserDTO loggedUser = userService.login(userDTO);
-		request.getSession().setAttribute("user", loggedUser);
-		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);	
-	}
 	
 	@GetMapping("/test")
 	public Object test( HttpServletRequest request) { 

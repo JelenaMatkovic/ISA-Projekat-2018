@@ -7,28 +7,40 @@
   </mat-form-field>
 
   <mat-form-field class="form-field">
-    <input matInput placeholder="Password" formControlName="password" required>
+    <input matInput type="password" placeholder="Password" formControlName="password" required>
     <mat-error>Password is required!</mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-field">
+    <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword" required>
+    <mat-error>Passwords are not same!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
     <input matInput placeholder="First name" formControlName="firstName" required>
-    <mat-error>First name is required!</mat-error>
+    <mat-error  *ngIf="form.controls.firstName.errors?.required">First name is required!</mat-error>
+    <mat-error *ngIf="form.controls.firstName.errors?.pattern">First name must contain just letters!</mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-field">
     <input matInput placeholder="Last name" formControlName="lastName" required>
-    <mat-error>Last name is required!</mat-error>
+    <mat-error *ngIf="form.controls.lastName.errors?.required">Last name is required!</mat-error>
+    <mat-error *ngIf="form.controls.lastName.errors?.pattern">Last name must contain just letters!</mat-error>
+
   </mat-form-field>
 
   <mat-form-field class="form-field">
     <input matInput placeholder="Telephone" formControlName="telephone" >
+    <mat-error *ngIf="form.controls.telephone.errors?.pattern">Telephone must contain just numbers!</mat-error>
+
   </mat-form-field>
 
   <mat-form-field class="form-field">
     <input matInput placeholder="City" formControlName="city">
-  </mat-form-field>
+    <mat-error *ngIf="form.controls.city.errors?.pattern">City must contain just letters!</mat-error>
 
+  </mat-form-field>
+  <br>
   <div fxLayout="row" fxLayout="start">
     <button mat-raised-button color="primary" (click)="save()">Register</button>
   </div>

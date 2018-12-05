@@ -2,6 +2,7 @@ package isa.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import isa.model.User;
@@ -15,11 +16,16 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	public UserDTO save(UserDTO userDTO) {
 		if(userRepository.existsByEmail(userDTO.getEmail())) {
 			throw new NullPointerException("User with email:" + userDTO.getEmail() + " already exists.");
 		}
 		userDTO.setId(null);
+		String hash = encoder.encode(userDTO.getPassword());
+		userDTO.setPassword(hash);
 		userDTO.setUserType(UserType.USER.toString());
 		User user = userRepository.save(convertToEntity(userDTO));
 		return convertToDTO(user);
@@ -46,11 +52,6 @@ public class UserService {
 		return convertToDTO(user);
 	}
 	
-	public UserDTO login(UserDTO userDTO){
-		User user = userRepository.findByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword())
-				.orElseThrow(()-> new NullPointerException("Email or password is not valid!"));
-		return convertToDTO(user);
-	}
 	
 	private User convertToEntity(UserDTO userDTO) {
 		User user = new User();

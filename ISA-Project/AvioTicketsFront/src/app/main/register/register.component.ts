@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -22,11 +22,12 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       email:['', Validators.compose([Validators.required, Validators.email])],
       password:['',Validators.required],
-      firstName:['', Validators.required],
-      lastName:['', Validators.required],
-      telephone:[''],
-      city:['']
-    });
+      confirmPassword:['',Validators.required],
+      firstName:['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]+')])],
+      lastName:['',  Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]+')])],
+      telephone:['', Validators.pattern('[0-9]*')],
+      city:['', Validators.pattern('[a-zA-Z ]*')]
+    }, { validator: this.checkPasswords });
   }
   
 
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
     this.userService.register(user).subscribe(
       data=>{
         const snack = this.snackBar.open(
-          "You successfully login in!",
+          "You successfully registered!",
           "Close",
           {duration:2000, verticalPosition: "top"}
         );
@@ -52,4 +53,21 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  checkPasswords (group: FormGroup): ValidationErrors | null  {
+    console.log('usao');
+    const password = group.get('password').value;
+    const confirmPassword = group.get('confirmPassword').value;
+  
+    const confirmPasswordControl = group.get('confirmPassword');
+    if(password !== confirmPassword){
+      
+      confirmPasswordControl.setErrors({ 'password': true })
+      console.log(confirmPasswordControl);
+      return { 'password': true };
+    }
+    confirmPasswordControl.setErrors(null);
+  };
+
 }
+
+

@@ -16,9 +16,5 @@ export class UserService {
   login(user){
     return this.http.post(SERVER_URL+'/user/login',user);
   }
-
-  test(){
-    return this.http.get(SERVER_URL+'/user/test');
-  }
   
 }

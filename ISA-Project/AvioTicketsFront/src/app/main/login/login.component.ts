@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,
     private userService:UserService,
+    private authService:AuthService,
     public snackBar: MatSnackBar,
     private router:Router) { }
 
@@ -28,8 +30,9 @@ export class LoginComponent implements OnInit {
   login(){
     const user = this.form.getRawValue();
     this.userService.login(user).subscribe(
-      data=>{
-        this.userService.test().subscribe(data=>console.log(data))
+      (data:any)=>{
+        console.log('success');
+        this.authService.saveToken(data.token);
         const snack = this.snackBar.open(
           "You successfully login!",
           "Close",
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
         })      
       },
       error =>{
+        console.log('error');
         const snack = this.snackBar.open(
           "Email or password are not valid!",
           "Close",
@@ -48,4 +52,5 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  
 }
