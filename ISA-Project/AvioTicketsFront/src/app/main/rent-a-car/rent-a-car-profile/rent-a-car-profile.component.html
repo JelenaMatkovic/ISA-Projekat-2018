@@ -1,0 +1,43 @@
+<div>
+
+  <mat-toolbar ><span style="margin-left: 45%;">{{rentACar?.name}}</span></mat-toolbar>
+  <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
+      <mat-card style="max-width: 40%;">
+          <mat-card-header>
+              <div mat-card-avatar ><mat-icon style="color: red">place</mat-icon></div>
+              <mat-card-title>Address</mat-card-title> 
+          </mat-card-header>
+          <mat-card-content>
+            {{rentACar?.address }}
+          </mat-card-content>
+      </mat-card>
+    <mat-card style="max-width: 50%;">
+        <mat-card-header>
+            <mat-card-title>Description</mat-card-title> 
+        </mat-card-header>
+        <mat-card-content>
+          {{rentACar?.description }}
+        </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
+      <mat-card style="max-width: 45%; min-width: 45%;">
+          <mat-card-header>
+                <mat-card-title>Branches</mat-card-title> 
+          </mat-card-header>
+          <mat-card-content>
+            
+          </mat-card-content>
+      </mat-card>
+    <mat-card style="max-width: 45%;  min-width: 45%;">
+        <mat-card-header>
+            <mat-card-title>Cars</mat-card-title> 
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+    </mat-card>
+  </div>
+
+
+</div>

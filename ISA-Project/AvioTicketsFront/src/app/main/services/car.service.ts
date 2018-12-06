@@ -9,8 +9,8 @@ export class CarService {
 
   constructor(private http:HttpClient) { }
 
-  addCar(car){
-    return this.http.post(SERVER_URL + '/rent-a-car',car );
+  getAllCarsByRentACar(rentCarId){
+    return this.http.get(SERVER_URL + '/rent-a-car/' + rentCarId + '/car');
   }
   
 }

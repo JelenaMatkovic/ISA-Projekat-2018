@@ -1,21 +1,27 @@
-<form class="form-container" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
-
-  <mat-form-field class="form-field">
-    <input matInput placeholder="Service name" formControlName="name" required>
-    <mat-error >Service name is required!</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-field">
-    <input matInput placeholder="Address" formControlName="address" required>
-    <mat-error>Address is required!</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-field">
-    <input matInput placeholder="Description" formControlName="description" >
-  </mat-form-field>
-
-  <br>
-  <div fxLayout="row" fxLayout="start">
-    <button mat-raised-button color="primary" (click)="addRentACar()">Add Rent-a-car</button>
+<div fxLayout="column" fxLayoutAlign="start center">
+  <div class="header-container" fxLayout="row" fxLayoutAlign="center center ">
+        <h2>Create new Rent-a-Car</h2>
   </div>
-</form>
+  <form class="container-40" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Service name" formControlName="name" required>
+      <mat-error >Service name is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Address" formControlName="address" required>
+      <mat-error>Address is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Description" formControlName="description" >
+    </mat-form-field>
+
+    <br>
+    <div fxLayout="row" fxLayout="start" fxLayoutAlign="space-between">
+      <button mat-raised-button class="back-button"  [routerLink]="'/rent-a-car'">Back</button>
+      <button mat-raised-button color="primary" (click)="addRentACar()">Save</button>
+    </div>
+  </form>
+</div>

@@ -11,3 +11,38 @@ body{
 .form-field{
     min-width: 300px;
 }
+
+.container-40{
+    width: 40%;
+}
+
+.full-container{
+    width: 100%;
+    height: 100%;
+}
+
+.back-button{
+    background: #ff2020;
+}
+.header-container{
+    min-width: 100%;
+}
+
+.table-power{
+    width: 100%;
+    height: 80%;  
+}
+
+.bottom-container{
+    min-width: 80%;
+    margin-top: 3%; 
+}
+
+.primary-button{
+    background-color: #6abd0f;
+    color: #fafafa;
+}
+
+.clickable:hover{
+    cursor: pointer;
+}

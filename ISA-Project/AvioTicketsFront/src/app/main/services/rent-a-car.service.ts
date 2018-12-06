@@ -14,4 +14,20 @@ export class RentACarService {
     return this.http.post(SERVER_URL + '/rent-a-car',rentACar );
   }
 
+  getAllRentACars(){
+    return this.http.get(SERVER_URL + '/rent-a-car');
+  }
+
+  getRentACarById(rentACarId){
+    return this.http.get(SERVER_URL + '/rent-a-car/'+rentACarId);
+  }
+
+  updateRentACar(rentACarId, rentACar){
+    return this.http.put(SERVER_URL + '/rent-a-car/'+rentACarId, rentACar);
+  }
+
+  deleteRentACar(rentACarId){
+    return this.http.delete(SERVER_URL + '/rent-a-car/'+rentACarId)
+  }
+
 }
