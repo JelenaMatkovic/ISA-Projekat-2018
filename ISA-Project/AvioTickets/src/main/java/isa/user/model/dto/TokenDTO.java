@@ -1,4 +1,4 @@
-package isa.user;
+package isa.user.model.dto;
 
 import lombok.Data;
 

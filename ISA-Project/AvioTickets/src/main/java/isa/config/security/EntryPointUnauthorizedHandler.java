@@ -1,4 +1,4 @@
-package isa.security;
+package isa.config.security;
 
 import java.io.IOException;
 

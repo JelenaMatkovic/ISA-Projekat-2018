@@ -1,4 +1,4 @@
-package isa.user;
+package isa.user.model;
 
 import java.util.Collection;
 

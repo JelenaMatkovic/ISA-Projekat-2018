@@ -1,4 +1,4 @@
-package isa.user;
+package isa.user.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import isa.user.enums.UserType;
+import isa.user.model.User;
+import isa.user.model.dto.UserDTO;
+import isa.user.repository.UserRepository;
 
 @Service
 public class UserService {

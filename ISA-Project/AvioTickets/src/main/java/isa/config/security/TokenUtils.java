@@ -1,4 +1,4 @@
-package isa.security;
+package isa.config.security;
 
 import java.io.UnsupportedEncodingException;
 
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
-import isa.user.User;
+import isa.user.model.User;
 
 @Component
 public class TokenUtils {
