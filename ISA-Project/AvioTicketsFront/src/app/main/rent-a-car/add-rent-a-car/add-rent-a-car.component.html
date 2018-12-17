@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start center">
   <div class="header-container" fxLayout="row" fxLayoutAlign="center center ">
-        <h2>Create new Rent-a-Car</h2>
+        <h2>{{header}}</h2>
   </div>
   <form class="container-40" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
 
@@ -21,7 +21,7 @@
     <br>
     <div fxLayout="row" fxLayout="start" fxLayoutAlign="space-between">
       <button mat-raised-button class="back-button"  [routerLink]="'/rent-a-car'">Back</button>
-      <button mat-raised-button color="primary" (click)="addRentACar()">Save</button>
+      <button mat-raised-button color="primary" (click)="saveRentACar()">Save</button>
     </div>
   </form>
 </div>

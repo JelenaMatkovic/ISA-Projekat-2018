@@ -31,6 +31,7 @@ public class CarService {
 	public CarDTO update(Long rentACarId, Long id, CarDTO carDTO) {
 		Car oldCar=carRepository.findByRentACarIdAndId(rentACarId, id)
 				.orElseThrow(()-> new NullPointerException("Car with id:" + id + " does not exists."));
+		carDTO.setRentACarId(rentACarId);
 		Car car =convertToEntity(carDTO);
 		oldCar.setName(car.getName());
 		oldCar.setBrand(car.getBrand());
