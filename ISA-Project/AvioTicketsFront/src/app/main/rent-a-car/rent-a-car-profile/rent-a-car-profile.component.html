@@ -1,6 +1,14 @@
 <div>
 
-  <mat-toolbar ><span style="margin-left: 45%;">{{rentACar?.name}}</span></mat-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutGap="35%">
+    <span>
+        <button mat-raised-button class="back-button" [routerLink]="'../'">Back</button>
+        <button mat-raised-button style="margin-left:10%;"  class="edit-button" 
+            [routerLink]="'/edit-rent-a-car/' + rentACarId">Edit</button>
+    </span>
+    <span >{{rentACar?.name}}</span>
+    
+  </mat-toolbar>
   <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
       <mat-card style="max-width: 40%;">
           <mat-card-header>
@@ -22,19 +30,20 @@
   </div>
 
   <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
-      <mat-card style="max-width: 45%; min-width: 45%;">
-          <mat-card-header>
-                <mat-card-title>Branches</mat-card-title> 
-          </mat-card-header>
-          <mat-card-content>
-            
-          </mat-card-content>
-      </mat-card>
+    <mat-card style="max-width: 45%; min-width: 45%;">
+        <mat-card-header>
+            <mat-card-title>Branches</mat-card-title> 
+        </mat-card-header>
+        <mat-card-content>
+            <branch-list [rentACarId]="rentACarId" ></branch-list>
+        </mat-card-content>
+    </mat-card>
     <mat-card style="max-width: 45%;  min-width: 45%;">
         <mat-card-header>
             <mat-card-title>Cars</mat-card-title> 
         </mat-card-header>
         <mat-card-content>
+            <car-list [rentACarId]="rentACarId" ></car-list>
         </mat-card-content>
     </mat-card>
   </div>

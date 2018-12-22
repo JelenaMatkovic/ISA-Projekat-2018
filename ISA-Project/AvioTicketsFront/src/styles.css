@@ -24,6 +24,11 @@ body{
 .back-button{
     background: #ff2020;
 }
+
+.edit-button{
+    background: #e7eb04;
+}
+
 .header-container{
     min-width: 100%;
 }

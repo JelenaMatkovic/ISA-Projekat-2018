@@ -6,32 +6,36 @@
   </mat-form-field>
 
   <mat-form-field class="form-field">
-    <input matInput placeholder="Model" formControlName="model" required>
+    <input matInput placeholder="Brand" formControlName="brand" required>
+    <mat-error>Brand is required!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Model" formControlName="model" >
     <mat-error>Model is required!</mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-field">
-    <input matInput placeholder="Brand" formControlName="brand" >
-    <mat-error>Model is required!</mat-error>
+    <input matInput type="number" placeholder="Year" formControlName="year" >
+    <mat-error  *ngIf="form.controls.year.errors?.required" >Year is required!</mat-error>
+    <mat-error  *ngIf="form.controls.year.errors?.pattern" >Year must contain four digit number</mat-error>
+    <mat-error  *ngIf="form.controls.year.errors?.min" >Year must be greater or equal than 1885</mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-field">
-    <input type="number" placeholder="Year" formControlName="year" >
-    <mat-error>Year is required!</mat-error>
+    <input matInput type="number" placeholder="Price" formControlName="price" >
+    <mat-error  *ngIf="form.controls.price.errors?.required" >Price is required</mat-error>
+    <mat-error  *ngIf="form.controls.price.errors?.pattern" >Price must contain just numbers</mat-error>
   </mat-form-field>
 
   <mat-form-field class="form-field">
-    <input type="number" placeholder="Price" formControlName="price" >
-    <mat-error> is required!</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-field">
-    <input type="number" placeholder="Seats" formControlName="seats" >
-    <mat-error>Model is required!</mat-error>
+    <input matInput type="number" placeholder="Seats" formControlName="seats" >
+    <mat-error  *ngIf="form.controls.seats.errors?.required" >Seats are required</mat-error>
+    <mat-error  *ngIf="form.controls.seats.errors?.pattern" >Seats must contain just numbers</mat-error>
   </mat-form-field>
 
   <br>
   <div fxLayout="row" fxLayout="start">
-    <button mat-raised-button color="primary" (click)="addRentACar()">Add Rent-a-car</button>
+    <button mat-raised-button color="primary" (click)="saveCar()">Save car</button>
   </div>
 </form>

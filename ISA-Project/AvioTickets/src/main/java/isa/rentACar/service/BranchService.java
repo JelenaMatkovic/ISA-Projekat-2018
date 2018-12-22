@@ -31,6 +31,7 @@ public class BranchService {
 	public BranchDTO update(Long rentACarId, Long id, BranchDTO branchDTO) {
 		Branch oldBranch=branchRepository.findByRentACarIdAndId(rentACarId, id)
 				.orElseThrow(()-> new NullPointerException("Branch with id:" + id + " does not exists."));
+		branchDTO.setRentACarId(rentACarId);
 		Branch branch =convertToEntity(branchDTO);
 		oldBranch.setAddress(branch.getAddress());
 		Branch updatedBranch= branchRepository.save(oldBranch);

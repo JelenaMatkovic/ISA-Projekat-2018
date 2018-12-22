@@ -16,6 +16,11 @@ import { AddRentACarComponent } from './rent-a-car/add-rent-a-car/add-rent-a-car
 import { AddCarComponent } from './car/add-car/add-car.component';
 import { RentACarListComponent } from './rent-a-car/rent-a-car-list/rent-a-car-list.component';
 import { RentACarProfileComponent } from './rent-a-car/rent-a-car-profile/rent-a-car-profile.component';
+import { AddBranchComponent } from './branch/add-branch/add-branch.component';
+import { CarListComponent } from './car/car-list/car-list.component';
+import { BranchListComponent } from './branch/branch-list/branch-list.component';
+import { EditRentACarComponent } from './rent-a-car/edit-rent-a-car/edit-rent-a-car.component';
+import { EditCarComponent } from './car/edit-car/edit-car.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { RentACarProfileComponent } from './rent-a-car/rent-a-car-profile/rent-a
     AddRentACarComponent,
     AddCarComponent,
     RentACarListComponent,
-    RentACarProfileComponent
+    RentACarProfileComponent,
+    AddBranchComponent,
+    CarListComponent,
+    BranchListComponent,
+    EditRentACarComponent,
+    EditCarComponent
   ],
   imports: [
     CommonModule,

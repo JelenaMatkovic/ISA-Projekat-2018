@@ -11,7 +11,8 @@ import { RentACarService } from '../../services/rent-a-car.service';
 })
 export class AddRentACarComponent implements OnInit {
 
-  form:FormGroup
+  header='Create new Rent-a-Car';
+  form:FormGroup;
 
   constructor(private formBuilder:FormBuilder,
     public snackBar: MatSnackBar,
@@ -27,7 +28,7 @@ export class AddRentACarComponent implements OnInit {
     });
   }
 
-  addRentACar(){
+  saveRentACar(){
     const  rentACar= this.form.getRawValue();
     this.rentACarService.addRentACar(rentACar).subscribe(
       data=>{

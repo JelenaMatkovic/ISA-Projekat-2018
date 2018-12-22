@@ -28,6 +28,7 @@ public class RentACarService {
 	public RentACarDTO update(Long id, RentACarDTO rentACarDTO) {
 		RentACar oldRentACar=rentACarRepository.findById(id).orElseThrow(()-> new NullPointerException("Rent_a_car with id:" + id + " does not exists."));
 		RentACar rentACar =convertToEntity(rentACarDTO);
+		oldRentACar.setName(rentACar.getName());
 		oldRentACar.setAddress(rentACar.getAddress());
 		oldRentACar.setDescription(rentACar.getDescription());
 		RentACar updatedrentACar=rentACarRepository.save(oldRentACar);
