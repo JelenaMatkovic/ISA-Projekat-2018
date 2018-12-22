@@ -58,11 +58,13 @@
 	      <artifactId>jjwt</artifactId>
    		  <version>0.9.1</version>
 	    </dependency>
-		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <scope>provided</scope>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+
+		
+
+
+
+
 		
 	</dependencies>
 
@@ -73,19 +75,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
-			<plugin>
-		      <groupId>org.projectlombok</groupId>
-		      <artifactId>lombok-maven-plugin</artifactId>
-		      <version>1.16.8.0</version>
-		      <executions>
-		        <execution>
-		          <phase>generate-sources</phase>
-		          <goals>
-		            <goal>delombok</goal>
-		          </goals>
-		        </execution>
-		      </executions>
-		    </plugin>
+			
 		</plugins>
 	</build>
 
