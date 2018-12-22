@@ -1,0 +1,15 @@
+<form class="form-container" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Name" formControlName="Name" required>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input matInput placeholder="Avio Company Id" formControlName="AvioCompanyId" required>
+  </mat-form-field>
+  
+  <br>
+  <div fxLayout="row" fxLayout="start">
+    <button mat-raised-button color="primary" (click)="save()">Add</button>
+  </div>
+</form>

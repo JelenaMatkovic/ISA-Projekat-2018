@@ -10,7 +10,7 @@ import { TokenInterceptor } from './main/services/token.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
