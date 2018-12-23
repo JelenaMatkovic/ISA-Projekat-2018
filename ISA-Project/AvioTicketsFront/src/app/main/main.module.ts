@@ -21,6 +21,7 @@ import { CarListComponent } from './car/car-list/car-list.component';
 import { BranchListComponent } from './branch/branch-list/branch-list.component';
 import { EditRentACarComponent } from './rent-a-car/edit-rent-a-car/edit-rent-a-car.component';
 import { EditCarComponent } from './car/edit-car/edit-car.component';
+import { AddAvioCompanyComponent } from './avio-company/add-avio-company/add-avio-company.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditCarComponent } from './car/edit-car/edit-car.component';
     CarListComponent,
     BranchListComponent,
     EditRentACarComponent,
-    EditCarComponent
+    EditCarComponent,
+    AddAvioCompanyComponent
   ],
   imports: [
     CommonModule,

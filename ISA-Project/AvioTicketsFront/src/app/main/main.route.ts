@@ -9,6 +9,7 @@ import { AddCarComponent } from "./car/add-car/add-car.component";
 import { AddBranchComponent } from "./branch/add-branch/add-branch.component";
 import { EditRentACarComponent } from "./rent-a-car/edit-rent-a-car/edit-rent-a-car.component";
 import { EditCarComponent } from "./car/edit-car/edit-car.component";
+import { AddAvioCompanyComponent } from "./avio-company/add-avio-company/add-avio-company.component";
 
 
 export const MainRoutes=[
@@ -22,6 +23,7 @@ export const MainRoutes=[
     {path: 'rent-a-car/:rentACarId', component:RentACarProfileComponent},
     {path: 'rent-a-car/:rentACarId/add-car', component:AddCarComponent},
     {path: 'rent-a-car/:rentACarId/edit-car/:carId', component:EditCarComponent},
-    {path: 'rent-a-car/:rentACarId/add-branch', component:AddBranchComponent}
+    {path: 'rent-a-car/:rentACarId/add-branch', component:AddBranchComponent},
+    {path: 'avio-company/addAvioCompany', component:AddAvioCompanyComponent}
     
 ]
