@@ -1,17 +1,30 @@
+/**
+ * 
+ * @author Dejan
+ *
+ *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
+ *
+ */
 package isa.user.model;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import isa.avioCompany.model.Path;
+import isa.avioCompany.model.SpotInTheAirPlane;
+
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import isa.user.enums.UserType;
 import lombok.Data;
@@ -19,9 +32,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="user")
-public class User implements UserDetails {
-
-	private static final long serialVersionUID = 1L;
+public class User /*implements UserDetails*/ {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -49,8 +60,11 @@ public class User implements UserDetails {
 	@Column(name="user_type", nullable = false)
 	private UserType userType;
 
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private SpotInTheAirPlane spotInTheAirPlane;
 	
-	@Override
+	/*@Override
 	public String getUsername() {		
 		return email;
 	}
@@ -83,6 +97,6 @@ public class User implements UserDetails {
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
-	}
+	}*/
 	
 }

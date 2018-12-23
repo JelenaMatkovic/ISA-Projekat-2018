@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import isa.user.model.User;
 import lombok.Data;
@@ -20,7 +21,8 @@ public class SpotInTheAirPlane {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable=false,length=100)
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
 	private User user;
 	
 	@Column(nullable=false)

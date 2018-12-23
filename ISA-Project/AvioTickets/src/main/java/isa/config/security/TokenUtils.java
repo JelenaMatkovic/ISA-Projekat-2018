@@ -1,4 +1,11 @@
-package isa.config.security;
+/**
+ * 
+ * @author Dejan
+ *
+ *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
+ *
+ */
+/*package isa.config.security;
 
 import java.io.UnsupportedEncodingException;
 
@@ -124,3 +131,4 @@ public class TokenUtils {
   }
 
 }
+*/

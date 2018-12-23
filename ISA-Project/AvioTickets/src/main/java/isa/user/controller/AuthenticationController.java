@@ -1,4 +1,11 @@
-package isa.user.controller;
+/**
+ * 
+ * @author Dejan
+ *
+ *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
+ *
+ */
+/*package isa.user.controller;
  
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,3 +61,4 @@ public class AuthenticationController {
   }
 
 }
+*/

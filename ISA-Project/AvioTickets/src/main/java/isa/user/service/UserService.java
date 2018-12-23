@@ -1,8 +1,16 @@
-package isa.user.service;
+
+/**
+ * 
+ * @author Dejan
+ *
+ *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
+ *
+ */
+/*package isa.user.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import isa.user.enums.UserType;
@@ -24,8 +32,8 @@ public class UserService {
 			throw new NullPointerException("User with email:" + userDTO.getEmail() + " already exists.");
 		}
 		userDTO.setId(null);
-		String hash = encoder.encode(userDTO.getPassword());
-		userDTO.setPassword(hash);
+		//String hash = encoder.encode(userDTO.getPassword());
+		//userDTO.setPassword(hash);
 		userDTO.setUserType(UserType.USER.toString());
 		User user = userRepository.save(convertToEntity(userDTO));
 		return convertToDTO(user);
@@ -78,3 +86,4 @@ public class UserService {
 		return userDTO;
 	}
 }
+*/

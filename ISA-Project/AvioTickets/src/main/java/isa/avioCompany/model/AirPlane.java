@@ -23,7 +23,7 @@ public class AirPlane {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable=false,length=100)
+	@Column(nullable=false,length=100,unique=true)
 	private String name;
 	
 	@OneToMany(mappedBy = "airPlane", cascade = CascadeType.ALL)
@@ -33,6 +33,6 @@ public class AirPlane {
 	private Set<Flight> flights;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "avio_company_id")
+	@JoinColumn(name = "avio_company_id", nullable = false, updatable = false, insertable = false)
 	private AvioCompany avioCompany;
 }
