@@ -28,6 +28,7 @@ public class AvioCompanyService {
 			return null;
 		}
 		AvioCompany avioCompany = avioCompanyRepository.findById(id).orElse(null);
+		System.out.println(avioCompany.getAirplanes());
 		return convertToDTO(avioCompany);
 	}
 	

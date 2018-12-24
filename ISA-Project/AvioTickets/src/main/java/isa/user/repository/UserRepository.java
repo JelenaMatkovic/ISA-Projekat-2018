@@ -1,11 +1,3 @@
-/**
- * 
- * @author Dejan
- *
- *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
- *
- */
-/*
 package isa.user.repository;
 
 import java.util.Optional;
@@ -25,4 +17,3 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByEmailAndPassword(String email, String password);
 	
 }
-*/

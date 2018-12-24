@@ -50,7 +50,7 @@ public class CarController {
 		return new ResponseEntity<CarDTO>(carService.update(rentACarId, id, carDTO),
 				HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long rentACarId, @PathVariable Long id){
 		carService.delete(rentACarId, id);

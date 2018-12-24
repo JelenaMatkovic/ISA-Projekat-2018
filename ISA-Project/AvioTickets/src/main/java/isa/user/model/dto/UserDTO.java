@@ -1,11 +1,4 @@
-/**
- * 
- * @author Dejan
- *
- *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
- *
- */
-/*package isa.user.model.dto;
+package isa.user.model.dto;
 
 import lombok.Data;
 
@@ -29,4 +22,3 @@ public class UserDTO {
 	private String userType;
 	
 }
-*/

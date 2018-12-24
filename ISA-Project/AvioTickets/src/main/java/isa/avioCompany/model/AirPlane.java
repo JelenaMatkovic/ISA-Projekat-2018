@@ -33,6 +33,6 @@ public class AirPlane {
 	private Set<Flight> flights;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "avio_company_id", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "avio_company_id")
 	private AvioCompany avioCompany;
 }

@@ -14,6 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -29,8 +30,9 @@ public class Ticket {
 	@Column(nullable=false)
 	private Double price;
 	
-	@OneToMany(mappedBy = "ticket",  cascade = CascadeType.ALL)
-	private Set<SpotInTheAirPlane> spotInTheAirplane;
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "spot_id")
+	private SpotInTheAirPlane spotInTheAirplane;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "flight_id")

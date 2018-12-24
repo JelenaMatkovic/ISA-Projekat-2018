@@ -34,6 +34,6 @@ public class Class {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "air_plane_id")
-	private AvioCompany airPlane;
+	private AirPlane airPlane;
 	
 }

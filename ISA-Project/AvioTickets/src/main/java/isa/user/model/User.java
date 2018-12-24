@@ -60,9 +60,6 @@ public class User /*implements UserDetails*/ {
 	@Column(name="user_type", nullable = false)
 	private UserType userType;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private SpotInTheAirPlane spotInTheAirPlane;
 	
 	/*@Override
 	public String getUsername() {		
