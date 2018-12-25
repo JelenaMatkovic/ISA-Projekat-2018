@@ -10,6 +10,7 @@ import { AddBranchComponent } from "./branch/add-branch/add-branch.component";
 import { EditRentACarComponent } from "./rent-a-car/edit-rent-a-car/edit-rent-a-car.component";
 import { EditCarComponent } from "./car/edit-car/edit-car.component";
 import { EditBranchComponent } from "./branch/edit-branch/edit-branch.component";
+import { AddAvioCompanyComponent } from "./avio-company/add-avio-company/add-avio-company.component";
 
 
 export const MainRoutes=[
@@ -25,6 +26,6 @@ export const MainRoutes=[
     {path: 'rent-a-car/:rentACarId/edit-car/:carId', component:EditCarComponent},
     {path: 'rent-a-car/:rentACarId/add-branch', component:AddBranchComponent},
     {path: 'rent-a-car/:rentACarId/edit-branch/:branchId', component:EditBranchComponent},
-
+    {path: 'avio-company/addAvioCompany', component:AddAvioCompanyComponent}
     
 ]

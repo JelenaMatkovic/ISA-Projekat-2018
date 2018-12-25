@@ -1,5 +1,9 @@
 package isa.avioCompany.repository;
 
-public class AvioCompanyRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import isa.avioCompany.model.AvioCompany;
+
+public interface AvioCompanyRepository extends JpaRepository<AvioCompany,Long>{
+	boolean existsByName(String name);
 }

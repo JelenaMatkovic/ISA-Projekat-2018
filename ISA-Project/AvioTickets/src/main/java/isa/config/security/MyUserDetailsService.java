@@ -1,3 +1,10 @@
+/**
+ * 
+ * @author Dejan
+ *
+ *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
+ *
+ */
 package isa.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;

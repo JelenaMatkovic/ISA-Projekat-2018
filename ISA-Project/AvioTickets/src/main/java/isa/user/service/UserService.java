@@ -1,3 +1,4 @@
+
 package isa.user.service;
 
 
@@ -24,8 +25,8 @@ public class UserService {
 			throw new NullPointerException("User with email:" + userDTO.getEmail() + " already exists.");
 		}
 		userDTO.setId(null);
-		String hash = encoder.encode(userDTO.getPassword());
-		userDTO.setPassword(hash);
+		//String hash = encoder.encode(userDTO.getPassword());
+		//userDTO.setPassword(hash);
 		userDTO.setUserType(UserType.USER.toString());
 		User user = userRepository.save(convertToEntity(userDTO));
 		return convertToDTO(user);
