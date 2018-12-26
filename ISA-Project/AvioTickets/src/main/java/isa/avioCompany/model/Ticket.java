@@ -1,8 +1,5 @@
 package isa.avioCompany.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,9 +10,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import isa.user.model.User;
 import lombok.Data;
 
 @Data
@@ -30,12 +27,23 @@ public class Ticket {
 	@Column(nullable=false)
 	private Double price;
 	
+	@Column(nullable=false)
+	private Double discount;
+	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spot_id")
 	private SpotInTheAirPlane spotInTheAirplane;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+	private User user;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "flight_id")
 	private Flight flight;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "avio_company_id")
+	private AvioCompany avioCompany;
 	
 }

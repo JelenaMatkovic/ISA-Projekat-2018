@@ -7,8 +7,6 @@
  */
 package isa.user.model;
 
-import java.util.Collection;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import isa.avioCompany.model.Path;
-import isa.avioCompany.model.SpotInTheAirPlane;
+import isa.avioCompany.model.Ticket;
 
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
@@ -60,6 +57,9 @@ public class User /*implements UserDetails*/ {
 	@Column(name="user_type", nullable = false)
 	private UserType userType;
 
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private Ticket ticket;
 	
 	/*@Override
 	public String getUsername() {		
