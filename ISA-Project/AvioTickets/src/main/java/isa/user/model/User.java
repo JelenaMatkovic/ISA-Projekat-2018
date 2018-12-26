@@ -7,6 +7,8 @@
  */
 package isa.user.model;
 
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -77,7 +79,6 @@ public class User implements UserDetails {
 		return null;
 	}
 
-
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
@@ -95,5 +96,7 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+
 	
 }
