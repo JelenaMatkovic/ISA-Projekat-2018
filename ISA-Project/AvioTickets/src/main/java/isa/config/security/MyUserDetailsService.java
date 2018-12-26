@@ -5,7 +5,7 @@
  *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
  *
  */
-/*package isa.config.security;
+package isa.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,4 +29,3 @@ public class MyUserDetailsService implements UserDetailsService {
 	    				String.format("No user found with email '%s'.", email)));	    
 	  }
 }
-*/

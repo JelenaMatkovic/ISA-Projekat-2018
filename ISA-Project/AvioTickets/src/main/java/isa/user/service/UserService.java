@@ -1,9 +1,9 @@
 
-/*package isa.user.service;
+package isa.user.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import isa.user.enums.UserType;
@@ -79,4 +79,3 @@ public class UserService {
 		return userDTO;
 	}
 }
-*/

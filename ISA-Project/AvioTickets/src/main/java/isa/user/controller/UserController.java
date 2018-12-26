@@ -5,7 +5,7 @@
  *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
  *
  */
-/*package isa.user.controller;
+package isa.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,4 +54,3 @@ public class UserController {
 		return new ResponseEntity<UserDTO>(userService.update(id, userDTO), HttpStatus.OK);
 	}
 }
-*/
