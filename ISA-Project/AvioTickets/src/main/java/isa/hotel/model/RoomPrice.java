@@ -1,6 +1,7 @@
 package isa.hotel.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="price_lists")
+@Table(name="room_prices")
 
-public class PriceList {
+public class RoomPrice {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,7 +35,15 @@ public class PriceList {
 	private double roomPrice;
 	
 	@ManyToOne
-	@JoinColumn(name = "room_id", nullable = false)
-	private Room room;
+	@JoinColumn(name = "type_id", nullable = false)
+	private ReservationType reservationType;
+	
+	@ManyToOne
+	@JoinColumn(name = "discount_id")
+	private Discount discount;
+	
+	@OneToMany(mappedBy = "roomPrice")
+	private Set<DefinedRoomPrice> definedRoomPrices;
+	
 	
 }
