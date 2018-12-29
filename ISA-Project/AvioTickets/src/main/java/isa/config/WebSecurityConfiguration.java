@@ -5,7 +5,7 @@
  *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
  *
  */
-/*package isa.config;
+package isa.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -88,4 +88,3 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
 
 }
-*/
