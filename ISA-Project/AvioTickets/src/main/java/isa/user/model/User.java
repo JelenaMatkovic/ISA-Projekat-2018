@@ -22,8 +22,8 @@ import javax.persistence.Table;
 
 import isa.avioCompany.model.Ticket;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import isa.user.enums.UserType;
 import lombok.Data;
@@ -31,7 +31,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="user")
-public class User implements UserDetails {
+public class User /*implements UserDetails*/ {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -63,7 +63,7 @@ public class User implements UserDetails {
             fetch = FetchType.LAZY, optional = false)
 	private Ticket ticket;
 	
-	@Override
+/*	@Override
 	public String getUsername() {		
 		return email;
 	}
@@ -97,6 +97,6 @@ public class User implements UserDetails {
 		return true;
 	}
 
-
+*/
 	
 }

@@ -6,7 +6,7 @@
  *
  */
 package isa.config.security;
-
+/*
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -25,4 +25,4 @@ public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
     httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Denied");
   }
 
-}
+}*/
