@@ -6,7 +6,7 @@
  *
  */
 package isa.config.security;
-/*
+
 import java.io.UnsupportedEncodingException;
 
 import java.util.Date;
@@ -130,4 +130,4 @@ public class TokenUtils {
     return (username.equals(user.getUsername()) && !(this.isTokenExpired(token)));
   }
 
-}*/
+}

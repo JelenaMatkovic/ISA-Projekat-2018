@@ -6,7 +6,7 @@
  *
  */
 package isa.config.security;
-/*
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,4 +29,3 @@ public class MyUserDetailsService implements UserDetailsService {
 	    				String.format("No user found with email '%s'.", email)));	    
 	  }
 }
-*/

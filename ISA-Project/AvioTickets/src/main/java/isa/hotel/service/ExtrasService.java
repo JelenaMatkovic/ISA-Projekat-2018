@@ -40,7 +40,7 @@ public class ExtrasService {
 	public boolean add(ExtrasDTO extrasDTO, Long hotelID) {
 		extrasDTO.setId(null);
 		extrasDTO.setHotelID(hotelID);
-		if(extrasRepository.findAll().stream().filter(x -> extrasDTO.getHotelID().equals(x.getHotel())).filter(x -> extrasDTO.getName().equals(x.getName())).map(this::convertToDTO).collect(Collectors.toList()).isEmpty()) {
+		if(extrasRepository.findAll().stream().filter(x -> extrasDTO.getHotelID().equals(x.getHotel().getId())).filter(x -> extrasDTO.getName().equals(x.getName())).map(this::convertToDTO).collect(Collectors.toList()).isEmpty()) {
 			
 			extrasRepository.save(convertToEntity(extrasDTO));
 			return true;

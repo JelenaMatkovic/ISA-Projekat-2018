@@ -6,7 +6,7 @@
  *
  */
 package isa.config.security;
-/*
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -52,4 +52,4 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
     chain.doFilter(request, response);
   }
 
-}*/
+}
