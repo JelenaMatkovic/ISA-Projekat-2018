@@ -1,9 +1,11 @@
 package isa.rentACar.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import isa.rentACar.model.RentACar;
@@ -55,6 +57,12 @@ public class RentACarService {
 		rentACarRepository.deleteById(id);
 	}
 	
+	public List<RentACarDTO> search(
+			String name, String location, LocalDateTime dateTake, LocalDateTime dateReturn) {	
+		return rentACarRepository.search(name, location, dateTake, dateReturn)
+				.stream().map(this::convertToDTO).collect(Collectors.toList());		
+	}
+	
 	private RentACar convertToEntity(RentACarDTO rentACarDTO) {
 		RentACar rentACar = new RentACar();
 		rentACar.setId(rentACarDTO.getId());
@@ -72,5 +80,7 @@ public class RentACarService {
 		rentACarDTO.setDescription(rentACar.getDescription());
 		return rentACarDTO;
 	}
+
+	
 
 }

@@ -42,7 +42,7 @@ export class EditBranchComponent implements OnInit {
   }
 
   setValues(){
-    this.form.controls.name.setValue(this.branch.address);
+    this.form.controls.address.setValue(this.branch.address);
   }
 
   saveBranch(){

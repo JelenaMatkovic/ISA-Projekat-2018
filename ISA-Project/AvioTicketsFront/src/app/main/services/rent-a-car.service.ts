@@ -14,8 +14,13 @@ export class RentACarService {
     return this.http.post(SERVER_URL + '/rent-a-car',rentACar );
   }
 
-  getAllRentACars(){
-    return this.http.get(SERVER_URL + '/rent-a-car');
+  getAllRentACars(params?){
+    const queryParams:any ={};
+    if(params.name || params.name != '') queryParams.name = params.name;
+    if(params.location || params.location != '') queryParams.location = params.location;
+    if(params.dateTake ) queryParams.dateTake = params.dateTake;
+    if(params.dateReturn ) queryParams.dateReturn = params.dateReturn;
+    return this.http.get(SERVER_URL + '/rent-a-car', {params:queryParams});
   }
 
   getRentACarById(rentACarId){

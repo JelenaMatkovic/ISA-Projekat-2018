@@ -1,0 +1,75 @@
+<div fxLayout="column" fxLayoutAlign="start center" class="full-container">
+
+  <mat-toolbar  fxLayout="row" fxLayoutGap="40%">
+    <button mat-raised-button class="back-button" [routerLink]="'../../'">Back</button>
+    <span style="margin-left: 45%;">Car reservation</span>
+    </mat-toolbar>
+
+  <form class="form-container" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+    
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px">
+      <mat-form-field>
+          <input matInput placeholder="Date take" formControlName="dateTake"
+          [owlDateTimeTrigger]="dtRangeTake" [owlDateTime]="dtRangeTake" required>
+          <owl-date-time #dtRangeTake></owl-date-time>
+      </mat-form-field>
+
+      <mat-form-field >
+          <mat-select placeholder="Place take" formControlName="placeTake" required>
+              <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                {{branch.address}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Date return" formControlName="dateReturn"
+          [owlDateTimeTrigger]="dtRangeReturn" [owlDateTime]="dtRangeReturn" required>
+          <owl-date-time #dtRangeReturn></owl-date-time>
+      </mat-form-field>
+
+      <mat-form-field >
+          <mat-select placeholder="Place return" formControlName="placeReturn" required>
+              <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                {{branch.address}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px">
+      <mat-form-field >
+          <mat-select placeholder="Type" formControlName="type" required>
+              <mat-option  value="PASSENGER_CAR">
+                  Passenger car
+              </mat-option>
+              <mat-option  value="FREIGHT_CAR">
+                  Freight car
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field >
+        <input matInput placeholder="Number of passengers" formControlName="passengers"  
+        type="number" required> 
+      </mat-form-field>
+
+      <mat-form-field >
+        <input matInput placeholder="Price from" formControlName="priceStart"  type="number"> 
+      </mat-form-field>
+      
+      <mat-form-field >
+        <input matInput placeholder="Price to"  type="number" formControlName="priceEnd"> 
+      </mat-form-field>
+    </div>
+   
+    
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" (click)="find()">Filter</button>
+    </div>
+  </form>
+
+  <div class="full-container">
+    <car-list [rentACarId]="rentACarId" [isReservation]="true" [filter]="filter" ></car-list>
+  </div>
+</div>

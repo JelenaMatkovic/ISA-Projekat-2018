@@ -1,4 +1,4 @@
-import {MatCheckboxModule} from '@angular/material';
+import {MatCheckboxModule, MatNativeDateModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -29,7 +29,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule, DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+import { MomentDateTimeAdapter, OWL_MOMENT_DATE_TIME_FORMATS } from 'ng-pick-datetime-moment';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { NgModule } from '@angular/core';
     MatInputModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
@@ -63,7 +65,9 @@ import { NgModule } from '@angular/core';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
 
   ],
   exports:[
@@ -97,7 +101,14 @@ import { NgModule } from '@angular/core';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
-  ]
+    MatPaginatorModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+  ],
+  providers: [
+    
+    {provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE]},
+    {provide: OWL_DATE_TIME_FORMATS, useValue: OWL_MOMENT_DATE_TIME_FORMATS},
+],
 })
 export class SharedModule { }

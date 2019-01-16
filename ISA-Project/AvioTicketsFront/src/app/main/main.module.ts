@@ -23,6 +23,7 @@ import { EditRentACarComponent } from './rent-a-car/edit-rent-a-car/edit-rent-a-
 import { EditCarComponent } from './car/edit-car/edit-car.component';
 import { AddAvioCompanyComponent } from './avio-company/add-avio-company/add-avio-company.component';
 import { EditBranchComponent } from './branch/edit-branch/edit-branch.component';
+import { CarReservationComponent } from './car/car-reservation/car-reservation.component';
 
 @NgModule({
   declarations:[
@@ -42,7 +43,8 @@ import { EditBranchComponent } from './branch/edit-branch/edit-branch.component'
     EditRentACarComponent,
     EditCarComponent,
     EditBranchComponent,
-    AddAvioCompanyComponent
+    AddAvioCompanyComponent,
+    CarReservationComponent,
   ],
   imports: [
     CommonModule,

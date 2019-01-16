@@ -1,5 +1,6 @@
 package isa.rentACar.model.dto;
 
+import isa.rentACar.enums.CarType;
 import lombok.Data;
 
 @Data
@@ -20,4 +21,7 @@ public class CarDTO {
 	private int seats;
 	
 	private Long rentACarId;
+	
+	private CarType carType;
+
 }

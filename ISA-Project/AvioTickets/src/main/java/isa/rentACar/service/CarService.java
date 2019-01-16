@@ -73,6 +73,7 @@ public class CarService {
 		car.setYear(carDTO.getYear());
 		car.setPrice(carDTO.getPrice());
 		car.setSeats(carDTO.getSeats());
+		car.setCarType(carDTO.getCarType());
 		
 		RentACar rentACar = rentACarRepository.findById(carDTO.getRentACarId())
 				.orElseThrow(() -> 
@@ -92,6 +93,7 @@ public class CarService {
 		carDTO.setPrice(car.getPrice());
 		carDTO.setSeats(car.getSeats());
 		carDTO.setRentACarId(car.getRentACar().getId());
+		carDTO.setCarType(car.getCarType());
 		return carDTO;
 	}
 

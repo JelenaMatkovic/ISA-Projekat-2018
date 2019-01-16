@@ -30,4 +30,13 @@ export class BranchListComponent implements OnInit {
   createTableElements(){
     this.dataSource = new MatTableDataSource<any>(this.branches);
   }
+
+  deleteBranch(branchId){
+    this.branchService.deleteBranch(this.rentACarId, branchId).subscribe(()=>{
+      const index =this.branches.findIndex(branch => branch.id === branchId);
+      this.branches.splice(index,1);
+      this.createTableElements();
+    })
+    
+  }
 }

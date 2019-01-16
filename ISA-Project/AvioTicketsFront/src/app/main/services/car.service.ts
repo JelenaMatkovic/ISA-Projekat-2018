@@ -9,8 +9,14 @@ export class CarService {
 
   constructor(private http:HttpClient) { }
 
-  getAllCarsByRentACar(rentCarId){
-    return this.http.get(SERVER_URL + '/rent-a-car/' + rentCarId + '/car');
+  getAllCarsByRentACar(rentCarId,filter?){
+    const queryParams:any ={};
+    if(filter){
+      Object.assign(queryParams, filter);
+      if(filter.priceStart ) queryParams.name = filter.name;
+      if(filter.priceEnd ) queryParams.location = filter.location;
+    } 
+    return this.http.get(SERVER_URL + '/rent-a-car/' + rentCarId + '/car', {params : queryParams});
   }
 
   addCar(rentCarId, car){
