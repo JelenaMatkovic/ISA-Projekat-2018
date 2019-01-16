@@ -2,9 +2,7 @@ package isa.hotel.model;
 
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +23,10 @@ public class Room {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name", nullable = false, length = 50)
+	@Column(name = "name", nullable = false, length = 10)
+	private String name;
+	
+	@Column(name = "floor", nullable = false, length = 50)
 	private int floor;
 	
 	@Column(name = "beds", nullable = false)
@@ -39,12 +40,12 @@ public class Room {
 	private Hotel hotel;
 	
 	@OneToMany(mappedBy = "room")
-	private Set<PriceList> priceLists;
+	private Set<DefinedRoomPrice> definedRoomPrices;
 	
 	@OneToMany(mappedBy = "reservatedRoom")
 	private Set<Reservation> reservations;
 	
 	@ManyToOne
-	@JoinColumn(name = "room_type", nullable = false)
-	private Type type;
+	@JoinColumn(name = "room_type_id", nullable = false)
+	private RoomType roomType;
 }

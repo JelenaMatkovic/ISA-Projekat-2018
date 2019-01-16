@@ -39,7 +39,7 @@ public class AvioCompany {
 	private Set<AirPlane> airplanes;
 	
 	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
-	private Set<DiscountTickets> discountTickets;
+	private Set<Ticket> discountTickets;
 	
 	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
 	private Set<Luggage> luggage;

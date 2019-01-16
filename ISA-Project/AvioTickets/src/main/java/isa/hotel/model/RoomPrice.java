@@ -17,28 +17,33 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="reservations")
-public class Reservation {
+@Table(name="room_prices")
+
+public class RoomPrice {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="date_of_arrival",nullable=false)
-	private Date dateOfArrival;
+	@Column(name="startDate",nullable=false)
+	private Date from;
 	
-	@Column(name="date_of_departure",nullable=false)
-	private Date dateOfDeparture;
+	@Column(name="endDate",nullable=false)
+	private Date to;
 	
-	@Column(name="price",nullable=false)
-	private double price;
-	
+	@Column(name="room_price",nullable=false)
+	private double roomPrice;
 	
 	@ManyToOne
-	@JoinColumn(name = "reservated_room_id", nullable = false)
-	private Room reservatedRoom;
+	@JoinColumn(name = "type_id", nullable = false)
+	private ReservationType reservationType;
 	
-	@OneToMany(mappedBy = "reservation")
-	private Set<ReservationExtras> reservationExtras;
+	@ManyToOne
+	@JoinColumn(name = "discount_id")
+	private Discount discount;
+	
+	@OneToMany(mappedBy = "roomPrice")
+	private Set<DefinedRoomPrice> definedRoomPrices;
+	
 	
 }

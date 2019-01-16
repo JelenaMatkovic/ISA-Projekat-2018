@@ -11,34 +11,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="reservations")
-public class Reservation {
-	
+public class ExtrasPrice {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="date_of_arrival",nullable=false)
-	private Date dateOfArrival;
-	
-	@Column(name="date_of_departure",nullable=false)
-	private Date dateOfDeparture;
-	
-	@Column(name="price",nullable=false)
+	@Column(name="price",nullable = false)
 	private double price;
 	
+	@Column(name="startDate",nullable=false)
+	private Date from;
+	
+	@Column(name="endDate",nullable=false)
+	private Date to;
 	
 	@ManyToOne
-	@JoinColumn(name = "reservated_room_id", nullable = false)
-	private Room reservatedRoom;
+	@JoinColumn(name = "extras_id", nullable = false)
+	private Extras extras;
 	
-	@OneToMany(mappedBy = "reservation")
+	@OneToMany(mappedBy = "extrasPrice")
 	private Set<ReservationExtras> reservationExtras;
+	
 	
 }

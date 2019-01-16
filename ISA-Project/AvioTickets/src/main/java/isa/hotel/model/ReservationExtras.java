@@ -1,26 +1,26 @@
-package isa.avioCompany.model;
+package isa.hotel.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
 
+@Data
 @Entity
-public class DiscountTickets extends Ticket{
-
+public class ReservationExtras {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable=false)
-	private Double discount;
+	@ManyToOne
+	@JoinColumn(name = "reservation_id", nullable = false)
+	private Reservation reservation;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "avio_company_id")
-	private AvioCompany avioCompany;
+	@ManyToOne
+	@JoinColumn(name = "extras_id", nullable = false)
+	private ExtrasPrice extrasPrice;
 }

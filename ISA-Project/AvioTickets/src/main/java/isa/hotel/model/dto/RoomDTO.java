@@ -3,17 +3,19 @@ package isa.hotel.model.dto;
 import lombok.Data;
 
 @Data
-public class HotelDTO {
+public class RoomDTO {
 	
 	private Long id;
 	
 	private String name;
 	
-	private String location;
+	private int floor;
 	
-	private String address;
-	
-	private String description;
+	private int beds;
 	
 	private double rating;
+	
+	private Long hotelID;
+	
+	private Long roomTypeID;
 }
