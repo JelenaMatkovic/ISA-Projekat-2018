@@ -31,8 +31,8 @@ export class AddRentACarComponent implements OnInit {
   saveRentACar(){
     const  rentACar= this.form.getRawValue();
     this.rentACarService.addRentACar(rentACar).subscribe(
-      data=>{
-          this.router.navigateByUrl('/');      
+      (data:any)=>{
+          this.router.navigateByUrl('/rent-a-car/'+ data.id);      
       } 
     );
   }

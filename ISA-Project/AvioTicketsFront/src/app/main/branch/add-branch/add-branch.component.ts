@@ -29,7 +29,7 @@ export class AddBranchComponent implements OnInit {
     });
   }
 
-  addBranch(){
+  saveBranch(){
     const branch= this.form.getRawValue();
     this.branchService.addBranch(this.rentACarId,branch).subscribe(
       data=>{

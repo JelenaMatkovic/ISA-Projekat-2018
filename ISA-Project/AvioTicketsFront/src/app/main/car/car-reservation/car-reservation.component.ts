@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { BranchService } from '../../services/branch.service';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-car-reservation',
@@ -13,7 +14,7 @@ export class CarReservationComponent implements OnInit {
   rentACarId:number;
   form:FormGroup;
   branches:any;
-  
+  filter:any;
   constructor(private activatedRoute:ActivatedRoute,
               private branchService:BranchService,
               private formBuilder: FormBuilder) { }
@@ -25,7 +26,7 @@ export class CarReservationComponent implements OnInit {
       placeTake:[null],
       placeReturn:[null],
       type:[null],
-      passengers:[null],
+      seats:[null],
       priceStart:[null],
       priceEnd:[null]
     });
@@ -39,7 +40,9 @@ export class CarReservationComponent implements OnInit {
   }
 
   find(){
-
+    const search = this.form.getRawValue();
+    this.filter = search;
+    
   }
 
 }

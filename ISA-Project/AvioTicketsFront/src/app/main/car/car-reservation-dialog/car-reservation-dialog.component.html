@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutAlign="start center" class="full-container">
+
+  <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+    <span >Confirm reservation</span>
+  </mat-toolbar>
+
+  <div>
+    <p>{{data?.car.name}}</p>
+    <p>{{data?.car.brand + ' ' + data?.car.model}}</p>
+    <p>{{data?.car.type}}</p>
+    <p>{{data?.car.year}}</p>
+    <p>{{data?.car.seats}}</p>
+    <p>{{dateTake +' - ' + dateReturn }}</p>
+    <p>{{data?.reservationInfo.placeTake +' - ' + data?.reservationInfo.placeReturn}}</p>
+    <p>{{totalPrice ? totalPrice + ' $' : '' }}</p>
+
+  </div>
+</div>

@@ -1,11 +1,13 @@
 package isa.rentACar.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import isa.rentACar.enums.CarType;
 import isa.rentACar.model.Car;
 import isa.rentACar.model.RentACar;
 import isa.rentACar.model.dto.CarDTO;
@@ -49,6 +51,12 @@ public class CarService {
 				.stream()
 				.map(this::convertToDTO)
 				.collect(Collectors.toList());
+	}
+	
+	public List<CarDTO> search(Long rentACarId, LocalDateTime dateTake, LocalDateTime dateReturn,
+			CarType type, Integer seats, Double priceStart, Double priceTo) {	
+		return carRepository.search(rentACarId, dateTake, dateReturn, type, 
+				seats, priceStart, priceTo).stream().map(this::convertToDTO).collect(Collectors.toList());	
 	}
 	
 	public CarDTO getById(Long rentACarId, Long id) {
@@ -96,5 +104,7 @@ public class CarService {
 		carDTO.setCarType(car.getCarType());
 		return carDTO;
 	}
+
+	
 
 }

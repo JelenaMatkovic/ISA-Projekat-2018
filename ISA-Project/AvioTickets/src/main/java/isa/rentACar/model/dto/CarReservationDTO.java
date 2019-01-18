@@ -22,7 +22,7 @@ public class CarReservationDTO {
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime dateReturn;
 	
-	private String placeTake;
+	private Long placeTake;
 	
-	private String placeReturn;
+	private Long placeReturn;
 }

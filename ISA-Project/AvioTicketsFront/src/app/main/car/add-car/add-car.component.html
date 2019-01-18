@@ -15,6 +15,17 @@
     <mat-error>Model is required!</mat-error>
   </mat-form-field>
 
+  <mat-form-field >
+      <mat-select placeholder="Type" formControlName="carType" required>
+          <mat-option  value="PASSENGER_CAR">
+              Passenger car
+          </mat-option>
+          <mat-option  value="FREIGHT_CAR">
+              Freight car
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+
   <mat-form-field class="form-field">
     <input matInput type="number" placeholder="Year" formControlName="year" >
     <mat-error  *ngIf="form.controls.year.errors?.required" >Year is required!</mat-error>

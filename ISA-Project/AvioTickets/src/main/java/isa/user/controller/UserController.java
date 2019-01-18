@@ -41,14 +41,6 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/test")
-	public Object test( HttpServletRequest request) { 
-		
-		return request.getSession().getAttribute("user");
-		
-	}
-	
-	
 	@PutMapping("{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO){
 		return new ResponseEntity<UserDTO>(userService.update(id, userDTO), HttpStatus.OK);

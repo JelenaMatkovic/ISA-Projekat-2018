@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import isa.rentACar.model.Branch;
 import isa.rentACar.model.Car;
 import isa.rentACar.model.CarReservation;
 
 import isa.rentACar.model.dto.CarReservationDTO;
+import isa.rentACar.repository.BranchRepository;
 import isa.rentACar.repository.CarRepository;
 import isa.rentACar.repository.CarReservationRepository;
 import isa.user.model.User;
@@ -23,6 +25,9 @@ public class CarReservationService {
 	
 	@Autowired
 	private CarRepository carRepository;
+	
+	@Autowired
+	private BranchRepository branchRepository;
 	
 
 	public CarReservationDTO createCarReservation(CarReservationDTO reservationDTO) {
@@ -64,8 +69,13 @@ public class CarReservationService {
 		carReservation.setId(carReservationDTO.getId());
 		carReservation.setDateTake(carReservationDTO.getDateTake());
 		carReservation.setDateReturn(carReservationDTO.getDateReturn());
-		carReservation.setPlaceTake(carReservationDTO.getPlaceTake());
-		carReservation.setPlaceReturn(carReservationDTO.getPlaceReturn());
+		
+		Branch placeTake = branchRepository.findByRentACarIdAndId(null, carReservationDTO.getPlaceTake())
+			.orElseThrow(()->new NullPointerException("Branch does not exist"));
+		carReservation.setPlaceTake(placeTake);
+		Branch placeReturn = branchRepository.findByRentACarIdAndId(null, carReservationDTO.getPlaceReturn())
+				.orElseThrow(()->new NullPointerException("Branch does not exist"));
+		carReservation.setPlaceReturn(placeReturn);
 		
 		User user =(User)SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
@@ -84,8 +94,8 @@ public class CarReservationService {
 		carReservationDTO.setId(carReservation.getId());
 		carReservationDTO.setDateTake(carReservation.getDateTake());
 		carReservationDTO.setDateReturn(carReservation.getDateReturn());
-		carReservationDTO.setPlaceTake(carReservation.getPlaceTake());
-		carReservationDTO.setPlaceReturn(carReservation.getPlaceReturn());
+		carReservationDTO.setPlaceTake(carReservation.getPlaceTake().getId());
+		carReservationDTO.setPlaceReturn(carReservation.getPlaceReturn().getId());
 		carReservationDTO.setCarId(carReservation.getCar().getId());
 		carReservationDTO.setCarName(carReservation.getCar().getName());
 		return carReservationDTO;

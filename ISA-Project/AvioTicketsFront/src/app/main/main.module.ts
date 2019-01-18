@@ -24,6 +24,7 @@ import { EditCarComponent } from './car/edit-car/edit-car.component';
 import { AddAvioCompanyComponent } from './avio-company/add-avio-company/add-avio-company.component';
 import { EditBranchComponent } from './branch/edit-branch/edit-branch.component';
 import { CarReservationComponent } from './car/car-reservation/car-reservation.component';
+import { CarReservationDialogComponent } from './car/car-reservation-dialog/car-reservation-dialog.component';
 
 @NgModule({
   declarations:[
@@ -45,6 +46,7 @@ import { CarReservationComponent } from './car/car-reservation/car-reservation.c
     EditBranchComponent,
     AddAvioCompanyComponent,
     CarReservationComponent,
+    CarReservationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { CarReservationComponent } from './car/car-reservation/car-reservation.c
     FlexLayoutModule,
     ReactiveFormsModule
   ],
+  entryComponents:[CarReservationDialogComponent],
   exports: [MainComponent]
 })
 export class MainModule { }

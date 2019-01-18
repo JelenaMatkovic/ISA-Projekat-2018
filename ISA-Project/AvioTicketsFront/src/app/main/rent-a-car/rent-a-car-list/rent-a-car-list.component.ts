@@ -32,15 +32,13 @@ export class RentACarListComponent implements OnInit {
   }
 
   fetchData(){
-    console.log("dkajfkd");
     const search = this.searchForm.getRawValue();
-    console.log(search);
     if(search.dateTake){
-        search.dateTake = search.dateTake.subtract(search.dateTake.utcOffset(), "hours")
+        search.dateTake = search.dateTake.subtract(search.dateTake.utcOffset(), "minutes")
           .format("YYYY-MM-DDTHH:mm:ss");
     }
     if(search.dateReturn){
-      search.dateReturn = search.dateReturn.subtract(search.dateReturn.utcOffset(), "hours")
+      search.dateReturn = search.dateReturn.subtract(search.dateReturn.utcOffset(), "minutes")
         .format("YYYY-MM-DDTHH:mm:ss");
     }
     this.rentACarService.getAllRentACars(search).subscribe(

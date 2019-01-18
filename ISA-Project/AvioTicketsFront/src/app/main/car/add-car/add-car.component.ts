@@ -30,7 +30,8 @@ export class AddCarComponent implements OnInit {
       brand:['',Validators.required],
       year:['',Validators.compose([Validators.required, Validators.pattern('[0-9]{4}'),Validators.min(1885)])],
       price:['',Validators.compose([Validators.required, Validators.pattern('[0-9]+')])],
-      seats:['',Validators.compose([Validators.required, Validators.pattern('[0-9]+')])]
+      seats:['',Validators.compose([Validators.required, Validators.pattern('[0-9]+')])],
+      carType:[null, Validators.required]
     });
   }
   

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { CarService } from '../../services/car.service';
 import { Router } from '@angular/router';
+import { CarReservationComponent } from '../car-reservation/car-reservation.component';
+import { CarReservationDialogComponent } from '../car-reservation-dialog/car-reservation-dialog.component';
 
 @Component({
   selector: 'car-list',
@@ -28,7 +30,8 @@ export class CarListComponent implements OnInit {
   }
   set filter(filter:any){
     if(!filter)return;
-    this._filter = filter;
+    this._filter = {}
+    Object.assign(this._filter, filter);
     this.carService.getAllCarsByRentACar(this.rentACarId,filter).subscribe(
       data =>{ 
         this.cars = data
@@ -42,6 +45,7 @@ export class CarListComponent implements OnInit {
   dataSource:MatTableDataSource<any>;
 
   constructor(private carService:CarService,
+              public dialog: MatDialog,
               private router:Router) { }
 
   ngOnInit() {
@@ -70,8 +74,18 @@ export class CarListComponent implements OnInit {
       const index =this.cars.findIndex(car => car.id === carId);
       this.cars.splice(index,1);
       this.createTableElements();
-    })
-    
+    });    
   }
+
+  reserve(carId){
+    const car = this.cars.find(c => c.id === carId);
+    this.dialog.open(CarReservationDialogComponent, {
+      data : {
+        car : car,
+        reservationInfo : this.filter
+      },
+      width: "50%"
+    })
+  } 
 
 }

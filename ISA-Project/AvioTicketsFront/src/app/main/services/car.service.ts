@@ -10,11 +10,18 @@ export class CarService {
   constructor(private http:HttpClient) { }
 
   getAllCarsByRentACar(rentCarId,filter?){
-    const queryParams:any ={};
-    if(filter){
-      Object.assign(queryParams, filter);
-      if(filter.priceStart ) queryParams.name = filter.name;
-      if(filter.priceEnd ) queryParams.location = filter.location;
+    let queryParams:any;
+    if(filter){    
+      queryParams = {
+        dateTake : filter.dateReturn.subtract(filter.dateReturn.utcOffset(), "hours")
+        .format("YYYY-MM-DDTHH:mm:ss"),
+        dateReturn : filter.dateReturn.subtract(filter.dateReturn.utcOffset(), "hours")
+        .format("YYYY-MM-DDTHH:mm:ss"),
+        type: filter.type,
+        seats: filter.seats
+      };
+      if(filter.priceStart ) queryParams.priceStart = filter.priceStart;
+      if(filter.priceEnd ) queryParams.priceEnd = filter.priceEnd;
     } 
     return this.http.get(SERVER_URL + '/rent-a-car/' + rentCarId + '/car', {params : queryParams});
   }

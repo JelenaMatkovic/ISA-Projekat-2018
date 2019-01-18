@@ -28,12 +28,14 @@ public class CarReservation {
 	
 	@Column(name="date_return",  nullable=false)
 	private LocalDateTime dateReturn;
+
+	@ManyToOne
+	@JoinColumn(name="place_take",nullable=false)
+	private Branch placeTake;
 	
-	@Column(name="place_take",nullable=false,length=100)
-	private String placeTake;
-	
-	@Column(name="place_return",nullable=false,length=100)
-	private String placeReturn;
+	@ManyToOne
+	@JoinColumn(name="place_return",nullable=false)
+	private Branch placeReturn;
 	
 	@ManyToOne
 	@JoinColumn(name = "car_id", nullable = false)

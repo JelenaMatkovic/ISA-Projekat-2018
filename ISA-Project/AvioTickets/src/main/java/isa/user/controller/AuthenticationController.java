@@ -5,7 +5,7 @@
  *ZAKOMENTARISANE DELOVE OTKOMENTARISATI KASNIJE , VEZANI SU ZA AUTENTIFIKACIJU I SSECURITY APLIKACIJE
  *
  */
-/*package isa.user.controller;
+package isa.user.controller;
  
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +60,4 @@ public class AuthenticationController {
     return ResponseEntity.ok(tokenDTO);
   }
 
-}*/
+}
