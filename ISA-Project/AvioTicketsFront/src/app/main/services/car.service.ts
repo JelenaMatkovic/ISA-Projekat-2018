@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SERVER_URL } from '../main.constant';
 import { HttpClient } from '@angular/common/http';
-
+import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +13,9 @@ export class CarService {
     let queryParams:any;
     if(filter){    
       queryParams = {
-        dateTake : filter.dateReturn.subtract(filter.dateReturn.utcOffset(), "hours")
+        dateTake : moment(filter.dateReturn).subtract(filter.dateReturn.utcOffset(), "minutes")
         .format("YYYY-MM-DDTHH:mm:ss"),
-        dateReturn : filter.dateReturn.subtract(filter.dateReturn.utcOffset(), "hours")
+        dateReturn : moment(filter.dateReturn).subtract(filter.dateReturn.utcOffset(), "minutes")
         .format("YYYY-MM-DDTHH:mm:ss"),
         type: filter.type,
         seats: filter.seats

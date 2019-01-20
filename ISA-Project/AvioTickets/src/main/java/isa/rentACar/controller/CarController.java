@@ -44,7 +44,7 @@ public class CarController {
 			Integer seats,
 			@RequestParam(value = "priceStart", required = false)
 			Double priceStart,
-			@RequestParam(value = "priceTo", required = false)
+			@RequestParam(value = "priceEnd", required = false)
 			Double priceTo){
 		if(dateTake != null || dateReturn !=null || type != null || seats != null || 
 				priceStart != null || priceTo != null) {

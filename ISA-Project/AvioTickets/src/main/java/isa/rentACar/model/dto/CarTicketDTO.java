@@ -8,8 +8,8 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import lombok.Data;
 
 @Data
-public class CarReservationDTO {
-	
+public class CarTicketDTO {
+
 	private Long id;
 	
 	private Long carId;
@@ -25,4 +25,5 @@ public class CarReservationDTO {
 	private Long placeTake;
 	
 	private Long placeReturn;
+	
 }

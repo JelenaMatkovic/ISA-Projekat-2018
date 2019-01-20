@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start center" class="full-container">
+<div fxLayout="column" fxLayoutAlign="start" class="full-container">
 
   <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
     <span >Confirm reservation</span>
@@ -11,8 +11,12 @@
     <p>{{data?.car.year}}</p>
     <p>{{data?.car.seats}}</p>
     <p>{{dateTake +' - ' + dateReturn }}</p>
-    <p>{{data?.reservationInfo.placeTake +' - ' + data?.reservationInfo.placeReturn}}</p>
+    <p>{{data?.reservationInfo.branchTake.address +' - ' + data?.reservationInfo.branchReturn.address}}</p>
     <p>{{totalPrice ? totalPrice + ' $' : '' }}</p>
+  </div>
 
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
   </div>
 </div>

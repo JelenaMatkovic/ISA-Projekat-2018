@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as moment from 'moment';
+import { CarReservationService } from '../../services/car-reservation.service';
 @Component({
   selector: 'app-car-reservation-dialog',
   templateUrl: './car-reservation-dialog.component.html',
@@ -14,6 +15,7 @@ export class CarReservationDialogComponent implements OnInit {
   dateReturn: string='';
 
   constructor(
+    private reservationService: CarReservationService,
     public dialogRef: MatDialogRef<CarReservationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
   
@@ -27,6 +29,26 @@ export class CarReservationDialogComponent implements OnInit {
     console.log(days);
     this.totalPrice = days * this.data.car.price;
 
+  }
+
+  confirm(){
+    const reservation = {
+      carId : this.data.car.id,
+      dateTake : this.data.reservationInfo.dateTake,
+      dateReturn : this.data.reservationInfo.dateReturn,
+      placeTake : this.data.reservationInfo.placeTake,
+      placeReturn : this.data.reservationInfo.placeReturn,
+      
+    };
+    console.log(this.reservationService);
+    this.reservationService.createReservation(reservation).subscribe(
+      data => this.dialogRef.close()
+    )
+    
+  }
+
+  cancel(){
+    this.dialogRef.close();
   }
 
  

@@ -40,7 +40,10 @@ export class CarReservationComponent implements OnInit {
   }
 
   find(){
+    
     const search = this.form.getRawValue();
+    search.branchTake = this.branches.find(branch => branch.id === search.placeTake);
+    search.branchReturn = this.branches.find(branch => branch.id === search.placeReturn);
     this.filter = search;
     
   }

@@ -26,8 +26,8 @@ public interface CarRepository extends JpaRepository<Car,Long>{
 			   "WHERE car.rentACar.id = :rentACarId " +
 			   "AND car.seats = :seats "+
 			   "AND car.carType = :type "+
-			   "AND (:priceStart is null OR :priceStart < car.price) "+
-			   "AND (:priceTo is null OR :priceTo > car.price) "+
+			   "AND (:priceStart is null OR :priceStart <= car.price) "+
+			   "AND (:priceTo is null OR :priceTo >= car.price) "+
 			   "AND ( (reservation.dateReturn is null OR reservation.dateTake is null) "+
 			   "OR NOT(:dateTake <= reservation.dateReturn AND :dateReturn >= reservation.dateTake)) ")
 	public List<Car> search(

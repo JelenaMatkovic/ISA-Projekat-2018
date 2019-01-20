@@ -70,13 +70,6 @@ public class CarReservationService {
 		carReservation.setDateTake(carReservationDTO.getDateTake());
 		carReservation.setDateReturn(carReservationDTO.getDateReturn());
 		
-		Branch placeTake = branchRepository.findByRentACarIdAndId(null, carReservationDTO.getPlaceTake())
-			.orElseThrow(()->new NullPointerException("Branch does not exist"));
-		carReservation.setPlaceTake(placeTake);
-		Branch placeReturn = branchRepository.findByRentACarIdAndId(null, carReservationDTO.getPlaceReturn())
-				.orElseThrow(()->new NullPointerException("Branch does not exist"));
-		carReservation.setPlaceReturn(placeReturn);
-		
 		User user =(User)SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		carReservation.setUser(user);
@@ -84,8 +77,16 @@ public class CarReservationService {
 		Car car = carRepository.findById(carReservationDTO.getCarId())
 				.orElseThrow(() -> 
 				new NullPointerException("Car does not exists with id:" + carReservationDTO.getCarId()));
-		
 		carReservation.setCar(car);
+		
+		Branch placeTake = branchRepository.findByRentACarIdAndId(car.getRentACar().getId(), carReservationDTO.getPlaceTake())
+			.orElseThrow(()->new NullPointerException("Branch does not exist"));
+		carReservation.setPlaceTake(placeTake);
+		
+		Branch placeReturn = branchRepository.findByRentACarIdAndId(car.getRentACar().getId(), carReservationDTO.getPlaceReturn())
+				.orElseThrow(()->new NullPointerException("Branch does not exist"));
+		carReservation.setPlaceReturn(placeReturn);
+		
 		return carReservation;
 	}
 	

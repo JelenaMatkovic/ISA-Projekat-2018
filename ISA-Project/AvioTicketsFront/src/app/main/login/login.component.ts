@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         })      
       },
       error =>{
-        console.log('error');
+        console.log(error);
         const snack = this.snackBar.open(
           "Email or password are not valid!",
           "Close",

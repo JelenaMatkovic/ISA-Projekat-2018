@@ -33,14 +33,6 @@ export class RentACarListComponent implements OnInit {
 
   fetchData(){
     const search = this.searchForm.getRawValue();
-    if(search.dateTake){
-        search.dateTake = search.dateTake.subtract(search.dateTake.utcOffset(), "minutes")
-          .format("YYYY-MM-DDTHH:mm:ss");
-    }
-    if(search.dateReturn){
-      search.dateReturn = search.dateReturn.subtract(search.dateReturn.utcOffset(), "minutes")
-        .format("YYYY-MM-DDTHH:mm:ss");
-    }
     this.rentACarService.getAllRentACars(search).subscribe(
       data =>{ 
         this.rentACars = data
