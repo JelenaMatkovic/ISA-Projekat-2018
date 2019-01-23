@@ -28,7 +28,7 @@
         </mat-card-content>
     </mat-card>
   </div>
-
+ 
   <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
     <mat-card style="max-width: 45%; min-width: 45%;">
         <mat-card-header>
@@ -48,5 +48,15 @@
     </mat-card>
   </div>
 
+  <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="center center">
+    <mat-card style="max-width: 65%; min-width: 65%;">
+        <mat-card-header>
+            <mat-card-title>Quick Tickets</mat-card-title> 
+        </mat-card-header>
+        <mat-card-content>
+            <car-quick-ticket-list [rentACarId]="rentACarId" ></car-quick-ticket-list>
+        </mat-card-content>
+    </mat-card>   
+  </div>
 
 </div>

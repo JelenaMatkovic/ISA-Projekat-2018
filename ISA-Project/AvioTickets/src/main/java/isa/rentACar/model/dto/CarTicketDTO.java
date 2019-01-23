@@ -13,8 +13,6 @@ public class CarTicketDTO {
 	private Long id;
 	
 	private Long carId;
-		
-	private String carName;
 	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime dateTake;
@@ -25,5 +23,13 @@ public class CarTicketDTO {
 	private Long placeTake;
 	
 	private Long placeReturn;
+	
+	private Long rentACarId;
+	
+	private String carName;
+	
+	private String placeTakeAddress;
+	
+	private String placeReturnAddress;
 	
 }

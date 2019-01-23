@@ -7,15 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import isa.rentACar.enums.CarTicketState;
 import isa.rentACar.model.Branch;
 import isa.rentACar.model.Car;
 import isa.rentACar.model.CarReservation;
-
+import isa.rentACar.model.CarTicket;
 import isa.rentACar.model.dto.CarReservationDTO;
 import isa.rentACar.repository.BranchRepository;
 import isa.rentACar.repository.CarRepository;
 import isa.rentACar.repository.CarReservationRepository;
+import isa.rentACar.repository.CarTicketRepository;
 import isa.user.model.User;
+import isa.user.repository.UserRepository;
 
 @Service
 public class CarReservationService {
@@ -29,7 +32,12 @@ public class CarReservationService {
 	@Autowired
 	private BranchRepository branchRepository;
 	
+	@Autowired
+	private CarTicketRepository ticketRepository;
 
+	@Autowired
+	private UserRepository userRepository;
+	
 	public CarReservationDTO createCarReservation(CarReservationDTO reservationDTO) {
 		CarReservation reservation = convertToEntity(reservationDTO);
 		
@@ -37,12 +45,13 @@ public class CarReservationService {
 		if(reservationDTO.getDateTake().isAfter(reservation.getDateReturn()))
 			throw new NullPointerException("Date take must be after date return");
 		
-		if(carReservationRepository.checkCarReservation(
-				reservation.getDateTake(), 
-				reservation.getDateReturn(), 
-				reservation.getCar().getId())) 
+		if( carReservationRepository.checkCarReservation(
+				reservationDTO.getDateTake(),reservationDTO.getDateReturn(), reservationDTO.getCarId()) 
+			||
+			ticketRepository.checkCarTicket(
+					reservationDTO.getDateTake(), reservationDTO.getDateReturn(), reservationDTO.getCarId())) 
 		{
-			throw new NullPointerException("Car reservation is already taken!");
+			throw new NullPointerException("Car reservation or ticket is already taken!");
 		}
 		
 		CarReservation newReservation = carReservationRepository.save(reservation);	
@@ -64,6 +73,32 @@ public class CarReservationService {
 		carReservationRepository.deleteById(id);
 	}
 	
+	public CarReservationDTO createQuickCarReservation(Long ticketId) {
+		CarTicket ticket = ticketRepository.findById(ticketId)
+				.orElseThrow(()-> new NullPointerException("Car ticket does not exist"));	
+		CarReservation reservation = convertFromTicket(ticket);
+		CarReservation newReservation = carReservationRepository.save(reservation);	
+		ticket.setState(CarTicketState.SOLD);
+		ticketRepository.save(ticket);
+		return convertToDTO(newReservation);
+	}
+	
+	private CarReservation convertFromTicket(CarTicket ticket) {
+		CarReservation carReservation = new CarReservation();
+		carReservation.setDateTake(ticket.getDateTake());
+		carReservation.setDateReturn(ticket.getDateReturn());
+		carReservation.setCar(ticket.getCar());		
+		carReservation.setPlaceTake(ticket.getPlaceTake());	
+		carReservation.setPlaceReturn(ticket.getPlaceReturn());
+		
+		User user =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		User userDB = userRepository.findById(user.getId())
+				.orElseThrow(()->new NullPointerException("No user"));
+		carReservation.setUser(userDB);	
+		return carReservation;
+	}
+	
 	private CarReservation convertToEntity(CarReservationDTO carReservationDTO) {
 		CarReservation carReservation = new CarReservation();
 		carReservation.setId(carReservationDTO.getId());
@@ -72,7 +107,9 @@ public class CarReservationService {
 		
 		User user =(User)SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
-		carReservation.setUser(user);
+		User userDB = userRepository.findById(user.getId())
+				.orElseThrow(()->new NullPointerException("No user"));
+		carReservation.setUser(userDB);	
 		
 		Car car = carRepository.findById(carReservationDTO.getCarId())
 				.orElseThrow(() -> 

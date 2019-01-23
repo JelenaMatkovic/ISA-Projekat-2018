@@ -25,6 +25,8 @@ import { AddAvioCompanyComponent } from './avio-company/add-avio-company/add-avi
 import { EditBranchComponent } from './branch/edit-branch/edit-branch.component';
 import { CarReservationComponent } from './car/car-reservation/car-reservation.component';
 import { CarReservationDialogComponent } from './car/car-reservation-dialog/car-reservation-dialog.component';
+import { CarQuickTicketListComponent } from './car-quick-ticket/car-quick-ticket-list/car-quick-ticket-list.component';
+import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-ticket/add-car-quick-ticket.component';
 
 @NgModule({
   declarations:[
@@ -47,6 +49,8 @@ import { CarReservationDialogComponent } from './car/car-reservation-dialog/car-
     AddAvioCompanyComponent,
     CarReservationComponent,
     CarReservationDialogComponent,
+    CarQuickTicketListComponent,
+    AddCarQuickTicketComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 package isa.rentACar.service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import isa.rentACar.model.CarTicket;
 import isa.rentACar.model.dto.CarTicketDTO;
 import isa.rentACar.repository.BranchRepository;
 import isa.rentACar.repository.CarRepository;
+import isa.rentACar.repository.CarReservationRepository;
 import isa.rentACar.repository.CarTicketRepository;
 
 @Service
@@ -23,13 +25,27 @@ public class CarTicketService {
 	private CarTicketRepository ticketRepository;
 	
 	@Autowired
+	private CarReservationRepository reservationRepository;
+	
+	@Autowired
 	private CarRepository carRepository;
 	
 	@Autowired
 	private BranchRepository branchRepository;
 
-	public CarTicketDTO createTicket(CarTicketDTO ticketDTO) {
+	public CarTicketDTO createTicket(Long rentACarId, CarTicketDTO ticketDTO) {
+		if( reservationRepository.checkCarReservation(
+				ticketDTO.getDateTake(),ticketDTO.getDateReturn(), ticketDTO.getCarId()) 
+			||
+			ticketRepository.checkCarTicket(
+				ticketDTO.getDateTake(), ticketDTO.getDateReturn(), ticketDTO.getCarId())) 
+		{
+			throw new NullPointerException("Car reservation or ticket is already taken!");
+		}
+
 		CarTicket ticket = convertToEntity(ticketDTO);
+		if(ticket.getCar().getRentACar().getId() != rentACarId)
+			throw new NullPointerException("Car does not exist in rent a car");
 		ticket.setState(CarTicketState.NEW);
 		CarTicket newTicket = ticketRepository.save(ticket);
 		return convertToDTO(newTicket);
@@ -40,8 +56,9 @@ public class CarTicketService {
 		
 		return ticketRepository.findByStateAndDateTakeGreaterThanEqualAndDateReturnLessThanEqual(
 						CarTicketState.NEW,
-						LocalDateTime.now(), 
-						LocalDateTime.now()
+						LocalDateTime.parse("2000-01-22T12:00:00", DateTimeFormatter.ISO_DATE_TIME),
+						LocalDateTime.parse("2100-12-20T12:00:00", DateTimeFormatter.ISO_DATE_TIME)
+						
 					).stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
 	
@@ -81,6 +98,9 @@ public class CarTicketService {
 		ticketDTO.setPlaceReturn(ticket.getPlaceReturn().getId());
 		ticketDTO.setCarId(ticket.getCar().getId());
 		ticketDTO.setCarName(ticket.getCar().getName());
+		ticketDTO.setPlaceTakeAddress(ticket.getPlaceTake().getAddress());
+		ticketDTO.setPlaceReturnAddress(ticket.getPlaceReturn().getAddress());
+		ticketDTO.setRentACarId(ticket.getCar().getRentACar().getId());
 		return ticketDTO;
 	}
 	
