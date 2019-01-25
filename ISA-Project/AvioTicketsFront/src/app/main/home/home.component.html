@@ -17,6 +17,27 @@
         </mat-card-header>
         <mat-card-content>
             <mat-tab-group>
+                <mat-tab label="Avio history"> 
+                    Content 1 
+                </mat-tab>
+                <mat-tab label="Hotel history"> 
+                    Content 2 
+                </mat-tab>
+                <mat-tab label="Rent-a-car history"> 
+                    <car-quick-ticket-list [isReservation]="true"></car-quick-ticket-list> 
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
+    <mat-card style="max-width: 65%;  min-width: 65%;">
+        <mat-card-header>
+            <mat-card-title>History</mat-card-title> 
+        </mat-card-header>
+        <mat-card-content>
+            <mat-tab-group>
                 <mat-tab label="Avio tickets"> 
                     Content 1 
                 </mat-tab>
@@ -24,9 +45,22 @@
                     Content 2 
                 </mat-tab>
                 <mat-tab label="Rent-a-car tickets"> 
-                    <car-quick-ticket-list [isReservation]="true"></car-quick-ticket-list> 
+                    <car-reservation-history></car-reservation-history>
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
     </mat-card>
-  </div>
+
+    <mat-card style="max-width: 25%; min-width: 25%;">
+        <mat-card-header>
+            <mat-card-title>User stuff</mat-card-title> 
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="5%">
+                <a mat-flat-button routerLink="." style="background-color: lightgreen;">Profile</a>
+                <a mat-flat-button routerLink="." style="background-color: lightgreen;">Friends</a>
+                <a mat-flat-button routerLink="." style="background-color: lightgreen;">Friend invites</a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -4,6 +4,7 @@ import { CarService } from '../../services/car.service';
 import { BranchService } from '../../services/branch.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CarQuickTicketService } from '../../services/car-quick-ticket.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-car-quick-ticket',
@@ -22,6 +23,7 @@ export class AddCarQuickTicketComponent implements OnInit {
               private carService:CarService,
               private branchService:BranchService,
               private router:Router,
+              private snackBar:MatSnackBar,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -45,8 +47,13 @@ export class AddCarQuickTicketComponent implements OnInit {
   
   saveTicket(){
     const ticket = this.form.getRawValue();
-    this.ticketServce.createTicket(this.rentACarId, ticket).subscribe(data=>
-        this.router.navigateByUrl('/rent-a-car/' + this.rentACarId)
+    this.ticketServce.createTicket(this.rentACarId, ticket).subscribe(
+      data=> this.router.navigateByUrl('/rent-a-car/' + this.rentACarId),
+      error =>  this.snackBar.open(
+        "Already exist reservation on that period!",
+        "Close",
+        {duration:3000, verticalPosition: "top"}
+      )
     );
   }
 

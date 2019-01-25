@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     const user = this.form.getRawValue();
     this.userService.login(user).subscribe(
       (data:any)=>{
-        console.log('success');
         this.authService.saveToken(data.token);
         const snack = this.snackBar.open(
           "You successfully login!",
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
         })      
       },
       error =>{
-        console.log(error);
         const snack = this.snackBar.open(
           "Email or password are not valid!",
           "Close",

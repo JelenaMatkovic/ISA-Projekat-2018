@@ -23,10 +23,11 @@ import { EditRentACarComponent } from './rent-a-car/edit-rent-a-car/edit-rent-a-
 import { EditCarComponent } from './car/edit-car/edit-car.component';
 import { AddAvioCompanyComponent } from './avio-company/add-avio-company/add-avio-company.component';
 import { EditBranchComponent } from './branch/edit-branch/edit-branch.component';
-import { CarReservationComponent } from './car/car-reservation/car-reservation.component';
-import { CarReservationDialogComponent } from './car/car-reservation-dialog/car-reservation-dialog.component';
+import { CarReservationComponent } from './car-reservation/car-reservation/car-reservation.component';
+import { CarReservationDialogComponent } from './car-reservation/car-reservation-dialog/car-reservation-dialog.component';
 import { CarQuickTicketListComponent } from './car-quick-ticket/car-quick-ticket-list/car-quick-ticket-list.component';
 import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-ticket/add-car-quick-ticket.component';
+import { CarReservationHistoryComponent } from './car-reservation/car-reservation-history/car-reservation-history.component';
 
 @NgModule({
   declarations:[
@@ -51,6 +52,7 @@ import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-tic
     CarReservationDialogComponent,
     CarQuickTicketListComponent,
     AddCarQuickTicketComponent,
+    CarReservationHistoryComponent,
   ],
   imports: [
     CommonModule,

@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { CarService } from '../../services/car.service';
 import { Router } from '@angular/router';
-import { CarReservationComponent } from '../car-reservation/car-reservation.component';
-import { CarReservationDialogComponent } from '../car-reservation-dialog/car-reservation-dialog.component';
+import { CarReservationComponent } from '../../car-reservation/car-reservation/car-reservation.component';
+import { CarReservationDialogComponent } from '../../car-reservation/car-reservation-dialog/car-reservation-dialog.component';
 
 @Component({
   selector: 'car-list',
@@ -32,7 +32,7 @@ export class CarListComponent implements OnInit {
     if(!filter)return;
     this._filter = {}
     Object.assign(this._filter, filter);
-    this.carService.getAllCarsByRentACar(this.rentACarId,filter).subscribe(
+    this.carService.getAllCarsByRentACar(this.rentACarId,this._filter).subscribe(
       data =>{ 
         this.cars = data
         this.createTableElements();

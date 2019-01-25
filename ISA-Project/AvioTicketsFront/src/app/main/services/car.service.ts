@@ -13,7 +13,7 @@ export class CarService {
     let queryParams:any;
     if(filter){    
       queryParams = {
-        dateTake : moment(filter.dateReturn).subtract(filter.dateReturn.utcOffset(), "minutes")
+        dateTake : moment(filter.dateTake).subtract(filter.dateTake.utcOffset(), "minutes")
         .format("YYYY-MM-DDTHH:mm:ss"),
         dateReturn : moment(filter.dateReturn).subtract(filter.dateReturn.utcOffset(), "minutes")
         .format("YYYY-MM-DDTHH:mm:ss"),

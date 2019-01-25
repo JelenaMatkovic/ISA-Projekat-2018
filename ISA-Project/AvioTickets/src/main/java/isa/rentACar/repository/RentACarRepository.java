@@ -15,13 +15,15 @@ public interface RentACarRepository extends JpaRepository<RentACar, Long>{
 	
 	boolean existsByAddress(String address);
 	
-	@Query("SELECT DISTINCT rent FROM RentACar rent "+
-		   "LEFT JOIN Car car ON rent.id = car.rentACar.id "+
-		   "LEFT JOIN CarReservation reservation ON car.id = reservation.car.id "+
+	@Query("SELECT rent FROM RentACar rent " +
 		   "WHERE (:name is null OR rent.name LIKE CONCAT('%',:name,'%')) "+
 		   "AND (:location is null OR rent.address LIKE CONCAT('%',:location,'%')) "+
-		   "AND ( (:dateTake is null OR :dateReturn is null OR reservation.dateReturn is null OR reservation.dateTake is null) "+
-		   "OR NOT(:dateTake <= reservation.dateReturn AND :dateReturn >= reservation.dateTake)) ")
+		   "AND NOT EXISTS( SELECT DISTINCT rent FROM RentACar rent "+		
+		   "LEFT JOIN Car car ON rent.id = car.rentACar.id "+
+		   "LEFT JOIN CarReservation reservation ON car.id = reservation.car.id "+	   
+		   "LEFT JOIN CarTicket ticket ON car.id = ticket.car.id "+
+		   "WHERE (:dateTake <= reservation.dateReturn AND :dateReturn >= reservation.dateTake) "+
+		   "OR (:dateTake <= ticket.dateReturn AND :dateReturn >= ticket.dateTake))")
 	public List<RentACar> search(
 			@Param("name") String name, 
 			@Param("location") String location, 

@@ -21,21 +21,22 @@ public interface CarRepository extends JpaRepository<Car,Long>{
 	
 	public List<Car> findByRentACarId(Long rentACarId);
 
-	@Query("SELECT DISTINCT car FROM Car car "+
-			   "LEFT JOIN CarReservation reservation ON car.id = reservation.car.id "+
-			   "LEFT JOIN CarTicket ticket ON car.id = ticket.car.id "+
-			   "WHERE car.rentACar.id = :rentACarId " +
-			   "AND car.seats = :seats "+
-			   "AND car.carType = :type "+
-			   "AND (:priceStart is null OR :priceStart <= car.price) "+
-			   "AND (:priceTo is null OR :priceTo >= car.price) "+
-			   "AND ( (reservation.dateReturn is null OR reservation.dateTake is null) "+
-			   "OR NOT(:dateTake <= reservation.dateReturn AND :dateReturn >= reservation.dateTake)) "+
-			   "AND ( (ticket.dateReturn is null OR ticket.dateTake is null) "+
-			   "OR NOT(:dateTake <= ticket.dateReturn AND :dateReturn >= ticket.dateTake)) ")
+	@Query("SELECT car FROM Car car " +
+		   "WHERE car.rentACar.id = :rentACarId " +
+		   "AND car.seats = :seats "+
+		   "AND car.carType = :type "+
+		   "AND (:priceStart is null OR :priceStart <= car.price) "+
+		   "AND (:priceTo is null OR :priceTo >= car.price) "+
+		   "AND NOT EXISTS( SELECT car FROM Car car "+
+		   "LEFT JOIN CarReservation reservation ON car.id = reservation.car.id "+
+		   "LEFT JOIN CarTicket ticket ON car.id = ticket.car.id WHERE "+
+		   " (:dateTake <= reservation.dateReturn AND :dateReturn >= reservation.dateTake) "+
+		    "OR (:dateTake <= ticket.dateReturn AND :dateReturn >= ticket.dateTake) )")
 	public List<Car> search(
 			@Param("rentACarId")Long rentACarId, @Param("dateTake")LocalDateTime dateTake, 
 			@Param("dateReturn")LocalDateTime dateReturn,@Param("type")CarType type, 
 			@Param("seats")Integer seats,@Param("priceStart") Double priceStart,
 			@Param("priceTo")Double priceTo);
+
+	
 }

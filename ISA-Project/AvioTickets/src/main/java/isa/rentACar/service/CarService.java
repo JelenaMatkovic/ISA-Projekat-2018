@@ -55,6 +55,7 @@ public class CarService {
 	
 	public List<CarDTO> search(Long rentACarId, LocalDateTime dateTake, LocalDateTime dateReturn,
 			CarType type, Integer seats, Double priceStart, Double priceTo) {	
+		
 		return carRepository.search(rentACarId, dateTake, dateReturn, type, 
 				seats, priceStart, priceTo).stream().map(this::convertToDTO).collect(Collectors.toList());	
 	}

@@ -18,7 +18,7 @@ public interface CarTicketRepository extends JpaRepository<CarTicket, Long> {
 	
 	List<CarTicket> findByCarRentACarId(Long rentACarId);
 
-	@Query("SELECT count(*) > 0 FROM CarTicket ticket"+
+	@Query("SELECT count(*) > 0 FROM CarTicket ticket "+
 		   "WHERE ticket.car.id = :carId " +
 		   "AND :dateStart <= ticket.dateReturn "+
 		   "AND :dateEnd   >= ticket.dateTake" )

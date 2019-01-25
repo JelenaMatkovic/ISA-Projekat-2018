@@ -11,6 +11,10 @@ export class CarReservationService {
     this.createReservation = this.createReservation.bind(this);
   }
 
+  getReservationHistory(){
+    return this.http.get(SERVER_URL + '/car-reservation');
+  }
+
   createReservation(reservation){
     return this.http.post(SERVER_URL + '/car-reservation', reservation);
   }

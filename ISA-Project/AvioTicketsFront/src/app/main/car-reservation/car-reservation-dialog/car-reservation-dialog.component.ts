@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 import { CarReservationService } from '../../services/car-reservation.service';
 import { CarQuickTicketService } from '../../services/car-quick-ticket.service';
@@ -17,6 +17,7 @@ export class CarReservationDialogComponent implements OnInit {
 
   constructor(
     private reservationService: CarReservationService,
+    public snackBar: MatSnackBar,
     private ticketService:CarQuickTicketService,
     public dialogRef: MatDialogRef<CarReservationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
@@ -36,7 +37,22 @@ export class CarReservationDialogComponent implements OnInit {
   confirm(){
     if(this.data.isQuick){
       this.ticketService.reserveTicket(this.data.reservationInfo.id).subscribe(
-        data => this.dialogRef.close()
+        data => {
+          this.dialogRef.close()
+          this.snackBar.open(
+            "You successfully reserved car!",
+            "Close",
+            {duration:2000, verticalPosition: "top"}
+          );
+        },
+        error =>{
+         this.snackBar.open(
+            "There was a error while reserving car!",
+            "Close",
+            {duration:2000, verticalPosition: "top"}
+          );
+        }
+         
       );
      
     }else {
@@ -49,8 +65,22 @@ export class CarReservationDialogComponent implements OnInit {
         
       };
       this.reservationService.createReservation(reservation).subscribe(
-        data => this.dialogRef.close()
-      )
+        data => {
+          this.dialogRef.close()
+          this.snackBar.open(
+            "You successfully reserved car!",
+            "Close",
+            {duration:2000, verticalPosition: "top"}
+          );
+        },
+        error => {
+          this.snackBar.open(
+            "There was a error while reserving car!",
+            "Close",
+            {duration:2000, verticalPosition: "top"}
+          );
+        }
+      );
     }
     
   }

@@ -22,7 +22,15 @@ body{
     height: 100%;
 }
 
+.full-width{
+    width: 100%;
+}
+
 .back-button{
+    background: #ff2020;
+}
+
+.delete-button{
     background: #ff2020;
 }
 

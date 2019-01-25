@@ -136,6 +136,8 @@ public class CarReservationService {
 		carReservationDTO.setPlaceReturn(carReservation.getPlaceReturn().getId());
 		carReservationDTO.setCarId(carReservation.getCar().getId());
 		carReservationDTO.setCarName(carReservation.getCar().getName());
+		carReservationDTO.setPlaceTakeAddress(carReservation.getPlaceTake().getAddress());
+		carReservationDTO.setPlaceReturnAddress(carReservation.getPlaceReturn().getAddress());
 		return carReservationDTO;
 	}
 

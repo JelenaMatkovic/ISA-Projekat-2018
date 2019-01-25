@@ -25,4 +25,8 @@ public class CarReservationDTO {
 	private Long placeTake;
 	
 	private Long placeReturn;
+	
+	private String placeTakeAddress;
+	
+	private String placeReturnAddress;
 }

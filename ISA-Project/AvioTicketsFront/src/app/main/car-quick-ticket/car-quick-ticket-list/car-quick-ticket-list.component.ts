@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { CarQuickTicketService } from '../../services/car-quick-ticket.service';
-import { CarReservationDialogComponent } from '../../car/car-reservation-dialog/car-reservation-dialog.component';
+import { CarReservationDialogComponent } from '../../car-reservation/car-reservation-dialog/car-reservation-dialog.component';
 import { CarService } from '../../services/car.service';
 
 @Component({
