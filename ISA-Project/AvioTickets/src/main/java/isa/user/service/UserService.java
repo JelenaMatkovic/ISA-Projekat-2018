@@ -3,6 +3,8 @@ package isa.user.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,10 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	@Autowired
+    public JavaMailSender emailSender;
+ 
+	
 	public UserDTO save(UserDTO userDTO) {
 		if(userRepository.existsByEmail(userDTO.getEmail())) {
 			throw new NullPointerException("User with email:" + userDTO.getEmail() + " already exists.");
@@ -29,6 +35,13 @@ public class UserService {
 		userDTO.setPassword(hash);
 		userDTO.setUserType(UserType.USER.toString());
 		User user = userRepository.save(convertToEntity(userDTO));
+		
+		SimpleMailMessage message = new SimpleMailMessage(); 
+        message.setTo(user.getEmail()); 
+        message.setSubject("ISA - account"); 
+        message.setText("Activate your account ");
+        emailSender.send(message);
+        
 		return convertToDTO(user);
 	}
 	
