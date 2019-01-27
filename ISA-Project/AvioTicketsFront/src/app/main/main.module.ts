@@ -28,6 +28,7 @@ import { CarReservationDialogComponent } from './car-reservation/car-reservation
 import { CarQuickTicketListComponent } from './car-quick-ticket/car-quick-ticket-list/car-quick-ticket-list.component';
 import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-ticket/add-car-quick-ticket.component';
 import { CarReservationHistoryComponent } from './car-reservation/car-reservation-history/car-reservation-history.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations:[
@@ -53,6 +54,7 @@ import { CarReservationHistoryComponent } from './car-reservation/car-reservatio
     CarQuickTicketListComponent,
     AddCarQuickTicketComponent,
     CarReservationHistoryComponent,
+    HomePageComponent,
   ],
   imports: [
     CommonModule,

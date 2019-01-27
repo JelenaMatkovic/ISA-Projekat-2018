@@ -1,3 +1,4 @@
+import { HomePageComponent } from "./home-page/home-page.component";
 import { HomeComponent } from "./home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { LoginComponent } from "./login/login.component";
@@ -16,7 +17,8 @@ import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-tic
 
 
 export const MainRoutes=[
-    {path : '', component: HomeComponent},
+    {path : '', component: HomePageComponent},
+    {path : 'register-user', component: HomeComponent},
     {path: 'profile', component : ProfileComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component:RegisterComponent},
