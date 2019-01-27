@@ -26,7 +26,7 @@ export class CarQuickTicketListComponent implements OnInit {
 
  
   tickets:any;
-  displayedColumns = ['car', 'date','place'];
+  displayedColumns = ['car', 'price', 'date','place'];
   dataSource:MatTableDataSource<any>;
 
   constructor(private ticketService:CarQuickTicketService,
@@ -37,6 +37,12 @@ export class CarQuickTicketListComponent implements OnInit {
   ngOnInit() {
     if(this.isReservation){
       this.displayedColumns.push('id');
+    }
+    this.fetchData();
+  }
+
+  fetchData(){
+    if(this.isReservation){
       this.ticketService.getTickets().subscribe(data =>{ 
           this.tickets = data
           this.createTableElements();
@@ -68,7 +74,7 @@ export class CarQuickTicketListComponent implements OnInit {
           isQuick : true
         },
         width: "50%"
-      }).afterClosed().subscribe(result=>this.ngOnInit());
+      }).afterClosed().subscribe(result=>this.fetchData());
     });
   } 
 }

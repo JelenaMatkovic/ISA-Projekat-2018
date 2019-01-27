@@ -27,7 +27,7 @@ public interface CarReservationRepository extends JpaRepository<CarReservation,L
 	@Query("SELECT count(*) > 0 FROM CarReservation reservation "+
 		   "WHERE reservation.id = :reservationId "+
 		   "AND reservation.user.id = :userId "+
-		   "AND reservation.dateTake - NOW() > 172800")
+		   "AND DATEDIFF(reservation.dateTake, NOW()) > 2 ")
 	public boolean canDelete(
 			@Param("reservationId")Long reservationId,
 			@Param("userId")Long userId);

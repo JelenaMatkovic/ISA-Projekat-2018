@@ -14,6 +14,14 @@
         </mat-form-field>
     </div>
 
+    <div fxLayout="row" class="full-width">
+        <mat-form-field class="full-width"  >
+            <input matInput type="number" placeholder="Discount" formControlName="discount" >
+            <mat-error  *ngIf="form.controls.discount.errors?.required" >Discount is required</mat-error>
+            <mat-error  *ngIf="form.controls.discount.errors?.min || form.controls.discount.errors?.max" >Discount must be 0-100</mat-error>
+        </mat-form-field>
+    </div>
+
     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px">
         <mat-form-field>
             <input matInput placeholder="Date take" formControlName="dateTake"

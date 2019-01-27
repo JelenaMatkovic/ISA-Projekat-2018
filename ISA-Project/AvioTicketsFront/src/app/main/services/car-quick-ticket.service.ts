@@ -16,6 +16,8 @@ export class CarQuickTicketService {
   }
 
   createTicket(rentCarId,ticket){
+    ticket.dateTake = ticket.dateTake.format("YYYY-MM-DDTHH:mm:ss");
+    ticket.dateReturn = ticket.dateReturn.format("YYYY-MM-DDTHH:mm:ss");
     return this.http.post(SERVER_URL+'/rent-a-car/' + rentCarId + '/car-ticket',ticket);
   }
 

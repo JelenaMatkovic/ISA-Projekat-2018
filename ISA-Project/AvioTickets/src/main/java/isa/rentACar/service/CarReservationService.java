@@ -1,5 +1,6 @@
 package isa.rentACar.service;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,8 @@ public class CarReservationService {
 		{
 			throw new NullPointerException("Car reservation or ticket is already taken!");
 		}
-		
+		reservation.setIsQuickReservation(false);
+		reservation.setPrice(calculatePrice(reservation));
 		CarReservation newReservation = carReservationRepository.save(reservation);	
 		return convertToDTO(newReservation);
 	}
@@ -70,6 +72,16 @@ public class CarReservationService {
 				.getAuthentication().getPrincipal();
 		if(!carReservationRepository.canDelete(id, user.getId()))
 			throw new NullPointerException("Cannot delete car reservation");
+		CarReservation reservation = carReservationRepository.findById(id).get();
+		if(reservation.getIsQuickReservation()) {
+			CarTicket ticket  = ticketRepository.findByCarIdAndDateTakeAndDateReturn(
+					reservation.getCar().getId(), 
+					reservation.getDateTake(), 
+					reservation.getDateReturn()
+			).orElseThrow(()-> new NullPointerException("Ticket does not exist"));
+			ticket.setState(CarTicketState.NEW);
+			ticketRepository.save(ticket);
+		}
 		carReservationRepository.deleteById(id);
 	}
 	
@@ -77,6 +89,8 @@ public class CarReservationService {
 		CarTicket ticket = ticketRepository.findById(ticketId)
 				.orElseThrow(()-> new NullPointerException("Car ticket does not exist"));	
 		CarReservation reservation = convertFromTicket(ticket);
+		reservation.setIsQuickReservation(true);
+		reservation.setPrice(calculatePrice(reservation));
 		CarReservation newReservation = carReservationRepository.save(reservation);	
 		ticket.setState(CarTicketState.SOLD);
 		ticketRepository.save(ticket);
@@ -138,7 +152,25 @@ public class CarReservationService {
 		carReservationDTO.setCarName(carReservation.getCar().getName());
 		carReservationDTO.setPlaceTakeAddress(carReservation.getPlaceTake().getAddress());
 		carReservationDTO.setPlaceReturnAddress(carReservation.getPlaceReturn().getAddress());
+		carReservationDTO.setTotalPrice(carReservation.getPrice());
+		carReservationDTO.setIsQuickReservation(carReservation.getIsQuickReservation());
 		return carReservationDTO;
+	}
+	
+	private Double calculatePrice(CarReservation reservation) {
+		Double priceForDay = reservation.getCar().getPrice();
+		Long minutes = Duration.between(reservation.getDateTake(),reservation.getDateReturn()).toMinutes();
+		Double numberOfDays = Math.ceil( minutes / 60.0 / 24.0) +1;
+		Double discount = 0.0;
+		if(reservation.getIsQuickReservation()) {
+			CarTicket ticket = ticketRepository.findByCarIdAndDateTakeAndDateReturn(
+					reservation.getCar().getId(), 
+					reservation.getDateTake(), 
+					reservation.getDateReturn()
+			).orElseThrow(()->new NullPointerException("Ticket does not exist"));
+			discount = priceForDay * numberOfDays * ticket.getDiscount() / 100;
+		}
+		return priceForDay * numberOfDays - discount;
 	}
 
 }

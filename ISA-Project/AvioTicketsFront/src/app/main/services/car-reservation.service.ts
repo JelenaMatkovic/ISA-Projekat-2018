@@ -16,6 +16,8 @@ export class CarReservationService {
   }
 
   createReservation(reservation){
+    reservation.dateTake = reservation.dateTake.format("YYYY-MM-DDTHH:mm:ss");
+    reservation.dateReturn = reservation.dateReturn.format("YYYY-MM-DDTHH:mm:ss");
     return this.http.post(SERVER_URL + '/car-reservation', reservation);
   }
 

@@ -23,6 +23,12 @@ public class CarReservation {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "price", nullable = false)
+	private Double price;
+	
+	@Column(name = "is_quick_reservation", nullable = false)
+	private Boolean isQuickReservation; 
+	
 	@Column(name="date_take", nullable=false)
 	private LocalDateTime dateTake;
 	
@@ -36,6 +42,7 @@ public class CarReservation {
 	@ManyToOne
 	@JoinColumn(name="place_return",nullable=false)
 	private Branch placeReturn;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "car_id", nullable = false)

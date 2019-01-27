@@ -16,6 +16,12 @@ public class CarReservationDTO {
 		
 	private String carName;
 	
+	private Double price;
+
+	private Double totalPrice;
+
+	private Boolean isQuickReservation;
+	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime dateTake;
 	

@@ -17,14 +17,16 @@
         </mat-card-header>
         <mat-card-content>
             <mat-tab-group>
-                <mat-tab label="Avio history"> 
+                <mat-tab label="Avio tickets"> 
                     Content 1 
                 </mat-tab>
-                <mat-tab label="Hotel history"> 
+                <mat-tab label="Hotel tickets"> 
                     Content 2 
                 </mat-tab>
-                <mat-tab label="Rent-a-car history"> 
-                    <car-quick-ticket-list [isReservation]="true"></car-quick-ticket-list> 
+                <mat-tab label="Rent-a-car tickets"> 
+                    <ng-template matTabContent>
+                        <car-quick-ticket-list [isReservation]="true"></car-quick-ticket-list> 
+                    </ng-template>
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
@@ -38,14 +40,16 @@
         </mat-card-header>
         <mat-card-content>
             <mat-tab-group>
-                <mat-tab label="Avio tickets"> 
+                <mat-tab label="Avio history"> 
                     Content 1 
                 </mat-tab>
-                <mat-tab label="Hotel tickets"> 
+                <mat-tab label="Hotel history"> 
                     Content 2 
                 </mat-tab>
-                <mat-tab label="Rent-a-car tickets"> 
-                    <car-reservation-history></car-reservation-history>
+                <mat-tab label="Rent-a-car history"> 
+                    <ng-template matTabContent>
+                        <car-reservation-history></car-reservation-history>
+                    </ng-template>
                 </mat-tab>
             </mat-tab-group>
         </mat-card-content>

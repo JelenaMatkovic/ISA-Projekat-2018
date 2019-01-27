@@ -32,6 +32,7 @@ export class AddCarQuickTicketComponent implements OnInit {
     })
     this.form = this.formBuilder.group({
       carId:['',Validators.required],
+      discount:[0, Validators.compose([Validators.required, Validators.max(100), Validators.min(0)])],
       placeTake:['',Validators.required],
       placeReturn:['',Validators.required],
       dateTake:['',Validators.required],

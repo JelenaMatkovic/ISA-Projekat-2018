@@ -1,5 +1,6 @@
 package isa.rentACar.service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -70,6 +71,7 @@ public class CarTicketService {
 	private CarTicket convertToEntity(CarTicketDTO ticketDTO) {
 		CarTicket ticket = new CarTicket();
 		ticket.setId(ticketDTO.getId());
+		ticket.setDiscount(ticketDTO.getDiscount());
 		ticket.setDateTake(ticketDTO.getDateTake());
 		ticket.setDateReturn(ticketDTO.getDateReturn());
 		
@@ -92,6 +94,7 @@ public class CarTicketService {
 	private CarTicketDTO convertToDTO(CarTicket ticket) {
 		CarTicketDTO ticketDTO = new CarTicketDTO();
 		ticketDTO.setId(ticket.getId());
+		ticketDTO.setDiscount(ticket.getDiscount());
 		ticketDTO.setDateTake(ticket.getDateTake());
 		ticketDTO.setDateReturn(ticket.getDateReturn());
 		ticketDTO.setPlaceTake(ticket.getPlaceTake().getId());
@@ -101,7 +104,18 @@ public class CarTicketService {
 		ticketDTO.setPlaceTakeAddress(ticket.getPlaceTake().getAddress());
 		ticketDTO.setPlaceReturnAddress(ticket.getPlaceReturn().getAddress());
 		ticketDTO.setRentACarId(ticket.getCar().getRentACar().getId());
+		ticketDTO.setTotalPrice(calculatePrice(ticket));
+		
 		return ticketDTO;
+	}
+	
+	private Double calculatePrice(CarTicket ticket) {
+		Double priceForDay = ticket.getCar().getPrice();
+		
+		Long minutes = Duration.between(ticket.getDateTake(),ticket.getDateReturn()).toMinutes();
+		Double numberOfDays = Math.ceil( minutes / 60.0 / 24.0) +1;
+		Double discount  = priceForDay * numberOfDays * ticket.getDiscount() / 100;
+		return priceForDay * numberOfDays - discount;
 	}
 	
 }

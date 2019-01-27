@@ -24,6 +24,9 @@ public class CarTicket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name="discount", nullable=false)
+	private Double discount; // In percent
+	
 	@Column(name="state", nullable=false)
 	private CarTicketState state;
 	

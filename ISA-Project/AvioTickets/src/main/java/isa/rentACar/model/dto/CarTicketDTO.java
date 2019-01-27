@@ -14,6 +14,10 @@ public class CarTicketDTO {
 	
 	private Long carId;
 	
+	private Double discount;
+		
+	private Double totalPrice;
+	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime dateTake;
 	

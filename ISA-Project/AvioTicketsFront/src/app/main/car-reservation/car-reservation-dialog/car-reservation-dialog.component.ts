@@ -27,10 +27,14 @@ export class CarReservationDialogComponent implements OnInit {
     this.dateTake = dateTake.format("DD-MM-YYYYTHH:mm:ss");
     const dateReturn = moment(this.data.reservationInfo.dateReturn);
     this.dateReturn = dateReturn.format("DD-MM-YYYYTHH:mm:ss");
-    const  duration = moment.duration(dateReturn.diff(dateTake));
-    const days = duration.days();
-    console.log(days);
-    this.totalPrice = days * this.data.car.price;
+    if(this.data.isQuick){
+      this.totalPrice = this.data.reservationInfo.totalPrice;
+    }else{    
+      const  duration = moment.duration(dateReturn.diff(dateTake));
+      const days = duration.days();
+      console.log(days);
+      this.totalPrice = days * this.data.car.price;
+    }
 
   }
 
