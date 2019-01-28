@@ -14,7 +14,7 @@ import { EditBranchComponent } from "./branch/edit-branch/edit-branch.component"
 import { AddAvioCompanyComponent } from "./avio-company/add-avio-company/add-avio-company.component";
 import { CarReservationComponent } from './car-reservation/car-reservation/car-reservation.component';
 import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-ticket/add-car-quick-ticket.component';
-
+import { ShowAvioCompaniesComponent } from './avio-company/show-avio-companies/show-avio-companies.component';
 
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
@@ -34,6 +34,8 @@ export const MainRoutes=[
     {path: 'rent-a-car/:rentACarId/add-quick-ticket', component:AddCarQuickTicketComponent},
     
     {path: 'avio-company/addAvioCompany', component:AddAvioCompanyComponent},
+
+    {path: 'avio-company/showAvioCompanies', component:ShowAvioCompaniesComponent},
     
     
 ]

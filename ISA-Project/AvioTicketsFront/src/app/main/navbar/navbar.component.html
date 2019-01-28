@@ -1,8 +1,14 @@
-<mat-toolbar  color="primary" class="mat-elevation-z8">
-    <button mat-button class="nav-button" [routerLink]="'/'">Avio Tickets</button>
-    <button mat-button class="nav-button" [routerLink]="'/login'">Log in</button>
-    <button mat-button class="nav-button" [routerLink]="'/register'">Register</button>
-    <button mat-icon-button  class="nav-button" [routerLink]="'/profile'">
-            <mat-icon >person</mat-icon>
-    </button>
-</mat-toolbar>
+<!-- Image and text -->
+<nav class="navbar navbar-custom" style="background-color: #333">
+    <a class="navbar-brand ml-5" href="#">
+      <img src="assets/Img/Logo.png" width="125" height="55"  class="d-inline-block align-top logo" [routerLink]="'/'">
+    </a>
+    <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link navigacija" href="#mdo" [routerLink]="'/login'">Logovanje</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#mdo" [routerLink]="'/register'">Registracija</a>
+        </li>
+      </ul>
+  </nav>

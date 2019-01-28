@@ -29,6 +29,7 @@ import { CarQuickTicketListComponent } from './car-quick-ticket/car-quick-ticket
 import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-ticket/add-car-quick-ticket.component';
 import { CarReservationHistoryComponent } from './car-reservation/car-reservation-history/car-reservation-history.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ShowAvioCompaniesComponent } from './avio-company/show-avio-companies/show-avio-companies.component';
 
 @NgModule({
   declarations:[
@@ -55,6 +56,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     AddCarQuickTicketComponent,
     CarReservationHistoryComponent,
     HomePageComponent,
+    ShowAvioCompaniesComponent,
   ],
   imports: [
     CommonModule,
