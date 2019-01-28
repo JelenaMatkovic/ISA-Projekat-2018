@@ -1,0 +1,18 @@
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2{
+    text-align: center;
+}
+
+p>a{
+    border-color : #61892f;
+    color: #61892f;
+}
+
+.dugme{
+    text-align: right;
+}

@@ -1,11 +1,11 @@
 li>a:hover{ 
-    border-bottom: 3px solid #959595;
+    border-bottom: 3px solid #474A4F;
     padding-bottom: 5px;
     
 }
 
 li>a.navigacija:hover{ 
-    border-bottom-color :#959595;
+    border-bottom-color :#474A4F;
 }
 
 li>a.navigacija{
@@ -17,12 +17,31 @@ li>a.navigacija{
     margin-right: 15px;
 }
 
-li>a{
-    color :#959595;
-    padding-left: 0px;
-    padding-right: 0px;
+li>a.logovanje{
+    color : #86c232;
 }
 
-.navbar{
-    font-family: 'Segoe UI';
+li>a.logovanje:hover{
+    border-bottom-color : #86c232;
+}
+
+li>a.registracija{
+    color : #61892f;
+}
+
+li>a.registracija:hover{
+    border-bottom-color : #61892f;
+}
+
+li>a{
+    color :#6b6e70;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold !important;
+}
+
+.navbar-brand{
+    margin-left: 17.5% !important;
 }

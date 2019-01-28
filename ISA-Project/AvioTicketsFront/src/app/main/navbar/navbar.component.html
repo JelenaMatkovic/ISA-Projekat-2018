@@ -1,14 +1,28 @@
 <!-- Image and text -->
-<nav class="navbar navbar-custom" style="background-color: #333">
-    <a class="navbar-brand ml-5" href="#">
+<nav class="navbar" style="background-color: #222629">
+    <a class="navbar-brand" href="#">
       <img src="assets/Img/Logo.png" width="125" height="55"  class="d-inline-block align-top logo" [routerLink]="'/'">
     </a>
+    <ul class="nav left">
+        <li class="nav-item">
+            <a class="nav-link navigacija" href="#mdo" [routerLink]="'/'">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#mdo">Avio Company</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#mdo">Hotel</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#mdo">Rent A Car</a>
+        </li>
+    </ul>
     <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link navigacija" href="#mdo" [routerLink]="'/login'">Logovanje</a>
+            <a class="nav-link registracija" href="#mdo" [routerLink]="'/register'">Registracija</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#mdo" [routerLink]="'/register'">Registracija</a>
+          <a class="nav-link logovanje" href="#mdo" [routerLink]="'/login'">Logovanje</a>
         </li>
-      </ul>
+    </ul>
   </nav>
