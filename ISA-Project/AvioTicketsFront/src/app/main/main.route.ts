@@ -15,6 +15,8 @@ import { AddAvioCompanyComponent } from "./avio-company/add-avio-company/add-avi
 import { CarReservationComponent } from './car-reservation/car-reservation/car-reservation.component';
 import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-ticket/add-car-quick-ticket.component';
 import { ShowAvioCompaniesComponent } from './avio-company/show-avio-companies/show-avio-companies.component';
+import { ShowAvioCompanyComponent } from './avio-company/show-avio-company/show-avio-company.component';
+import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/update-avio-company.component';
 
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
@@ -36,6 +38,7 @@ export const MainRoutes=[
     {path: 'avio-company/addAvioCompany', component:AddAvioCompanyComponent},
 
     {path: 'avio-company/showAvioCompanies', component:ShowAvioCompaniesComponent},
-    
+    {path: 'avio-company/showAvioCompany/:id', component:ShowAvioCompanyComponent},
+    {path: 'avio-company/updateAvioCompany/:id', component:UpdateAvioCompanyComponent}
     
 ]

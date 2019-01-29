@@ -13,6 +13,11 @@ p>a{
     color: #61892f;
 }
 
+p>a:hover{
+    background-color: #61892f;
+    color: white;
+}
+
 .dugme{
     text-align: right;
 }

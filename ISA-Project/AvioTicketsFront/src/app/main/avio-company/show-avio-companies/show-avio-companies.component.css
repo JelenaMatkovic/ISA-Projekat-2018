@@ -1,0 +1,5 @@
+table>tbody>tr:hover{
+    background-color: #86c232;
+    /*background-color: #61892f;*/
+    color: white;
+}

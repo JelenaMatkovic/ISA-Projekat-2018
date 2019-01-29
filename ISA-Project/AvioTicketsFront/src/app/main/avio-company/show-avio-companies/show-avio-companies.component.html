@@ -1,0 +1,20 @@
+<table class="container table mt-3 table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Naziv</th>
+      <th scope="col">Adresa</th>
+      <th scope="col">Opis</th>
+      <th scope="col">Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let avioCompany of avioCompanies" (click)="RowSelected(avioCompany); " id="{{avioCompany.id}}">
+      <th scope="row">{{avioCompany.id}}</th>
+      <th>{{avioCompany.name}}</th>
+      <td>{{avioCompany.address}}</td>
+      <td>{{avioCompany.description}}</td>
+      <td>{{avioCompany.rating}}</td>
+    </tr>
+  </tbody>
+</table>
