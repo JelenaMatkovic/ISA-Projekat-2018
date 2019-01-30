@@ -68,8 +68,8 @@ public class PathService {
 		Path oldPath = pathRepository.findById(id).orElse(null);
 		if(oldPath != null) {
 			Path newPath = convertToEntity(pathDTO);
-			oldPath.setStart(newPath.getStart());
-			oldPath.setEnd(newPath.getEnd());
+			oldPath.setDestinationStart(newPath.getDestinationStart());
+			oldPath.setDestinationEnd(newPath.getDestinationEnd());
 			oldPath.setNumberOfTransfer(newPath.getNumberOfTransfer());
 			pathRepository.save(oldPath);
 			return true;
@@ -81,8 +81,8 @@ public class PathService {
 	private Path convertToEntity(PathDTO pathDTO) {
 		Path path = new Path();
 		path.setId(pathDTO.getId());
-		path.setStart(pathDTO.getStart());
-		path.setEnd(pathDTO.getEnd());
+		path.setDestinationStart(pathDTO.getDestinationStart());
+		path.setDestinationEnd(pathDTO.getDestinationEnd());
 		path.setNumberOfTransfer(pathDTO.getNumberOfTransfer());
 		
 		AvioCompany avioCompany = avioCompanyRepository.findById(pathDTO.getAvio_id()).orElse(null);
@@ -93,8 +93,8 @@ public class PathService {
 	private PathDTO convertToDTO(Path path) {
 		PathDTO pathDTO = new PathDTO();
 		pathDTO.setId(path.getId());
-		pathDTO.setStart(path.getStart());
-		pathDTO.setEnd(path.getEnd());
+		pathDTO.setDestinationStart(path.getDestinationStart());
+		pathDTO.setDestinationEnd(path.getDestinationEnd());
 		pathDTO.setNumberOfTransfer(path.getNumberOfTransfer());
 		pathDTO.setAvio_id(path.getAvioCompany().getId());
 		return pathDTO;

@@ -17,7 +17,8 @@ import { AddCarQuickTicketComponent } from './car-quick-ticket/add-car-quick-tic
 import { ShowAvioCompaniesComponent } from './avio-company/show-avio-companies/show-avio-companies.component';
 import { ShowAvioCompanyComponent } from './avio-company/show-avio-company/show-avio-company.component';
 import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/update-avio-company.component';
-
+import { AddDestinationComponent } from './avio-company/add-destination/add-destination.component';
+import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
     {path : 'register-user', component: HomeComponent},
@@ -39,6 +40,8 @@ export const MainRoutes=[
 
     {path: 'avio-company/showAvioCompanies', component:ShowAvioCompaniesComponent},
     {path: 'avio-company/showAvioCompany/:id', component:ShowAvioCompanyComponent},
-    {path: 'avio-company/updateAvioCompany/:id', component:UpdateAvioCompanyComponent}
-    
+    {path: 'avio-company/updateAvioCompany/:id', component:UpdateAvioCompanyComponent},
+
+    {path: 'avio-company/showAvioCompany/:id/destination/addDestination', component:AddDestinationComponent},
+    {path: 'avio-company/showAvioCompany/:id/destination/updateDestination/:idDes', component:UpdateDestinationComponent}
 ]

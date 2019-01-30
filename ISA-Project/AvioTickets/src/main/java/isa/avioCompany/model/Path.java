@@ -24,11 +24,13 @@ public class Path {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable=false,length=100)
-	private String start;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "destination_start")
+	private Destination destinationStart;
 	
-	@Column(nullable=false,length=100)
-	private String end;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "destination_end")
+	private Destination destinationEnd;
 	
 	@Column(nullable=false)
 	private Integer numberOfTransfer;
@@ -42,5 +44,7 @@ public class Path {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "avio_company_id")
 	private AvioCompany avioCompany;
+	
+	
 
 }

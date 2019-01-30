@@ -14,6 +14,8 @@ export class ShowAvioCompanyComponent implements OnInit {
 
   avioCompanyId : any;
   avioCompany : any;
+  destinations : any;
+  temp: number;
 
   constructor(private _avioComapnyService : AvioCompanyService,
               private router:Router,
@@ -29,8 +31,19 @@ export class ShowAvioCompanyComponent implements OnInit {
             data => this.avioCompany = data
           );
       }
-    );  
+    );
+
+    this._avioComapnyService.getDestination().subscribe(
+            data => this.destinations = data
+    );
       
+  }
+
+  deleteDestination(id:number,i:number){
+    this._avioComapnyService.deleteDestination(id).subscribe(
+
+    );
+    this.destinations.splice(i,1);
   }
 
 }

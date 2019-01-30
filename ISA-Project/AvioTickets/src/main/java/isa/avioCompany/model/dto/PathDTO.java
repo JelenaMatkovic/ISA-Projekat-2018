@@ -1,5 +1,6 @@
 package isa.avioCompany.model.dto;
 
+import isa.avioCompany.model.Destination;
 import lombok.Data;
 
 @Data
@@ -7,9 +8,9 @@ public class PathDTO {
 
 	private Long id;
 
-	private String start;
+	private Destination destinationStart;
 
-	private String end;
+	private Destination destinationEnd;
 
 	private Integer numberOfTransfer;
 

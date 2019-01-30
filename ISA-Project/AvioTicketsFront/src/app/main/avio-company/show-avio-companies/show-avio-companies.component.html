@@ -9,8 +9,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let avioCompany of avioCompanies" (click)="RowSelected(avioCompany); " id="{{avioCompany.id}}">
-      <th scope="row">{{avioCompany.id}}</th>
+    <tr *ngFor="let avioCompany of avioCompanies ; let i = index" (click)="RowSelected(avioCompany); " id="{{avioCompany.id}}">
+      <th scope="row">{{i + 1}}</th>
       <th>{{avioCompany.name}}</th>
       <td>{{avioCompany.address}}</td>
       <td>{{avioCompany.description}}</td>
