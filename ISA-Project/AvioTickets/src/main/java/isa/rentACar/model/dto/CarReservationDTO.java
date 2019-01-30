@@ -35,4 +35,12 @@ public class CarReservationDTO {
 	private String placeTakeAddress;
 	
 	private String placeReturnAddress;
+	
+	private String rentACarName;
+	
+	private Long rentACarId;
+	
+	private boolean canRateCar;
+	
+	private boolean canRateRentACar;
 }

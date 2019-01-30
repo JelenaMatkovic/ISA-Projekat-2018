@@ -1,0 +1,15 @@
+<h2>Rate your reservation for {{data.name}}</h2>
+<form class="form-container" [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+
+  <mat-form-field class="form-field">
+    <input matInput type="number" placeholder="Rating" formControlName="rating" >
+    <mat-error  *ngIf="form.controls.rating.errors?.required" >Rating is required</mat-error>
+    <mat-error  *ngIf="form.controls.rating.errors?.min || form.controls.rating.errors?.max" >Rating must be between 1 and 5</mat-error>
+  </mat-form-field>
+
+  <br>
+  <div fxLayout="row" fxLayout="start">
+    <button mat-raised-button color="primary" (click)="rate()">Rate</button>
+  </div>
+</form>
+

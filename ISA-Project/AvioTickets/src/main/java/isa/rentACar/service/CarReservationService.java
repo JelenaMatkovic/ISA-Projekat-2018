@@ -1,6 +1,7 @@
 package isa.rentACar.service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import isa.rating.repository.CarRatingRepository;
+import isa.rating.repository.RentACarRatingRepository;
 import isa.rentACar.enums.CarTicketState;
 import isa.rentACar.model.Branch;
 import isa.rentACar.model.Car;
@@ -38,6 +41,13 @@ public class CarReservationService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired 
+	private CarRatingRepository carRatingRepository;
+	
+	@Autowired 
+	private RentACarRatingRepository rentACarRatingRepository;
+	
 	
 	public CarReservationDTO createCarReservation(CarReservationDTO reservationDTO) {
 		CarReservation reservation = convertToEntity(reservationDTO);
@@ -154,6 +164,10 @@ public class CarReservationService {
 		carReservationDTO.setPlaceReturnAddress(carReservation.getPlaceReturn().getAddress());
 		carReservationDTO.setTotalPrice(carReservation.getPrice());
 		carReservationDTO.setIsQuickReservation(carReservation.getIsQuickReservation());
+		carReservationDTO.setRentACarName(carReservation.getCar().getRentACar().getName());
+		carReservationDTO.setRentACarId(carReservation.getCar().getRentACar().getId());
+		carReservationDTO.setCanRateCar(!carRatingRepository.existsByCarReservationIdAndUserIdOrCarReservationDateReturnAfter(
+				carReservation.getId(), carReservation.getUser().getId(), LocalDateTime.now()));
 		return carReservationDTO;
 	}
 	

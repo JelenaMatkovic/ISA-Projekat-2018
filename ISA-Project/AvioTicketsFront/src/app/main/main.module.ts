@@ -34,6 +34,7 @@ import { ShowAvioCompanyComponent } from './avio-company/show-avio-company/show-
 import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/update-avio-company.component';
 import { AddDestinationComponent } from './avio-company/add-destination/add-destination.component';
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
+import { RatingDialogComponent } from './rating/rating-dialog/rating-dialog.component';
 
 @NgModule({
   declarations:[
@@ -65,6 +66,7 @@ import { UpdateDestinationComponent } from './avio-company/update-destination/up
     UpdateAvioCompanyComponent,
     AddDestinationComponent,
     UpdateDestinationComponent,
+    RatingDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,7 @@ import { UpdateDestinationComponent } from './avio-company/update-destination/up
     FlexLayoutModule,
     ReactiveFormsModule
   ],
-  entryComponents:[CarReservationDialogComponent],
+  entryComponents:[CarReservationDialogComponent,RatingDialogComponent],
   exports: [MainComponent]
 })
 export class MainModule { }

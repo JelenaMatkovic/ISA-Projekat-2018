@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class RentACarService {
 
-  constructor(private http:HttpClient, private authService:AuthService) { }
+  constructor(private http:HttpClient) { }
 
   addRentACar(rentACar){
     return this.http.post(SERVER_URL + '/rent-a-car',rentACar );

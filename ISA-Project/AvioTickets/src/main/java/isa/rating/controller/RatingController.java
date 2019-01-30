@@ -28,6 +28,14 @@ public class RatingController {
 		return ratingService.createRentACarRating(rentACarId,ratingDTO);
 	}
 	
+	@PostMapping("hotel/{hotelId}/rating")
+	public RatingDTO rateHotel(@RequestBody RatingDTO ratingDTO, @PathVariable Long hotelId) {
+		return ratingService.createHotelRating(hotelId,ratingDTO);
+	}
 	
+	@PostMapping("room/{roomId}/rating")
+	public RatingDTO rateRoom(@RequestBody RatingDTO ratingDTO, @PathVariable Long roomId) {
+		return ratingService.createRoomRating(roomId,ratingDTO);
+	}
 	
 }
