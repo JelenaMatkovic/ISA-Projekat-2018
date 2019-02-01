@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RentACarService } from '../../services/rent-a-car.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, Sort } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
@@ -56,5 +56,21 @@ export class RentACarListComponent implements OnInit {
     this.fetchData();
   }
 
+  sortData(sort:Sort){
+    const sortedRentACars = this.rentACars.sort((a,b) =>{
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name': return compare(a.name.toLowerCase(), b.name.toLowerCase(), isAsc);
+        case 'address': return compare(a.address.toLowerCase(), b.address.toLowerCase(), isAsc);
+        default: return 0;
+      }
+    })
+    this.dataSource =  new MatTableDataSource<any>(sortedRentACars);
+  }
 
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

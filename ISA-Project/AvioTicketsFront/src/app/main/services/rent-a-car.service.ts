@@ -35,4 +35,8 @@ export class RentACarService {
     return this.http.delete(SERVER_URL + '/rent-a-car/'+rentACarId)
   }
 
+  getReservedCarsStatistic(rentACarId, granularity){
+    return this.http.get(SERVER_URL + '/rent-a-car/' + rentACarId  + '/reserved-car-statistic', 
+      {params : {granularity:granularity} })
+  }
 }

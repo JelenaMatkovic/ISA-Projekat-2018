@@ -32,4 +32,9 @@ public interface CarReservationRepository extends JpaRepository<CarReservation,L
 			@Param("reservationId")Long reservationId,
 			@Param("userId")Long userId);
 
+	@Query("SELECT count(*) from CarReservation reservation WHERE reservation.car.rentACar.id = :id " + 
+		   "AND reservation.dateTake >= :startDate AND reservation.dateTake <= :endDate  ")
+	public Integer findNumberOfReservations(@Param("id")Long id, 
+			@Param("startDate")LocalDateTime dateStart, @Param("endDate")LocalDateTime dateEnd);
+
 }

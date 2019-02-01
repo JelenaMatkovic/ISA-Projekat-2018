@@ -112,8 +112,8 @@ public class RatingService {
 		rentACarRating.setCarReservation(carReservation);
 		if( !rentACar.getId().equals(carReservation.getCar().getRentACar().getId()) || 
 				!userDB.getId().equals(carReservation.getUser().getId())||
-				rentACarRatingRepository.existsByCarReservationIdAndUserId(carReservation.getId(), userDB.getId()) ||
-				carReservation.getDateReturn().isAfter(LocalDateTime.now())) {
+				rentACarRatingRepository.existsByCarReservationIdAndUserIdOrCarReservationDateReturnAfter(
+						carReservation.getId(), userDB.getId(),LocalDateTime.now())) {
 				throw new NullPointerException("Cannot rate reservation");
 		}
 		RentACarRating savedRating=rentACarRatingRepository.save(rentACarRating);

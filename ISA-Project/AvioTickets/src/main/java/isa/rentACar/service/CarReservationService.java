@@ -168,6 +168,8 @@ public class CarReservationService {
 		carReservationDTO.setRentACarId(carReservation.getCar().getRentACar().getId());
 		carReservationDTO.setCanRateCar(!carRatingRepository.existsByCarReservationIdAndUserIdOrCarReservationDateReturnAfter(
 				carReservation.getId(), carReservation.getUser().getId(), LocalDateTime.now()));
+		carReservationDTO.setCanRateRentACar(!rentACarRatingRepository.existsByCarReservationIdAndUserIdOrCarReservationDateReturnAfter(
+				carReservation.getId(), carReservation.getUser().getId(), LocalDateTime.now()));
 		return carReservationDTO;
 	}
 	

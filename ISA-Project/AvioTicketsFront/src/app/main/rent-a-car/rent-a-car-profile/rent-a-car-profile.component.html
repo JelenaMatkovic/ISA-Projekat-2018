@@ -10,7 +10,7 @@
     
   </mat-toolbar>
   <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
-      <mat-card style="max-width: 40%;">
+      <mat-card style="max-width: 30%; min-width: 30%;" >
           <mat-card-header>
               <div mat-card-avatar ><mat-icon style="color: red">place</mat-icon></div>
               <mat-card-title>Address</mat-card-title> 
@@ -18,19 +18,60 @@
           <mat-card-content>
             {{rentACar?.address }}
           </mat-card-content>
-      </mat-card>
-    <mat-card style="max-width: 50%;">
+        </mat-card>
+
+        <mat-card style="max-width: 30%;min-width: 30%;" >
+                <mat-card-header>
+                    <mat-card-title>Description</mat-card-title> 
+                </mat-card-header>
+                <mat-card-content>
+                  {{rentACar?.description }}
+                </mat-card-content>
+        </mat-card>
+
+      <mat-card style="max-width: 25%; min-width: 25%;" >
         <mat-card-header>
-            <mat-card-title>Description</mat-card-title> 
+            <mat-card-title>Rating</mat-card-title> 
         </mat-card-header>
-        <mat-card-content>
-          {{rentACar?.description }}
+        <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+            <ngx-charts-pie-chart
+            [view]="[150 , 150]"
+            [results]="ratingData"
+            [gradient]="gradient">
+          </ngx-charts-pie-chart>
         </mat-card-content>
     </mat-card>
   </div>
  
-  <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
-    <mat-card style="max-width: 45%; min-width: 45%;">
+  <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-around space-around">
+
+    
+
+    <mat-card style="max-width: 40%; min-width:40%;" >
+            <mat-card-header>
+                <mat-card-title>Reserved cars info</mat-card-title> 
+                <mat-select placeholder="Granularity" [(value)]="granularity"
+                    (selectionChange)="granularityChange()" >
+                        <mat-option  value="DAY">Day</mat-option>
+                        <mat-option  value="WEEK">Week</mat-option>
+                        <mat-option  value="MONTH">Month</mat-option>
+                </mat-select>
+            </mat-card-header>
+            <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+                <ngx-charts-line-chart
+                [view]="[500 , 300]"
+                [results]="reservedCarData"
+                [xAxis]="true" [yAxis]="true"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]="'Date'"
+                [yAxisLabel]="'Reserved cars'"
+                [showGridLines]="true">
+              </ngx-charts-line-chart>
+            </mat-card-content>
+        </mat-card>
+
+    <mat-card style="max-width: 50%; min-width: 50%;" >
         <mat-card-header>
             <mat-card-title>Branches</mat-card-title> 
         </mat-card-header>
@@ -38,7 +79,10 @@
             <branch-list [rentACarId]="rentACarId" ></branch-list>
         </mat-card-content>
     </mat-card>
-    <mat-card style="max-width: 45%;  min-width: 45%;">
+  </div>
+
+  <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
+    <mat-card fxFlex>
         <mat-card-header>
             <mat-card-title>Cars</mat-card-title> 
         </mat-card-header>

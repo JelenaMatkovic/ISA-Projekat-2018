@@ -24,7 +24,7 @@
             <div >
                 <button *ngIf="canCancel(element.id)" mat-raised-button class="delete-button" (click)="cancel(element.id)">Cancel</button>
                 <button *ngIf="element.canRateCar" mat-raised-button (click)="rateCar(element.id)">Rate car</button>
-                <button mat-raised-button (click)="rateRentACar(element.id)">Rate rent-a-car</button>
+                <button *ngIf="element.canRateRentACar" mat-raised-button (click)="rateRentACar(element.id)">Rate rent-a-car</button>
             </div>
         </td>
     </ng-container>

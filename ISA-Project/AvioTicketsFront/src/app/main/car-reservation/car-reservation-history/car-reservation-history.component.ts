@@ -22,7 +22,10 @@ export class CarReservationHistoryComponent implements OnInit {
               private ratingService:RatingService) { }
 
   ngOnInit() {
-   
+    this.fetchData();
+  }
+
+  fetchData(){
     this.reservationService.getReservationHistory().subscribe(data =>{ 
         this.reservations = data
         this.createTableElements();
@@ -60,7 +63,7 @@ export class CarReservationHistoryComponent implements OnInit {
       if(!result)return
       result.reservationId = reservationId;
       this.ratingService.rateCar(reservation.carId, result).subscribe(()=>{
-
+        this.fetchData();
       });
     });
 
@@ -77,7 +80,7 @@ export class CarReservationHistoryComponent implements OnInit {
       if(!result)return
       result.reservationId = reservationId;
       this.ratingService.rateRentACar(reservation.rentACarId, result).subscribe(()=>{
-
+        this.fetchData();
       });
     });
 

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import isa.rating.repository.CarRatingRepository;
 import isa.rentACar.enums.CarType;
 import isa.rentACar.model.Car;
 import isa.rentACar.model.RentACar;
@@ -22,6 +23,9 @@ public class CarService {
 	
 	@Autowired
 	private RentACarRepository rentACarRepository;
+	
+	@Autowired
+	private CarRatingRepository carRatingRepository;
 	
 	public CarDTO save(Long rentACarId, CarDTO carDTO) {
 		carDTO.setId(null);
@@ -103,6 +107,7 @@ public class CarService {
 		carDTO.setSeats(car.getSeats());
 		carDTO.setRentACarId(car.getRentACar().getId());
 		carDTO.setCarType(car.getCarType());
+		carDTO.setAverageRating(carRatingRepository.findAverageRating(car.getId()));
 		return carDTO;
 	}
 

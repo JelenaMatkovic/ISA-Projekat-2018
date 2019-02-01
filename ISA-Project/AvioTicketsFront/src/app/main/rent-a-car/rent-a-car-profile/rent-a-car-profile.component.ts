@@ -15,6 +15,10 @@ export class RentACarProfileComponent implements OnInit {
   branches:any;
   cars:any;
 
+  ratingData = [];
+  reservedCarData:any=[];
+  granularity='MONTH';
+
   constructor(private rentACarService:RentACarService,
               private carService:CarService,
               private activatedRoute: ActivatedRoute) { }
@@ -25,13 +29,26 @@ export class RentACarProfileComponent implements OnInit {
     );
 
     this.rentACarService.getRentACarById(this.rentACarId).subscribe(
-      data => this.rentACar = data
+      (data:any) => {
+        this.rentACar = data
+        this.ratingData = [{name: "Rating" , value : data.averageRating} , {name: "Not rating" , value : 5-data.averageRating} ]
+      }
     );
 
     this.carService.getAllCarsByRentACar(this.rentACarId).subscribe(
       data => this.cars = data
     );
 
+    this.rentACarService.getReservedCarsStatistic(this.rentACarId, this.granularity).subscribe(
+      data => this.reservedCarData = [{name:'Reserved cars', series: data}]
+    );
+
+  }
+
+  granularityChange(){
+    this.rentACarService.getReservedCarsStatistic(this.rentACarId, this.granularity).subscribe(
+      data => this.reservedCarData = [{name:'Reserved cars', series: data}]
+    );
   }
 
 }
