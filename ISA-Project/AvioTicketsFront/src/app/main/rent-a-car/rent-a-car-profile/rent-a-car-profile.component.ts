@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RentACarService } from '../../services/rent-a-car.service';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from '../../services/car.service';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-rent-a-car-profile',
@@ -18,7 +19,11 @@ export class RentACarProfileComponent implements OnInit {
   ratingData = [];
   reservedCarData:any=[];
   granularity='MONTH';
-
+  
+  income:any;
+  dateFrom:Date;
+  dateTo:Date;
+  
   constructor(private rentACarService:RentACarService,
               private carService:CarService,
               private activatedRoute: ActivatedRoute) { }
@@ -28,6 +33,12 @@ export class RentACarProfileComponent implements OnInit {
       params => this.rentACarId = params.rentACarId 
     );
 
+    this.dateFrom = moment().subtract(30,'days').toDate();
+    this.dateTo = moment().toDate();
+    this.rentACarService.getIncomeStatistic(this.rentACarId, moment(this.dateFrom).format('YYYY-MM-DD'), 
+    moment(this.dateTo).format('YYYY-MM-DD')).subscribe(
+      (data:any) => this.income = data.income
+    );
     this.rentACarService.getRentACarById(this.rentACarId).subscribe(
       (data:any) => {
         this.rentACar = data
@@ -48,6 +59,18 @@ export class RentACarProfileComponent implements OnInit {
   granularityChange(){
     this.rentACarService.getReservedCarsStatistic(this.rentACarId, this.granularity).subscribe(
       data => this.reservedCarData = [{name:'Reserved cars', series: data}]
+    );
+  }
+
+  dateIncomeChange(event, isDateFrom){
+    if(isDateFrom)
+      this.dateFrom = event.value
+    else 
+      this.dateTo = event.value
+    
+    this.rentACarService.getIncomeStatistic(this.rentACarId, moment(this.dateFrom).format('YYYY-MM-DD'), 
+    moment(this.dateTo).format('YYYY-MM-DD')).subscribe(
+      (data:any) => this.income = data.income
     );
   }
 

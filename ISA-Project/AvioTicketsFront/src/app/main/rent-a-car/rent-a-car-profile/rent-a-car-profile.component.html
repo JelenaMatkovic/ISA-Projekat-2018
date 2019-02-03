@@ -10,7 +10,7 @@
     
   </mat-toolbar>
   <div fxLayout="row" style="margin-top:3%;" fxLayoutAlign="space-evenly space-around">
-      <mat-card style="max-width: 30%; min-width: 30%;" >
+      <mat-card style="max-width: 25%; min-width: 25%;" >
           <mat-card-header>
               <div mat-card-avatar ><mat-icon style="color: red">place</mat-icon></div>
               <mat-card-title>Address</mat-card-title> 
@@ -20,13 +20,36 @@
           </mat-card-content>
         </mat-card>
 
-        <mat-card style="max-width: 30%;min-width: 30%;" >
+        <mat-card style="max-width: 20%;min-width: 20%;" >
                 <mat-card-header>
                     <mat-card-title>Description</mat-card-title> 
                 </mat-card-header>
                 <mat-card-content>
                   {{rentACar?.description }}
                 </mat-card-content>
+        </mat-card>
+
+        <mat-card style="max-width: 25%;min-width: 25%;" >
+            <mat-card-header>
+                <mat-card-title>Income</mat-card-title> 
+                <div>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="pickerFrom" [value]="dateFrom"
+                        placeholder="Date from" (dateChange)="dateIncomeChange($event, true)">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFrom ></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="pickerTo" [value]="dateTo"
+                        placeholder="Date to" (dateChange)="dateIncomeChange($event, false)">
+                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerTo ></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+              {{income + ' $'}}
+            </mat-card-content>
         </mat-card>
 
       <mat-card style="max-width: 25%; min-width: 25%;" >

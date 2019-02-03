@@ -19,12 +19,14 @@ import { ShowAvioCompanyComponent } from './avio-company/show-avio-company/show-
 import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/update-avio-company.component';
 import { AddDestinationComponent } from './avio-company/add-destination/add-destination.component';
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
+import { ActivationComponent } from './activation/activation.component';
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
     {path : 'register-user', component: HomeComponent},
     {path: 'profile', component : ProfileComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component:RegisterComponent},
+    {path: 'activation/:hash', component: ActivationComponent},
     {path: 'add-rent-a-car', component : AddRentACarComponent},
     {path: 'edit-rent-a-car/:rentACarId', component : EditRentACarComponent},
     {path: 'rent-a-car', component: RentACarListComponent},

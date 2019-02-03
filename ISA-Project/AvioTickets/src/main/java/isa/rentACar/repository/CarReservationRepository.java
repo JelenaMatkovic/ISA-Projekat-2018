@@ -37,4 +37,10 @@ public interface CarReservationRepository extends JpaRepository<CarReservation,L
 	public Integer findNumberOfReservations(@Param("id")Long id, 
 			@Param("startDate")LocalDateTime dateStart, @Param("endDate")LocalDateTime dateEnd);
 
+	@Query("SELECT sum(reservation.price) FROM CarReservation reservation "+
+		   "WHERE reservation.car.rentACar.id = :rentACarId " + 
+		   "AND reservation.dateTake >= :dateFrom AND reservation.dateTake <= :dateTo")
+	public Double findIncome(@Param("rentACarId")Long rentACarId, 
+			@Param("dateFrom")LocalDateTime dateFrom, @Param("dateTo")LocalDateTime dateTo);
+
 }

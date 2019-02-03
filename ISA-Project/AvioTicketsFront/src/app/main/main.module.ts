@@ -35,6 +35,7 @@ import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/u
 import { AddDestinationComponent } from './avio-company/add-destination/add-destination.component';
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
 import { RatingDialogComponent } from './rating/rating-dialog/rating-dialog.component';
+import { ActivationComponent } from './activation/activation.component';
 
 @NgModule({
   declarations:[
@@ -67,6 +68,7 @@ import { RatingDialogComponent } from './rating/rating-dialog/rating-dialog.comp
     AddDestinationComponent,
     UpdateDestinationComponent,
     RatingDialogComponent,
+    ActivationComponent,
   ],
   imports: [
     CommonModule,

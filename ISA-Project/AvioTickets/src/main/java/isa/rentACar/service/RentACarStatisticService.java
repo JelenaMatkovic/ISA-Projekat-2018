@@ -1,5 +1,6 @@
 package isa.rentACar.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import isa.rentACar.enums.Granularity;
+import isa.rentACar.model.dto.RentACarIncomeDTO;
 import isa.rentACar.model.dto.RentACarReservedCarDTO;
 import isa.rentACar.repository.CarReservationRepository;
 
 @Service
 public class RentACarStatisticService {
 
-	@Autowired CarReservationRepository carReservationRepository;
+	@Autowired 
+	private CarReservationRepository carReservationRepository;
 	
 	public List<RentACarReservedCarDTO> getReservedCarsStatistic(Long id,Granularity granularity) {
 		List<RentACarReservedCarDTO> statistics = new ArrayList<>();
@@ -69,6 +72,19 @@ public class RentACarStatisticService {
 		}
 		}
 		return statistics;
+	}
+
+	public RentACarIncomeDTO getIncomeStatistic(Long rentACarId, LocalDate dateFrom, LocalDate dateTo) {
+		Double income = carReservationRepository.findIncome(
+				rentACarId, dateFrom.atStartOfDay(), dateTo.atTime(23, 59, 59));
+		if(income == null)
+			income = 0.0;
+		RentACarIncomeDTO dto = new RentACarIncomeDTO();
+		dto.setRentACarId(rentACarId);
+		dto.setDateFrom(dateFrom);
+		dto.setDateTo(dateTo);
+		dto.setIncome(income);
+		return dto;
 	}
 
 }

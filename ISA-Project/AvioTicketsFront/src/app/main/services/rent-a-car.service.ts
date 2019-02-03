@@ -39,4 +39,9 @@ export class RentACarService {
     return this.http.get(SERVER_URL + '/rent-a-car/' + rentACarId  + '/reserved-car-statistic', 
       {params : {granularity:granularity} })
   }
+
+  getIncomeStatistic(rentACarId, dateFrom, dateTo){
+    return this.http.get(SERVER_URL + '/rent-a-car/' + rentACarId  + '/income-statistic', 
+      {params : {dateFrom:dateFrom , dateTo:dateTo} })
+  }
 }
