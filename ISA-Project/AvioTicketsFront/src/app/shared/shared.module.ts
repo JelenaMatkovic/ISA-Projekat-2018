@@ -31,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
 import { OwlDateTimeModule, OwlNativeDateTimeModule, DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { MomentDateTimeAdapter, OWL_MOMENT_DATE_TIME_FORMATS } from 'ng-pick-datetime-moment';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   imports: [
@@ -68,6 +69,8 @@ import { MomentDateTimeAdapter, OWL_MOMENT_DATE_TIME_FORMATS } from 'ng-pick-dat
     MatPaginatorModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    NgxChartsModule
+    
 
   ],
   exports:[
@@ -104,6 +107,7 @@ import { MomentDateTimeAdapter, OWL_MOMENT_DATE_TIME_FORMATS } from 'ng-pick-dat
     MatPaginatorModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    NgxChartsModule
   ],
   providers: [
     

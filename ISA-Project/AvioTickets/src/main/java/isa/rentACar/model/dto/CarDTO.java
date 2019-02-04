@@ -23,5 +23,7 @@ public class CarDTO {
 	private Long rentACarId;
 	
 	private CarType carType;
+	
+	private Double averageRating; 
 
 }

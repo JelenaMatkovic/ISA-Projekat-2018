@@ -2,6 +2,8 @@
 package isa.user.service;
 
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -39,7 +41,7 @@ public class UserService {
 		SimpleMailMessage message = new SimpleMailMessage(); 
         message.setTo(user.getEmail()); 
         message.setSubject("ISA - account"); 
-        message.setText("Activate your account ");
+        message.setText("Activate your account on link: http://localhost:4200/activation/" + user.getActivationHash());
         emailSender.send(message);
         
 		return convertToDTO(user);
@@ -66,6 +68,14 @@ public class UserService {
 		return convertToDTO(user);
 	}
 	
+	public void activateUser(String hash) {
+		User user = userRepository.findByActivationHash(hash)
+				.orElseThrow(()->new NullPointerException("Activation failed"));
+		user.setActivationHash(null);
+		userRepository.save(user);
+		
+	}
+	
 	
 	private User convertToEntity(UserDTO userDTO) {
 		User user = new User();
@@ -77,6 +87,7 @@ public class UserService {
 		user.setCity(userDTO.getCity());
 		user.setTelephone(userDTO.getTelephone());
 		user.setUserType(UserType.valueOf(userDTO.getUserType()));
+		user.setActivationHash(UUID.randomUUID().toString());
 		return user;
 	}
 	
@@ -91,4 +102,6 @@ public class UserService {
 		userDTO.setUserType(user.getUserType().toString());
 		return userDTO;
 	}
+
+	
 }

@@ -7,7 +7,9 @@
  */
 package isa.user.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,11 +22,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import isa.avioCompany.model.Ticket;
-
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import isa.avioCompany.model.Ticket;
 import isa.user.enums.UserType;
 import lombok.Data;
 
@@ -32,6 +34,9 @@ import lombok.Data;
 @Entity
 @Table(name="user")
 public class User implements UserDetails {
+
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -58,6 +63,9 @@ public class User implements UserDetails {
 	@Enumerated
 	@Column(name="user_type", nullable = false)
 	private UserType userType;
+	
+	@Column(name = "activation_hash", nullable = true)
+	private String activationHash;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
@@ -70,13 +78,15 @@ public class User implements UserDetails {
 	
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return activationHash == null;
 	}
 	
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<? extends GrantedAuthority> getAuthorities() {	
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+		authorities.add(new SimpleGrantedAuthority("ROLE_" + userType.toString()));
+        return authorities;
 	}
 
 	@Override

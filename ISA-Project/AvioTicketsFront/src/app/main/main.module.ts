@@ -37,6 +37,8 @@ import { AddDestinationComponent } from './avio-company/add-destination/add-dest
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
 import { AddFlightComponent } from './avio-company/add-flight/add-flight.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RatingDialogComponent } from './rating/rating-dialog/rating-dialog.component';
+import { ActivationComponent } from './activation/activation.component';
 
 @NgModule({
   declarations:[
@@ -69,6 +71,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AddDestinationComponent,
     UpdateDestinationComponent,
     AddFlightComponent,
+    RatingDialogComponent,
+    ActivationComponent,
   ],
   imports: [
     CommonModule,
@@ -80,7 +84,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     ReactiveFormsModule
   ],
-  entryComponents:[CarReservationDialogComponent],
+  entryComponents:[CarReservationDialogComponent,RatingDialogComponent],
   exports: [MainComponent]
 })
 export class MainModule { }

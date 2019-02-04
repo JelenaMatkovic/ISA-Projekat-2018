@@ -13,4 +13,6 @@ public class RentACarDTO {
 	
 	private String description;
 	
+	private Double averageRating;
+	
 }

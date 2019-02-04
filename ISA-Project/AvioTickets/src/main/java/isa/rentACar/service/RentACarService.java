@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import isa.rating.repository.RentACarRatingRepository;
 import isa.rentACar.model.RentACar;
 import isa.rentACar.model.dto.RentACarDTO;
 import isa.rentACar.repository.RentACarRepository;
@@ -17,6 +18,9 @@ public class RentACarService {
 	
 	@Autowired
 	private RentACarRepository rentACarRepository;
+	
+	@Autowired
+	private RentACarRatingRepository rentACarRatingRepository;
 	
 	public RentACarDTO save(RentACarDTO rentACarDTO) {
 		if(rentACarRepository.existsByAddress(rentACarDTO.getAddress())) {
@@ -78,6 +82,7 @@ public class RentACarService {
 		rentACarDTO.setName(rentACar.getName());
 		rentACarDTO.setAddress(rentACar.getAddress());
 		rentACarDTO.setDescription(rentACar.getDescription());
+		rentACarDTO.setAverageRating(rentACarRatingRepository.findAverageRating(rentACar.getId()));
 		return rentACarDTO;
 	}
 

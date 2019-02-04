@@ -45,6 +45,7 @@ export class AddFlightComponent implements OnInit {
 
   ngOnInit() {
     this.addFlightForm = this.formBuilder.group({
+      id:[null],
       pathCode:[null],
       starting_point_id:[null],
       destination_id:[null],
@@ -187,6 +188,8 @@ export class AddFlightComponent implements OnInit {
       });
     }
     this.flight.destinationOfTransfer = this.tempA;
+
+    this.flight.id = null;
 
     console.log(this.flight);
 

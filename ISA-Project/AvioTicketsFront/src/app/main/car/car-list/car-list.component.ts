@@ -41,7 +41,7 @@ export class CarListComponent implements OnInit {
   }
   _filter:any;
   cars:any;
-  displayedColumns = ['name', 'model_brand','type', 'year', 'seats', 'price', 'id'];
+  displayedColumns = ['name', 'model_brand','type', 'year', 'seats', 'price','rating', 'id'];
   dataSource:MatTableDataSource<any>;
 
   constructor(private carService:CarService,
@@ -64,6 +64,10 @@ export class CarListComponent implements OnInit {
       case 'PASSENGER_CAR': car.carType = 'Passenger'; break;
       case 'FREIGHT_CAR': car.carType = 'Freight'; break;
       }
+      car.rating = [
+        {name:'Rating', value:car.averageRating},
+        {name:'Not rating', value:5-car.averageRating}
+      ]
       return car;
     });
     this.dataSource = new MatTableDataSource<any>(cars);
