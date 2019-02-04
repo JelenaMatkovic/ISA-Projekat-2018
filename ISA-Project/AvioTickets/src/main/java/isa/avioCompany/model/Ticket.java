@@ -1,5 +1,7 @@
 package isa.avioCompany.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +18,7 @@ import isa.user.model.User;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity 
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Ticket {
 	
@@ -24,26 +26,27 @@ public class Ticket {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable=false)
-	private Double price;
-	
-	@Column(nullable=false)
-	private Double discount;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "spot_id")
-	private SpotInTheAirPlane spotInTheAirplane;
-	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "flight_id")
-	private Flight flight;
+	@Column(nullable=false)
+	private Integer numberOfSeats;
+	
+	@Column(nullable=false)
+	private Date dateAndTimeTicket;
+	
+	@Column(nullable=false)
+	private Double discount;
+	
+	@Column(nullable=false)
+	private Boolean fastReservation;
+	
+	@Column(nullable=false)
+	private Boolean deleted;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "avio_company_id")
-	private AvioCompany avioCompany;
+	@JoinColumn(name = "flight_id")
+	private Class clas;
 	
 }

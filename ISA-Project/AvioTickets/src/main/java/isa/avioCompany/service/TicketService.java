@@ -1,4 +1,4 @@
-package isa.avioCompany.service;
+/*package isa.avioCompany.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,7 +94,7 @@ public class TicketService {
 		}
 	}
 	
-	/**
+	*//**
 	 * 
 	 * @param id
 	 * @param user_id
@@ -102,7 +102,7 @@ public class TicketService {
 	 * @return
 	 * 
 	 * Prilikom kupovine karte dodaje se user ....
-	 */
+	 *//*
 	public Boolean updateAddUser(Long id, Long user_id, TicketDTO ticketDTO) {
 		if(!ticketRepository.existsById(id)) {
 			return false;
@@ -156,3 +156,4 @@ public class TicketService {
 	}
 
 }
+*/

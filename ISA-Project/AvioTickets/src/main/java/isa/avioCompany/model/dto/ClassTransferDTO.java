@@ -3,12 +3,11 @@ package isa.avioCompany.model.dto;
 import lombok.Data;
 
 @Data
-public class SpotInTheAirPlaneDTO {
-
-	private Long id;
+public class ClassTransferDTO {
 	
 	private Integer numberOfSeats;
 	
-	private Long class_id;
-
+	private Double priceForAdults;
+	
+	private Double priceForKids;
 }

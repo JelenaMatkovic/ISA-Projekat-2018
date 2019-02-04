@@ -1,0 +1,249 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 offset-md-3">
+                <h2>Add flight</h2>
+                <form [formGroup]="addFlightForm" (ngSubmit)="onSubmit($event)" novalidate>
+                    <div class="form-row">
+                            <div class="form-group col-md-12">
+                                        <label>Kod puta</label>
+                                        <input type="text" formControlName="pathCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pathCode.errors }" />
+                                        <div *ngIf="submitted && f.pathCode.errors" class="invalid-feedback">
+                                            <div *ngIf="f.pathCode.errors.required">Name is required</div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                    
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Polaziste</label>
+                        <ng-multiselect-dropdown
+                              *ngIf="dropdownList"
+                              [placeholder]="'Polaziste'"
+                              [data]="dropdownList"
+                              [settings]="dropdownSettingsPolaziste"
+                              (onSelect)="onItemSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              formControlName="starting_point_id"
+                              >
+                               </ng-multiselect-dropdown>
+                        </div>
+                      <div class="form-group col-md-6">
+                          <label>Odrediste</label>
+                          <ng-multiselect-dropdown            
+                              *ngIf="dropdownList"
+                              [placeholder]="'Odrediste'"
+                              [data]="dropdownList"
+                              [settings]="dropdownSettingsOdrediste"
+                              (onSelect)="onItemSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              formControlName="destination_id"
+                              >
+                               </ng-multiselect-dropdown>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Vreme poletanja</label>
+                          <div class="col-auto">
+                              <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <input class="form-control " formControlName="dateAndTimeStart" [ngClass]="{ 'is-invalid': submitted && f.dateAndTimeStart.errors }"
+                                [owlDateTimeTrigger]="dtPoletanja" [owlDateTime]="dtPoletanja">
+                                <owl-date-time #dtPoletanja></owl-date-time>
+                              </div>
+                          </div>
+                          <div *ngIf="submitted && f.dateAndTimeStart.errors" class="invalid-feedback">
+                              <div *ngIf="f.dateAndTimeStart.errors.required">Name is required</div>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Vreme sletanja</label>
+                            <div class="col-auto">
+                                <div class="input-group mb-2">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                  </div>
+                                  <input class="form-control " formControlName="dateAndTimeEnd" [ngClass]="{ 'is-invalid': submitted && f.dateAndTimeEnd.errors }"
+                                  [owlDateTimeTrigger]="dtSletanja" [owlDateTime]="dtSletanja">
+                                  <owl-date-time #dtSletanja></owl-date-time>
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && f.dateAndTimeEnd.errors" class="invalid-feedback">
+                                <div *ngIf="f.dateAndTimeEnd.errors.required">Name is required</div>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Duzina puta</label>
+                            <input type="text" formControlName="lengthOfTravel" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lengthOfTravel.errors }" />
+                            <div *ngIf="submitted && f.lengthOfTravel.errors" class="invalid-feedback">
+                                <div *ngIf="f.lengthOfTravel.errors.required">Name is required</div>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Presedanja</label>
+                            <ng-multiselect-dropdown            
+                              *ngIf="dropdownList"
+                              [placeholder]="'Presedanja'"
+                              [data]="dropdownList"
+                              [settings]="dropdownSettings"
+                              (onSelect)="onItemSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              formControlName="destinationOfTransfer"
+                              >
+                               </ng-multiselect-dropdown>
+                          </div>
+                        </div>
+                        
+                    <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Tip puta</label>
+                            <select class="custom-select" (change)="omoguci($event)" formControlName="typeOfPath" class="form-control">
+                                <option selected></option>
+                                <option value="1">Round-trip</option>
+                                <option value="2">One-way</option>
+                                <option value="3">Multy-city</option>
+                              </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                                    <label>Dodatne usluge</label>
+                                    <input type="text" formControlName="additionalServices" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.additionalServices.errors }" />
+                                    <div *ngIf="submitted && f.additionalServices.errors" class="invalid-feedback">
+                                        <div *ngIf="f.additionalServices.errors.required">Name is required</div>
+                                    </div>
+                                 
+                            </div>
+                        </div>
+                        <div *ngIf="omoguciCheck" class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>Vreme poletanja povratnog leta</label>
+                                  <div class="col-auto">
+                                      <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                        <input class="form-control " formControlName="dateAndTimeStartReturn" [ngClass]="{ 'is-invalid': submitted && f.dateAndTimeStartReturn.errors }"
+                                        [owlDateTimeTrigger]="dtPoletanja" [owlDateTime]="dtPoletanja">
+                                        <owl-date-time #dtPoletanja></owl-date-time>
+                                      </div>
+                                  </div>
+                                  <div *ngIf="submitted && f.dateAndTimeStartReturn.errors" class="invalid-feedback">
+                                      <div *ngIf="f.dateAndTimeStartReturn.errors.required">Name is required</div>
+                                  </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Vreme sletanja povratnog leta</label>
+                                    <div class="col-auto">
+                                        <div class="input-group mb-2">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                          </div>
+                                          <input class="form-control " formControlName="dateAndTimeEndReturn" [ngClass]="{ 'is-invalid': submitted && f.dateAndTimeEndReturn.errors }"
+                                          [owlDateTimeTrigger]="dtSletanja" [owlDateTime]="dtSletanja">
+                                          <owl-date-time #dtSletanja></owl-date-time>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="submitted && f.dateAndTimeEndReturn.errors" class="invalid-feedback">
+                                        <div *ngIf="f.dateAndTimeEndReturn.errors.required">Name is required</div>
+                                    </div>
+                                  </div>
+                              </div>
+                        <label>Broj sedista za podrzane klase i cene</label>
+                        <div class="form-group">
+                            <div formGroupName="ecconomic" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><input type="checkbox" (change)="eco($event)"></span>
+                                  <span style="width: 60px;" class="input-group-text">Ekon</span>
+                                </div>
+                                  <input formControlName="numberOfSeats" style="width: 100px;" *ngIf="ekoCheck" type="text" class="form-control">
+                                  <input style="width: 100px;" *ngIf="!ekoCheck" type="text" class="form-control" disabled>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cena odrasli</span>
+                                </div>
+                                  <input formControlName="priceForAdults" style="width: 100px;" *ngIf="ekoCheck" type="text" class="form-control">
+                                  <input  style="width: 100px;" *ngIf="!ekoCheck" type="text" class="form-control" disabled>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cena deca</span>
+                                </div>
+                                <input formControlName="priceForKids" style="width: 100px;" *ngIf="ekoCheck" type="text" class="form-control">
+                                <input style="width: 100px;" *ngIf="!ekoCheck" type="text" class="form-control" disabled>
+                                  
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div formGroupName="business" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><input type="checkbox" (change)="bys($event)"></span>
+                                  <span style="width: 60px;" class="input-group-text">Bizn</span>
+                                </div>
+                                <input formControlName="numberOfSeats" style="width: 100px;" *ngIf="bysCheck" type="text" class="form-control">
+                                <input style="width: 100px;" *ngIf="!bysCheck" type="text" class="form-control" disabled>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cena odrasli</span>
+                                </div>
+                                    <input formControlName="priceForAdults" style="width: 100px;" *ngIf="bysCheck" type="text" class="form-control">
+                                    <input style="width: 100px;" *ngIf="!bysCheck" type="text" class="form-control" disabled>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cena deca</span>
+                                </div>
+                                    <input formControlName="priceForKids" style="width: 100px;" *ngIf="bysCheck" type="text" class="form-control">
+                                    <input style="width: 100px;" *ngIf="!bysCheck" type="text" class="form-control" disabled>
+                                      
+                              </div>
+                        </div>
+                        <div class="form-group">
+                            <div formGroupName="first" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><input type="checkbox" (change)="fir($event)"></span>
+                                  <span style="width: 60px;" class="input-group-text">Prva</span>
+                                </div>
+                                  <input formControlName="numberOfSeats" style="width: 100px;" *ngIf="firCheck" type="text" class="form-control">
+                                  <input style="width: 100px;" *ngIf="!firCheck" type="text" class="form-control" disabled>
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">Cena odrasli</span>
+                                  </div>
+                                    <input formControlName="priceForAdults" style="width: 100px;" *ngIf="firCheck" type="text" class="form-control">
+                                    <input style="width: 100px;" *ngIf="!firCheck" type="text" class="form-control" disabled>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cena deca</span>
+                                    </div>
+                                        <input formControlName="priceForKids" style="width: 100px;" *ngIf="firCheck" type="text" class="form-control">
+                                        <input style="width: 100px;" *ngIf="!firCheck" type="text" class="form-control" disabled>
+                                      
+                              </div>
+                        </div>
+                        <label>Informacije o prtljagu</label>
+                        <div formGroupName="luggage" class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span style="width: 120px;" class="input-group-text">Max kolicina</span>
+                                </div>
+                                  <input formControlName="maxQuantity" type="text" class="form-control" >
+                                <div class="input-group-prepend">
+                                    <span style="width: 120px;" class="input-group-text">Max tezina</span>
+                                </div>
+                                  <input formControlName="maxWeight" type="text" class="form-control">
+                                <div class="input-group-prepend">
+                                    <span style="width: 120px;" class="input-group-text">Max dimenzije</span>
+                                </div>
+                                    <input formControlName="maxDimensions" type="text" class="form-control">
+                                  
+                            </div>
+                        </div>
+                        
+
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

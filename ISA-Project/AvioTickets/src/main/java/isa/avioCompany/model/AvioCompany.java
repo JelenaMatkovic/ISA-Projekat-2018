@@ -18,6 +18,7 @@ public class AvioCompany {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="avio_company_id")
 	private Long id;
 	
 	@Column(nullable=false,length=100)
@@ -29,21 +30,16 @@ public class AvioCompany {
 	@Column(nullable=false,length=100)
 	private String description;
 	
-	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
-	private Set<Path> destination;
+	@Column(nullable=false)
+	private Double rating;
+	
+	@Column(nullable=false)
+	private Boolean deleted;
 	
 	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
 	private Set<Flight> flights;
 	
 	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
-	private Set<AirPlane> airplanes;
+	private Set<Office> office;
 	
-	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
-	private Set<Ticket> discountTickets;
-	
-	@OneToMany(mappedBy = "avioCompany", cascade = CascadeType.ALL)
-	private Set<Luggage> luggage;
-	
-	@Column(nullable=false)
-	private Double rating;
 }

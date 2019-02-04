@@ -14,4 +14,6 @@ public class AvioCompanyDTO {
 	private String description;
 
 	private Double rating;
+	
+	private Boolean deleted;
 }

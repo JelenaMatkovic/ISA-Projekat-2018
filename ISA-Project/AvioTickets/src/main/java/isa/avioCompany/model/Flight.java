@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,8 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -28,42 +26,62 @@ public class Flight {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "path_id")
-	private Path path;
+	@Column(nullable=false)
+	private String pathCode;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "starting_point_id")
+	private Destination startingPoint;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "destination_id")
+	private Destination destination;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable=false)
 	private Date dateAndTimeStart;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable=false)
 	private Date dateAndTimeEnd;
-	
-	@Temporal(TemporalType.TIME)
-	private Date timeOfTravel;
 	
 	@Column(nullable=false)
 	private Double lengthOfTravel;
 	
-	@Column(nullable=false,length=100)
-	private String typeOfTravel;
-	
-	@ElementCollection(targetClass=String.class)
-	private Set<String> additionalServices;
-	
-	@OneToMany(mappedBy = "flight" , cascade = CascadeType.ALL)
-	private Set<Ticket> ticket;
-	
-	@Column(nullable=false,length=100)
-	private String pathCode;
+	@Column
+	private Date timeOfTravel;
 	
 	@Column(nullable=false)
+	private Integer numberOfTransfer;
+
+	@Column(nullable=false)
+	private String destinationOfTransfer;
+	
+	@Column(nullable=false)
+	private String typeOfPath;
+	
+	@Column
+	private String additionalServices;
+	
+	@Column
+	private Date dateAndTimeStartReturn;
+	
+	@Column
+	private Date dateAndTimeEndReturn;
+
+	@Column
 	private Double rating;
+	
+	@Column(nullable=false)
+	private Boolean deleted;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "avio_company_id")
 	private AvioCompany avioCompany;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "air_plane_id")
-	private AirPlane airPlane;
+	@OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+	private Set<Class> clas;
+	
+	@OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+	private Set<Luggage> luggage;
+	
+
 }

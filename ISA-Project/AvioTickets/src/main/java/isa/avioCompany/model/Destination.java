@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -17,18 +18,31 @@ import lombok.Data;
 public class Destination {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="destination_id")
 	private Long id;
 	
 	@Column(nullable=false,length=100)
-	private String name;
+	private String nameOfTown;
+	
+	@Column(nullable=false,length=100)
+	private String nameOfCountry;
+	
+	@Column(nullable=false,length=100)
+	private String nameOfAirPort;
 	
 	@Column(nullable=false,length=100)
 	private String description;
 	
-	@OneToMany(mappedBy = "destinationStart", cascade = CascadeType.ALL)
-	private Set<Path> pathStart;
+	@Column(nullable=false)
+	private Boolean deleted;
 	
-	@OneToMany(mappedBy = "destinationEnd", cascade = CascadeType.ALL)
-	private Set<Path> pathEnd;
+	@OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+	private Set<Office> office;
+	
+	@OneToOne(mappedBy = "startingPoint", cascade = CascadeType.ALL)
+	private Flight flightStart;
+	
+	@OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
+	private Flight flightEnd;
 
 }

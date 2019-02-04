@@ -8,25 +8,44 @@ import lombok.Data;
 public class FlightDTO {
 
 	private Long id;
+	
+	private String pathCode;
 
+	private Long starting_point_id;
+
+	private Long destination_id;
+	
 	private Date dateAndTimeStart;
 
 	private Date dateAndTimeEnd;
-
-	private Date timeOfTravel;
 	
 	private Double lengthOfTravel;
+	
+	private Date timeOfTravel;
+	
+	private Integer numberOfTransfer;
 
-	private String typeOfTravel;
+	private String destinationOfTransfer;
 
-	private String pathCode;
+	private String typeOfPath;
+	
+	private String additionalServices;
+	
+	private Date dateAndTimeStartReturn;
+
+	private Date dateAndTimeEndReturn;
 
 	private Double rating;
 	
-	private Long air_plane_id;
+	private Boolean deleted;
 	
 	private Long avio_company_id;
 	
-	private Long path_id;
+	
+	
+	
+	
+	
+
 
 }

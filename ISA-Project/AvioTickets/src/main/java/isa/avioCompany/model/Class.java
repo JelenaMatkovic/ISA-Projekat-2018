@@ -24,16 +24,25 @@ public class Class {
 	private Long id;
 	
 	@Column(nullable=false,length=100)
-	private String tip;
+	private String type;
 	
 	@Column(nullable=false)
 	private Integer numberOfSeats;
 	
-	@OneToMany(mappedBy = "clas", cascade = CascadeType.ALL)
-	private Set<SpotInTheAirPlane> spotInTheAirPlane;
+	@Column(nullable=false)
+	private Double priceForAdults;
+	
+	@Column(nullable=false)
+	private Double priceForKids;
+	
+	@Column(nullable=false)
+	private Boolean deleted;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "air_plane_id")
-	private AirPlane airPlane;
+	@JoinColumn(name = "flight_id")
+	private Flight flight;
+	
+	@OneToMany(mappedBy = "clas", cascade = CascadeType.ALL)
+	private Set<Ticket> ticket;
 	
 }

@@ -34,3 +34,37 @@
         </tr>
       </tbody>
     </table>
+
+    <table class="container table mt-3 table-hover" style="text-align:center;">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" colspan="9" >
+                    Letovi
+                    <a class="btn btn-secondary" href="#" role="button" [routerLink]="'flight/addFlight'">Dodaj</a>
+                </th>
+              </tr>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Polaziste</th>
+            <th scope="col">Odrediste</th>
+            <th scope="col">Vreme poletanja</th>
+            <th scope="col">Vreme sletanja</th>
+            <th scope="col">Duzina puta</th>
+            <th scope="col">Manipulacija</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="flights">
+          <tr *ngFor="let flight of flights; let i = index">
+            <th scope="row" >{{i + 1}}</th>
+            <th>{{flight.starting_point_id.nameOfAirPort}}</th>
+            <th>{{flight.destination_id.nameOfAirPort}}</th>
+            <th>{{flight.dateAndTimeStart}}</th>
+            <th>{{flight.dateAndTimeEnd}}</th>
+            <th>{{flight.lengthOfTravel}}</th>
+            <th>
+              <button class="btn btn-secondary">Obrisi</button>
+              <button class="btn btn-secondary">izmeni</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>

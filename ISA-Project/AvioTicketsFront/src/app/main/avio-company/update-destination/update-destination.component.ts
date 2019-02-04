@@ -36,7 +36,9 @@ export class UpdateDestinationComponent implements OnInit {
     );
 
     this.updateDestinationForm = this.formBuilder.group({
-      name:['',Validators.required],
+      nameOfCountry:['',Validators.required],
+      nameOfTown:['',Validators.required],
+      nameOfAirPort:['',Validators.required],
       description:['',Validators.required],
     });
   }
@@ -51,7 +53,7 @@ export class UpdateDestinationComponent implements OnInit {
         return;
     }
 
-    this._avioComapnyService. updateDestination(this.destination).pipe(delay(300)).subscribe(
+    this._avioComapnyService. updateDestination(this.avioCompanyId,this.destination).pipe(delay(300)).subscribe(
       data =>
               this.router.navigateByUrl("avio-company/showAvioCompany/" + this.avioCompanyId)
     );

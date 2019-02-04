@@ -1,4 +1,4 @@
-package isa.avioCompany.controller;
+/*package isa.avioCompany.controller;
 
 import java.util.List;
 
@@ -78,3 +78,4 @@ public class TicketController {
 		}
 	}
 }
+*/

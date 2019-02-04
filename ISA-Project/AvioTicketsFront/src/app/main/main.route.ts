@@ -19,6 +19,8 @@ import { ShowAvioCompanyComponent } from './avio-company/show-avio-company/show-
 import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/update-avio-company.component';
 import { AddDestinationComponent } from './avio-company/add-destination/add-destination.component';
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
+import { AddFlightComponent } from './avio-company/add-flight/add-flight.component';
+
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
     {path : 'register-user', component: HomeComponent},
@@ -43,5 +45,8 @@ export const MainRoutes=[
     {path: 'avio-company/updateAvioCompany/:id', component:UpdateAvioCompanyComponent},
 
     {path: 'avio-company/showAvioCompany/:id/destination/addDestination', component:AddDestinationComponent},
-    {path: 'avio-company/showAvioCompany/:id/destination/updateDestination/:idDes', component:UpdateDestinationComponent}
+    {path: 'avio-company/showAvioCompany/:id/destination/updateDestination/:idDes', component:UpdateDestinationComponent},
+    
+    {path: 'avio-company/showAvioCompany/:id/flight/addFlight', component:AddFlightComponent}
+
 ]

@@ -20,27 +20,20 @@ public class Luggage {
 	private Long id;
 	
 	@Column(nullable=false)
-	private Double quantityOf;
+	private Double maxQuantity;
 	
 	@Column(nullable=false)
-	private Double quantityTo;
+	private Double maxWeight;
 	
 	@Column(nullable=false)
-	private Double weightOf;
+	private String maxDimensions;
 	
 	@Column(nullable=false)
-	private Double weightTo;
-	
-	@Column(nullable=false)
-	private Double dimensionsOf;
-	
-	@Column(nullable=false)
-	private Double dimensionsTo;
+	private Boolean deleted;
 
-	@Column(nullable=false)
-	private Double price;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "avio_company_id")
-	private AvioCompany avioCompany;
+	@JoinColumn(name = "flight_id")
+	private Flight flight;
+	
+	
 }

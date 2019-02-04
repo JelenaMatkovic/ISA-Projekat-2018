@@ -1,4 +1,4 @@
-package isa.avioCompany.service;
+/*package isa.avioCompany.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,3 +89,4 @@ public class ClassService {
 		return classDTO;
 	}
 }
+*/

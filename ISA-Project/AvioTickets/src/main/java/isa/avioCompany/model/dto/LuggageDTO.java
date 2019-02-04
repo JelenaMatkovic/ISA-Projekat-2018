@@ -3,20 +3,17 @@ package isa.avioCompany.model.dto;
 import lombok.Data;
 
 @Data
-public class ClassDTO {
+public class LuggageDTO {
 	
 	private Long id;
 	
-	private String type;
+	private Double maxQuantity;
 	
-	private Integer numberOfSeats;
+	private Double maxWeight;
 	
-	private Double priceForAdults;
-	
-	private Double priceForKids;
+	private Double maxDimensions;
 	
 	private Boolean deleted;
 	
 	private Long flight_id;
-	
 }

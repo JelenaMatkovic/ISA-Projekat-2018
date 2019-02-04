@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatToolbarModule, MatButtonModule, MatIconModule} from '@angular/material';
@@ -11,7 +13,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AddRentACarComponent } from './rent-a-car/add-rent-a-car/add-rent-a-car.component';
 import { AddCarComponent } from './car/add-car/add-car.component';
 import { RentACarListComponent } from './rent-a-car/rent-a-car-list/rent-a-car-list.component';
@@ -34,6 +35,8 @@ import { ShowAvioCompanyComponent } from './avio-company/show-avio-company/show-
 import { UpdateAvioCompanyComponent } from './avio-company/update-avio-company/update-avio-company.component';
 import { AddDestinationComponent } from './avio-company/add-destination/add-destination.component';
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
+import { AddFlightComponent } from './avio-company/add-flight/add-flight.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations:[
@@ -65,12 +68,16 @@ import { UpdateDestinationComponent } from './avio-company/update-destination/up
     UpdateAvioCompanyComponent,
     AddDestinationComponent,
     UpdateDestinationComponent,
+    AddFlightComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forRoot(MainRoutes),
     SharedModule,
+    NgbModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
     FlexLayoutModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   entryComponents:[CarReservationDialogComponent],

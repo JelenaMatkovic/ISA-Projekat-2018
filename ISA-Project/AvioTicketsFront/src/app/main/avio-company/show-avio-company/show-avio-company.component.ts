@@ -15,6 +15,7 @@ export class ShowAvioCompanyComponent implements OnInit {
   avioCompanyId : any;
   avioCompany : any;
   destinations : any;
+  flights : any;
   temp: number;
 
   constructor(private _avioComapnyService : AvioCompanyService,
@@ -24,23 +25,31 @@ export class ShowAvioCompanyComponent implements OnInit {
 
   ngOnInit() {
                       
-    this.activatedRoute.paramMap.pipe(delay(300)).subscribe(
+    this.activatedRoute.paramMap.pipe(delay(350)).subscribe(
       params => {
           this.avioCompanyId = params.get('id');
           this._avioComapnyService.getAvioCompanyById(this.avioCompanyId).subscribe(
             data => this.avioCompany = data
           );
+          this._avioComapnyService.getDestination(this.avioCompanyId).subscribe(
+            data => this.destinations = data
+          );
+          this._avioComapnyService.getFlights(this.avioCompanyId).subscribe(
+            data =>{
+             this.flights = data
+             console.log(this.flights)
+          }
+          );
+          
       }
     );
-
-    this._avioComapnyService.getDestination().subscribe(
-            data => this.destinations = data
-    );
+    
+    
       
   }
 
   deleteDestination(id:number,i:number){
-    this._avioComapnyService.deleteDestination(id).subscribe(
+    this._avioComapnyService.deleteDestination(this.avioCompanyId,id).subscribe(
 
     );
     this.destinations.splice(i,1);
