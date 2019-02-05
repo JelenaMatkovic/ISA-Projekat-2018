@@ -14,4 +14,5 @@ public class ErrorHandler {
 	 public void handleNullPointerException(NullPointerException exception, HttpServletResponse response) throws IOException {
 	      response.sendError(400,exception.getMessage());
 	 }
+	 
 }

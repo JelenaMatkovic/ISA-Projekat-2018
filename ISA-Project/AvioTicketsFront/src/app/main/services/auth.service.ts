@@ -11,6 +11,14 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  saveUserType(userType){
+    localStorage.setItem('user_type', userType);
+  }
+
+  getUserType(){
+    return localStorage.getItem('user_type');
+  }
+
   getToken(){
     return localStorage.getItem('token');
   }

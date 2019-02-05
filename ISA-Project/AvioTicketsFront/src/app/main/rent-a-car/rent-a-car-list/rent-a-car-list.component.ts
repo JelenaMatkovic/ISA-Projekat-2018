@@ -4,6 +4,7 @@ import { MatTableDataSource, Sort } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-rent-a-car-list',
   templateUrl: './rent-a-car-list.component.html',
@@ -17,11 +18,17 @@ export class RentACarListComponent implements OnInit {
 
   searchForm:FormGroup;
 
+  canAdd:boolean;
+  canReserve:boolean;
+
   constructor(private rentACarService:RentACarService,
               private formBuilder:FormBuilder,
+              private authService:AuthService,
               private router:Router) { }
 
   ngOnInit() {
+    this.canAdd = this.authService.getUserType() == 'SUPER_ADMIN';
+    this.canReserve = this.authService.getUserType() == 'USER';
     this.searchForm = this.formBuilder.group({
       name:[''],
       location:[''],

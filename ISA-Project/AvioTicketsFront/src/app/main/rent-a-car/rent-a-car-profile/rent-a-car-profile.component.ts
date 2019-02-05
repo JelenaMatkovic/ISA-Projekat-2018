@@ -42,7 +42,8 @@ export class RentACarProfileComponent implements OnInit {
     this.rentACarService.getRentACarById(this.rentACarId).subscribe(
       (data:any) => {
         this.rentACar = data
-        this.ratingData = [{name: "Rating" , value : data.averageRating} , {name: "Not rating" , value : 5-data.averageRating} ]
+        if(this.rentACar.averageRating)
+          this.ratingData = [{name: "Rating" , value : data.averageRating} , {name: "Not rating" , value : 5-data.averageRating} ]
       }
     );
 

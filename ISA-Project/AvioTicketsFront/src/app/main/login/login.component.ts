@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(user).subscribe(
       (data:any)=>{
         this.authService.saveToken(data.token);
+        this.authService.saveUserType(data.userType);
         const snack = this.snackBar.open(
           "You successfully login!",
           "Close",

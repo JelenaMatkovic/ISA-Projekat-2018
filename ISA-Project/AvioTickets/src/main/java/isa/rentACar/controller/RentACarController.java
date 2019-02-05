@@ -64,6 +64,7 @@ public class RentACarController {
 	}
 	
 	@PutMapping("{id}")
+	@PreAuthorize("hasRole('ADMIN_RENT_A_CAR')")
 	public ResponseEntity<RentACarDTO> update(@PathVariable Long id, @RequestBody RentACarDTO rentACarDTO){
 		return new ResponseEntity<RentACarDTO>(rentACarService.update(id, rentACarDTO), HttpStatus.OK);
 	}

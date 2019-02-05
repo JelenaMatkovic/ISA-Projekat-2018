@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -26,6 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import isa.config.security.AuthenticationTokenFilter;
 import isa.config.security.EntryPointUnauthorizedHandler;
+import isa.config.security.TokenUtils;
 
 @Configuration
 @EnableWebSecurity
@@ -37,6 +39,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private UserDetailsService userDetailsService;
+
+  @Autowired
+  private TokenUtils tokenUtils;
 
   
   @Autowired
@@ -57,11 +62,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     return super.authenticationManagerBean();
   }
 
-  @Bean
   public AuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-    AuthenticationTokenFilter authenticationTokenFilter = new AuthenticationTokenFilter();
+    AuthenticationTokenFilter authenticationTokenFilter = new AuthenticationTokenFilter(tokenUtils,userDetailsService);
+    
     authenticationTokenFilter.setAuthenticationManager(authenticationManagerBean());
     return authenticationTokenFilter;
+  }
+  
+  @Override
+  public void configure(WebSecurity webSecurity) {
+    webSecurity.ignoring()
+    .antMatchers(HttpMethod.OPTIONS, "/**")
+    .antMatchers(HttpMethod.PATCH, "/user/activation/*")
+    .antMatchers(HttpMethod.POST, "/user/login")
+    .antMatchers(HttpMethod.POST, "/user")
+    .antMatchers(HttpMethod.GET, "/rent-a-car")
+    .antMatchers(HttpMethod.GET, "/rent-a-car/**");
   }
 
   @Override
@@ -78,15 +94,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
       .authorizeRequests()
-        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-        .antMatchers(HttpMethod.PATCH, "/user/activation/*").permitAll()
-        .antMatchers(HttpMethod.POST, "/user/login").permitAll()
-        .antMatchers(HttpMethod.POST, "/user").permitAll()
         .anyRequest().authenticated();
-
-    // Custom JWT based authentication
+        
     httpSecurity
-      .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+    .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+    // Custom JWT based authentication
   }
 
 }
