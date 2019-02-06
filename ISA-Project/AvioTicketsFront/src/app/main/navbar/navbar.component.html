@@ -5,24 +5,29 @@
     </a>
     <ul class="nav left">
         <li class="nav-item">
-            <a class="nav-link navigacija" href="#mdo" [routerLink]="'/'">Home</a>
+            <a class="nav-link navigacija" [routerLink]="'/'">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#mdo" [routerLink]="'/avio-company/showAvioCompanies'">Avio Company</a>
+          <a class="nav-link"  [routerLink]="'/avio-company/showAvioCompanies'">Avio Company</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#mdo">Hotel</a>
+            <a class="nav-link" >Hotel</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#mdo" [routerLink]="'/rent-a-car'">Rent A Car</a>
+            <a class="nav-link" [routerLink]="'/rent-a-car'">Rent A Car</a>
         </li>
     </ul>
-    <ul class="nav">
+    <ul class="nav" *ngIf="this.authService.getToken() == null">
         <li class="nav-item">
-            <a class="nav-link registracija" href="#mdo" [routerLink]="'/register'">Registracija</a>
+            <a class="nav-link registracija" [routerLink]="'/register'">Registracija</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link logovanje" href="#mdo" [routerLink]="'/login'">Logovanje</a>
+          <a class="nav-link logovanje" [routerLink]="'/login'">Logovanje</a>
+        </li>
+    </ul>
+    <ul class="nav" *ngIf="this.authService.getToken() != null">
+        <li class="nav-item">
+          <a class="nav-link logovanje"  (click)="logout()">Log out</a>
         </li>
     </ul>
   </nav>
