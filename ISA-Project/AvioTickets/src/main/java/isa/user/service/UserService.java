@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,14 @@ public class UserService {
 		User user = userRepository.findById(id)
 			.orElseThrow(()-> new NullPointerException("User with id:" + id + " does not exists."));
 		return convertToDTO(user);
+	}
+	
+	public UserDTO getLogedUser() {
+		User user =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		UserDTO u = getById(user.getId());
+		System.out.println("PASSWORD : " + u.getPassword());
+		return u;
 	}
 	
 	public void activateUser(String hash) {

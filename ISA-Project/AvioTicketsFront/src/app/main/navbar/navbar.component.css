@@ -45,3 +45,11 @@ li>a{
 .navbar-brand{
     margin-left: 17.5% !important;
 }
+
+li>a.user:hover{
+    border-bottom: 3px solid white;
+}
+
+li>a.user{
+    color: white;
+}

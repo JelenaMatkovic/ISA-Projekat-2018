@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     const user = this.form.getRawValue();
     this.userService.login(user).subscribe(
       (data:any)=>{
+        console.log(data);
         this.authService.saveToken(data.token);
         this.authService.saveUserType(data.userType);
         const snack = this.snackBar.open(

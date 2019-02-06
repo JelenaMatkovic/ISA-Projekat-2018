@@ -20,5 +20,9 @@ export class UserService {
   activateUser(hash){
     return this.http.patch(SERVER_URL + '/user/activation/' + hash, {});
   }
+
+  getLoged(){
+    return this.http.get(SERVER_URL + '/user/loged')
+  }
   
 }

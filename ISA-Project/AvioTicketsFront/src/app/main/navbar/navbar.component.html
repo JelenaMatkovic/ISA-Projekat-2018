@@ -27,7 +27,17 @@
     </ul>
     <ul class="nav" *ngIf="this.authService.getToken() != null">
         <li class="nav-item">
-          <a class="nav-link logovanje"  (click)="logout()">Log out</a>
+            <a *ngIf="this.authService.getUserType() == 'USER'" class="nav-link user" [routerLink]="'/profile'">
+                <img class="img" src="assets/Img/user.png" alt="Generic placeholder image" height="24px" width="24px">
+                Profile
+            </a>
+            <a *ngIf="this.authService.getUserType() != 'USER'" class="nav-link user" [routerLink]="'/profile'">
+                <img class="img" src="assets/Img/administrator.png" alt="Generic placeholder image" height="24px" width="24px">
+                Profile
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link logovanje" [routerLink]="'/'"  (click)="logout()">Log out</a>
         </li>
     </ul>
   </nav>

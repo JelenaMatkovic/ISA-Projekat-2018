@@ -34,6 +34,10 @@ public class UserController {
 	public ResponseEntity<UserDTO> getById(@PathVariable Long id){
 		return new ResponseEntity<UserDTO>(userService.getById(id), HttpStatus.OK);
 	}
+	@GetMapping("/loged")
+	public ResponseEntity<UserDTO> getLoged(){
+		return new ResponseEntity<UserDTO>(userService.getLogedUser(), HttpStatus.OK);
+	}
 	
 	@PostMapping
 	public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) { 

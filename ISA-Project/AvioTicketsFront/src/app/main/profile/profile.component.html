@@ -1,3 +1,75 @@
-<p>
-  profile works!
-</p>
+<div *ngIf="user" class="container">
+  <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="mt-2 mb-2" style="text-align: center;">
+          <img *ngIf="this.authService.getUserType() == 'USER'" 
+                class="img" src="assets/Img/userBlack.png" alt="Generic placeholder image"
+                height="128px" width="128px">
+          <img *ngIf="this.authService.getUserType() != 'USER'"
+          class="img" src="assets/Img/administratorBlack.png" alt="Generic placeholder image"
+                height="128px" width="128px">
+        </div>
+      <div class="row">
+          <div class="col-md-5">
+              <label style="font-weight:bold;">Ime</label>
+          </div>
+          <div class="col-md-7">
+              {{user.firstName}}
+          </div>
+      </div>
+      <hr />
+
+      <div class="row">
+          <div class="col-md-5">
+              <label style="font-weight:bold;">Prezime</label>
+          </div>
+          <div class="col-md-7">
+              {{user.lastName}}
+          </div>
+      </div>
+      <hr />
+
+      <div class="row">
+          <div class="col-md-5">
+              <label style="font-weight:bold;">E-mail</label>
+          </div>
+          <div class="col-md-7">
+              {{user.email}}
+          </div>
+      </div>
+      <hr />
+      <div class="row">
+          <div class="col-md-5">
+              <label style="font-weight:bold;">Sifra</label>
+          </div>
+          <div class="col-md-7">
+              {{user.password}}
+          </div>
+      </div>
+      <hr />
+      <div class="row">
+          <div class="col-md-5">
+              <label style="font-weight:bold;">Grad</label>
+          </div>
+          <div class="col-md-7">
+              {{user.city}}
+          </div>
+      </div>
+      <hr />
+      <div class="row">
+          <div class="col-md-5">
+              <label style="font-weight:bold;">Broj telefona</label>
+          </div>
+          <div class="col-md-7">
+              {{user.telephone}}
+          </div>
+      </div>
+      <hr />
+      <div style="text-align: right">
+              <button class="btn btn-outline-success">Izmeni</button>
+      </div>
+      </div>
+      <div class="col-md-4"></div>
+  </div>
+</div>

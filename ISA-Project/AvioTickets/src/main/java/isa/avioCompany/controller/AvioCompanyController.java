@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,8 @@ public class AvioCompanyController {
 	@Autowired
 	private AvioCompanyService avioCompanyService;
 	
+	
+	//@PreAuthorize("hasRole('USER')")
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<AvioCompanyDTO>> getAll(){
 		if(avioCompanyService.getAll() == null) {
@@ -32,6 +35,7 @@ public class AvioCompanyController {
 		return new ResponseEntity<List<AvioCompanyDTO>>(avioCompanyService.getAll(),HttpStatus.OK);
 	}
 	
+	//@PreAuthorize("hasRole('USER')")
 	@GetMapping(value = "/getById/{id}")
 	public ResponseEntity<AvioCompanyDTO> getById(@PathVariable Long id){
 		if(avioCompanyService.getById(id) == null) {
