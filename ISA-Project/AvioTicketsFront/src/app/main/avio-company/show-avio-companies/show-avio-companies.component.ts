@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AvioCompanyService } from '../../services/avio-company.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-show-avio-companies',
@@ -13,10 +14,12 @@ export class ShowAvioCompaniesComponent implements OnInit {
 
   constructor(private _avioComapnyService : AvioCompanyService,
               private router:Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.getAvioCompanies();
+
   }
 
   getAvioCompanies(){

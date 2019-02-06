@@ -39,10 +39,10 @@ public class Destination {
 	@OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
 	private Set<Office> office;
 	
-	@OneToOne(mappedBy = "startingPoint", cascade = CascadeType.ALL)
-	private Flight flightStart;
+	@OneToMany(mappedBy = "startingPoint", cascade = CascadeType.ALL)
+	private Set<Flight> flightStart;
 	
-	@OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
-	private Flight flightEnd;
+	@OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+	private Set<Flight> flightEnd;
 
 }

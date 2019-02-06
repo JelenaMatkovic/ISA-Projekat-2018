@@ -1,0 +1,324 @@
+<div class="jumbotron" style="padding-top:20px; padding-bottom: 20px;">
+<div class="container mt-3 mb-3" >
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit($event)" novalidate>
+        <!--<div class="form-row">
+            <div class="form-group col">
+                    <label>Tip puta</label>
+                    <select class="form-control" formControlName="typeOfPath">
+                            <option></option>
+                            <option>Round-trip</option>
+                            <option>One-way</option>
+                            <option>Multi-city</option>
+                    </select>  
+            </div>
+            <div class="form-group col">
+                <label>Broj odraslih</label>
+                <select class="form-control" formControlName="numberOfAdults">
+                        <option>0 Adult</option>
+                        <option>1 Adult</option>
+                        <option>2 Adult</option>
+                        <option>3 Adult</option>
+                        <option>4 Adult</option>
+                        <option>5 Adult</option>
+                </select> 
+            </div>
+            <div class="form-group col">
+                    <label>Broj dece</label>
+                    <select class="form-control" formControlName="numberOfChilds">
+                            <option>0 Child</option>
+                            <option>1 Child</option>
+                            <option>2 Child</option>
+                            <option>3 Child</option>
+                            <option>4 Child</option>
+                            <option>5 Child</option>
+                    </select> 
+            </div>
+            <div class="form-group col">
+                    <label>Klasa</label>
+                    <select class="form-control" formControlName="clas">
+                            <option></option>
+                            <option>Ecconomic</option>
+                            <option>Biznis</option>
+                            <option>Prva</option>
+                    </select> 
+                </div>
+        </div>-->
+        <div class="form-row">
+            <div class="form-group col">
+                    <label>Grad polaznog Aerodroma</label>
+                    <input type="text" formControlName="starting_pointTown" class="form-control"/>  
+            </div>
+            <div class="form-group col">
+                <label>Drzava polaznog Aerodroma</label>
+                <input type="text" formControlName="starting_pointCountry" class="form-control"/>  
+            </div>
+            <div class="form-group col">
+                <label class="ml-3">Datum i Vreme poletanja od</label>
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                        <input class="form-control " formControlName="dateAndTimeStart"
+                        [owlDateTimeTrigger]="dtPoletanja" [owlDateTime]="dtPoletanja">
+                        <owl-date-time #dtPoletanja></owl-date-time>
+                    </div>
+                </div>
+                </div>
+            
+        </div>
+        <div class="form-row">
+                <div class="form-group col">
+                        <label>Grad odredisnog Aerodroma</label>
+                        <input type="text" formControlName="destinationTown" class="form-control"/>  
+                </div>
+                <div class="form-group col">
+                    <label>Drzava odredisnog Aerodroma</label>
+                    <input type="text" formControlName="destinationCountry" class="form-control"/>  
+                </div>
+                <div class="form-group col">
+                        <label class="ml-3">Datum i vreme poletanja do</label>
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <input class="form-control " formControlName="dateAndTimeEnd"
+                                [owlDateTimeTrigger]="dtSletanja" [owlDateTime]="dtSletanja">
+                                <owl-date-time #dtSletanja></owl-date-time>
+                            </div>
+                        </div>  
+                    </div>
+                
+            </div>
+        <div class="form-group" style="text-align:right;">
+            <button [disabled]="loading" type="submit" class="btn btn-outline-success" >Search flights</button>
+        </div>
+        <!--<div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">Add</button>
+            </div>-->
+    </form>
+</div>
+</div>
+<!--
+   
+<div class="row">
+    <div class="col-md-2">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                    Stops:
+                    <label><input type="checkbox" name="checkbox" value="value">Text</label>
+                    <label><input type="checkbox" name="checkbox" value="value">Text</label>
+                    <label><input type="checkbox" name="checkbox" value="value">Text</label>        
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+            
+    </div>
+    <div class="col-md-9">
+        
+        
+<div class="card">
+        <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10">
+                <div class="card mb-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2" style="text-align:center;">
+                                    <h5>Beograd</h5>
+                                </div>
+                                <div class="col-md-2" style="text-align:center;">
+                                    <h6>18:05</h6>
+                                </div>
+                                <div class="col-md-2" style="text-align:center;">
+                                    <h6>1:35</h6>
+                                </div>
+                                <div class="col-md-2" style="text-align:center;">
+                                    <h5>Berlin</h5>
+                                </div>
+                                <div class="col-md-2" style="text-align:center;">
+                                    <h6>20:00</h6>
+                                </div>
+                                <div class="col-md-2" style="text-align:center;">
+                                    <h6>1 presedanje</h6>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h5>Beograd</h5>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>18:05</h6>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>1:35</h6>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h5>Berlin</h5>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>20:00</h6>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>1 presedanje</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div></div>
+                        <div class="col-md-2">
+                            <div class="row-md-6 mb-2">
+                            <span class="badge badge-warning">
+                                <h3>189.999 RSD</h3>
+                            </span>
+                            </div>
+                            <div class="row-md-4 mb-2">
+                            <h3>Jat Arvays</h3>
+                            </div>
+                            <div class="row-md-2 mt-4">
+                            <button type="button" class="btn btn-success">Rezervisi sada</button>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+      </div>
+      <div class="card">
+            <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                    <div class="card mb-2">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h5>Beograd</h5>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>18:05</h6>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>1:35</h6>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h5>Berlin</h5>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>20:00</h6>
+                                        </div>
+                                        <div class="col-md-2" style="text-align:center;">
+                                            <h6>1 presedanje</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                          
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row-md-6 mb-2">
+                                <span class="badge badge-warning">
+                                    <h3>189.9999999 RSD</h3>
+                                </span>
+                                </div>
+                                <div class="row-md-4 mb-2">
+                                <h3>Jat Arvays</h3>
+                                </div>
+                                <div class="row-md-2 mt-4">
+                                <button type="button" class="btn btn-success">Rezervisi sada</button>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+          </div>
+    </div>
+</div>-->
+<div style="margin-top:30px;">
+<table class="container table mt-3 table-hover" style="text-align:center">
+        <thead class="thead-dark">
+        <tr *ngIf="searchedFlights">
+                <th scope="col" colspan="10" >
+                        <form [formGroup]="filterForm" (ngSubmit)="filter($event)" novalidate>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="ml-3">Naziv avio-kompanije</label>
+                                    <input formControlName="nameOfAvioCompany" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="ml-3">Cena od</label>
+                                    <input formControlName="startPrice" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="ml-3">Cena do</label>
+                                    <input formControlName="endPrice" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="ml-3">Vreme puta od</label>
+                                    <input placeholder="U min" formControlName="durationOfFlightsStart" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="ml-3">Vreme puta do</label>
+                                    <input placeholder="U min" formControlName="durationOfFlightsEnd" class="form-control">
+                                </div>
+                                <div class="col-md-1">
+                                        <button type="submit" class="btn btn-outline-success" style="margin-top:32px;">
+                                            Filter
+                                        </button>
+                                </div>
+                            </div>
+                        </form>
+                </th>
+        </tr>
+        <tr>
+            <th scope="col" colspan="10" >
+                Letovi
+            </th>
+        </tr>
+          <tr>
+            <th scope="col">Avio kompanija</th>
+            <th scope="col">Polaziste</th>
+            <th scope="col">Odrediste</th>
+            <th scope="col">Vreme poletanja</th>
+            <th scope="col">Vreme sletanja</th>
+            <th scope="col">Duzina puta</th>
+            <th scope="col">Trajanje puta(min)</th>
+            <th scope="col">Broj presedanja</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Manipulacija</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="searchedFlights">
+            <ng-container *ngFor="let flight of searchedFlights; let i = index">
+                <tr *ngIf="flight?.nameOfAvioCompany">
+                    <th>{{flight.nameOfAvioCompany}}</th>
+                    <th>{{flight.starting_point_id.nameOfAirPort}}</th>
+                    <th>{{flight.destination_id.nameOfAirPort}}</th>
+                    <th>{{flight.dateAndTimeStart.slice(0,16).replace('T', ' ')}}</th>
+                    <th>{{flight.dateAndTimeEnd.slice(0,16).replace('T', ' ')}}</th>
+                    <th>{{flight.lengthOfTravel}}</th>
+                    <th>{{flight.timeOfTravel}}</th>
+                    <th>{{flight.destinationOfTransfer.length}}</th>
+                    <th>
+                            <div *ngIf="flight.ecconomic">
+                                Econ:{{flight.ecconomic.price}}
+                            </div>
+                            <div *ngIf="flight.business">
+                                <br>
+                                Bizn:{{flight.business.price}}
+                            </div>
+                            <div *ngIf="flight.first">
+                                <br>
+                                Prva:{{flight.first.price}}
+                            </div>
+                            </th>
+                    <th>
+                            <button class="btn btn-secondary"  [routerLink]="['/avio-company/searchFlights/',flight.id]">Rezervisi</button>
+                    </th>
+                </tr>
+            </ng-container>
+        </tbody>
+      </table>
+    </div>

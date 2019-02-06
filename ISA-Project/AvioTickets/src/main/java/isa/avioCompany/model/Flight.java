@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -29,11 +28,11 @@ public class Flight {
 	@Column(nullable=false)
 	private String pathCode;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "starting_point_id")
 	private Destination startingPoint;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_id")
 	private Destination destination;
 
@@ -82,6 +81,5 @@ public class Flight {
 	
 	@OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
 	private Set<Luggage> luggage;
-	
 
 }

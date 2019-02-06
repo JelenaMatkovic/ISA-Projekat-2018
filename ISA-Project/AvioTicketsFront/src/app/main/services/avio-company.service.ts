@@ -49,8 +49,16 @@ export class AvioCompanyService {
     return this.http.get(SERVER_URL + '/flight/getAll/' + avioCompanyId );
   }
 
+  getFlightById(flight:any){
+    return this.http.get(SERVER_URL + '/flight/getById/' + flight);
+  }
+
   addFlight(avioId:number,flight:any){
     return this.http.post(SERVER_URL + '/flight/create/' + avioId,flight,{responseType: 'text'});
+  }
+
+  searchFlights(search:any){
+    return this.http.post(SERVER_URL + '/search/searchFlights',search);
   }
   
 }

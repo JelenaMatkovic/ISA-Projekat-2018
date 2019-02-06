@@ -59,18 +59,15 @@ export class AddFlightComponent implements OnInit {
       dateAndTimeEndReturn:[null],
       ecconomic:this.formBuilder.group({
         numberOfSeats:[null],
-        priceForAdults:[null],
-        priceForKids:[null]
+        price:[null]
       }),
       business:this.formBuilder.group({
         numberOfSeats:[null],
-        priceForAdults:[null],
-        priceForKids:[null]
+        price:[null]
       }),
       first:this.formBuilder.group({
         numberOfSeats:[null],
-        priceForAdults:[null],
-        priceForKids:[null]
+        price:[null]
       }),
       luggage:this.formBuilder.group({
         maxQuantity : [null],

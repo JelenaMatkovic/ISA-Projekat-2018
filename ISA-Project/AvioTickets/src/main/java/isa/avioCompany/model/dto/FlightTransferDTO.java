@@ -1,5 +1,6 @@
 package isa.avioCompany.model.dto;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import lombok.Data;
 public class FlightTransferDTO {
 	
 	private Long id;
+	
+	private String nameOfAvioCompany;
 
 	private String pathCode;
 	
@@ -21,6 +24,8 @@ public class FlightTransferDTO {
 	private Date dateAndTimeEnd;
 	
 	private Double lengthOfTravel;
+	
+	private String timeOfTravel;
 	
 	private List<DestinationDTO> destinationOfTransfer;
 	

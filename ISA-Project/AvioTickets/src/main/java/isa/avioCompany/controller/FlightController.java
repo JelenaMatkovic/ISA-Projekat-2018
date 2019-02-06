@@ -31,13 +31,13 @@ public class FlightController {
 		return new ResponseEntity<List<FlightTransferDTO>>(flightService.getAllOfAvio(idAvio),HttpStatus.OK);
 	}
 	
-	/*@GetMapping(value = "/getById/{id}")
-	public ResponseEntity<FlightDTO> getById(@PathVariable Long id){
+	@GetMapping(value = "/getById/{id}")
+	public ResponseEntity<FlightTransferDTO> getById(@PathVariable Long id){
 		if(flightService.getById(id) == null) {
-			return new ResponseEntity<FlightDTO>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<FlightTransferDTO>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<FlightDTO>(flightService.getById(id),HttpStatus.OK);
-	}*/
+		return new ResponseEntity<FlightTransferDTO>(flightService.getById(id),HttpStatus.OK);
+	}
 	
 	@PostMapping(value = "/create/{avio_id}")
 	public ResponseEntity<String> create(@PathVariable("avio_id") Long avio_id,@RequestBody FlightTransferDTO flightTransferDTO){

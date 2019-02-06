@@ -60,12 +60,12 @@ public class FlightService {
  			String destinationOfTransfer = flightOfAvioCompany.get(i).getDestinationOfTransfer();
  			destinationOfTransfer = destinationOfTransfer.substring(0, destinationOfTransfer.length()-1);
  			String[] lis = destinationOfTransfer.split(",");
- 			String[] destinations  = new String[lis.length-1];
- 			for (int j = 0; j < lis.length-1; j++) {
+ 			String[] destinations  = new String[lis.length];
+ 			for (int j = 0; j <= lis.length-1; j++) {
 				destinations[j] = lis[j].split("\\.")[1];
 			}
  			List<DestinationDTO> list = new ArrayList<>();
- 			for(int k = 0; k < destinations.length-1 ; k++) {
+ 			for(int k = 0; k <= destinations.length-1 ; k++) {
  				list.add(convertToDTO(destinationRepository.findByNameOfAirPort(destinations[k])));
  			}
  			forTransfer.setDestinationOfTransfer(list);
@@ -77,8 +77,7 @@ public class FlightService {
 				if(clas.getType().equals("Ecconomic") && clas.getDeleted() == false) {
 					ClassTransferDTO ecconomic = new ClassTransferDTO();
 		 			ecconomic.setNumberOfSeats(clas.getNumberOfSeats());
-		 			ecconomic.setPriceForAdults(clas.getPriceForAdults());
-		 			ecconomic.setPriceForKids(clas.getPriceForKids());
+		 			ecconomic.setPrice(clas.getPrice());
 		 			forTransfer.setEcconomic(ecconomic);
 				}	
 			}
@@ -86,8 +85,7 @@ public class FlightService {
 				if(clas.getType().equals("Biznis") && clas.getDeleted() == false) {
 					ClassTransferDTO biznis = new ClassTransferDTO();
 					biznis.setNumberOfSeats(clas.getNumberOfSeats());
-					biznis.setPriceForAdults(clas.getPriceForAdults());
-					biznis.setPriceForKids(clas.getPriceForKids());
+					biznis.setPrice(clas.getPrice());
 		 			forTransfer.setEcconomic(biznis);
 				}	
 			}
@@ -95,8 +93,7 @@ public class FlightService {
 				if(clas.getType().equals("Prva") && clas.getDeleted() == false) {
 					ClassTransferDTO prva = new ClassTransferDTO();
 					prva.setNumberOfSeats(clas.getNumberOfSeats());
-		 			prva.setPriceForAdults(clas.getPriceForAdults());
-		 			prva.setPriceForKids(clas.getPriceForKids());
+		 			prva.setPrice(clas.getPrice());
 		 			forTransfer.setEcconomic(prva);
 				}	
 			}
@@ -116,14 +113,77 @@ public class FlightService {
 		return retFlight;
 	}
 	
-	/*
-	public FlightDTO getById(Long id) {
-		if(!flightRepository.existsById(id)) {
-			return null;
+	
+	public FlightTransferDTO getById(Long id) {
+		
+			Flight flight = flightRepository.findById(id).orElse(null);
+		
+			FlightTransferDTO forTransfer = new FlightTransferDTO();
+			List<Class> classes = classRepository.findByFlightId(flight.getId());
+			List<Luggage> luggage = luggageRepository.findByFlightId(flight.getId());
+		
+			forTransfer.setId(flight.getId());
+			forTransfer.setPathCode(flight.getPathCode());
+			forTransfer.setStarting_point_id(convertToDTO(flight.getStartingPoint()));
+			forTransfer.setDestination_id(convertToDTO(flight.getDestination()));
+			forTransfer.setDateAndTimeStart(flight.getDateAndTimeStart());
+			forTransfer.setDateAndTimeEnd(flight.getDateAndTimeEnd());
+			forTransfer.setLengthOfTravel(flight.getLengthOfTravel());
+			//parsiranje
+			String destinationOfTransfer = flight.getDestinationOfTransfer();
+			destinationOfTransfer = destinationOfTransfer.substring(0, destinationOfTransfer.length()-1);
+			String[] lis = destinationOfTransfer.split(",");
+			String[] destinations  = new String[lis.length];
+			for (int j = 0; j <= lis.length-1; j++) {
+			destinations[j] = lis[j].split("\\.")[1];
 		}
-		Flight flight = flightRepository.findById(id).orElse(null);
-		return convertToDTO(flight);
-	}*/
+			List<DestinationDTO> list = new ArrayList<>();
+			for(int k = 0; k <= destinations.length-1 ; k++) {
+				list.add(convertToDTO(destinationRepository.findByNameOfAirPort(destinations[k])));
+			}
+			forTransfer.setDestinationOfTransfer(list);
+			forTransfer.setTypeOfPath(flight.getTypeOfPath());
+			forTransfer.setAdditionalServices(flight.getAdditionalServices());
+			forTransfer.setDateAndTimeStartReturn(flight.getDateAndTimeStartReturn());
+			forTransfer.setDateAndTimeEndReturn(flight.getDateAndTimeEndReturn());
+			for (Class clas : classes) {
+			if(clas.getType().equals("Ecconomic") && clas.getDeleted() == false) {
+				ClassTransferDTO ecconomic = new ClassTransferDTO();
+	 			ecconomic.setNumberOfSeats(clas.getNumberOfSeats());
+	 			ecconomic.setPrice(clas.getPrice());
+	 			forTransfer.setEcconomic(ecconomic);
+			}	
+		}
+			for (Class clas : classes) {
+			if(clas.getType().equals("Biznis") && clas.getDeleted() == false) {
+				ClassTransferDTO biznis = new ClassTransferDTO();
+				biznis.setNumberOfSeats(clas.getNumberOfSeats());
+				biznis.setPrice(clas.getPrice());
+	 			forTransfer.setEcconomic(biznis);
+			}	
+		}
+			for (Class clas : classes) {
+			if(clas.getType().equals("Prva") && clas.getDeleted() == false) {
+				ClassTransferDTO prva = new ClassTransferDTO();
+				prva.setNumberOfSeats(clas.getNumberOfSeats());
+	 			prva.setPrice(clas.getPrice());
+	 			forTransfer.setEcconomic(prva);
+			}	
+		}
+			for (Luggage lug : luggage) {
+			if(lug.getDeleted() == false) {
+				LuggageTransferDTO prtljag = new LuggageTransferDTO();
+				prtljag.setMaxDimensions(lug.getMaxDimensions());
+				prtljag.setMaxQuantity(lug.getMaxQuantity());
+				prtljag.setMaxWeight(lug.getMaxWeight());
+	 			forTransfer.setLuggage(prtljag);
+			}	
+		}
+		
+		
+		return forTransfer;
+		
+	}
 	
 	public Boolean save(Long idAvio,FlightTransferDTO flightTransferDTO) {
 		if(!avioCompanyRepository.existsById(idAvio)) {
@@ -170,8 +230,7 @@ public class FlightService {
 			klasaE.setId(null);
 			klasaE.setType("Ecconomic");
 			klasaE.setNumberOfSeats(flightTransferDTO.getEcconomic().getNumberOfSeats());
-			klasaE.setPriceForAdults(flightTransferDTO.getEcconomic().getPriceForAdults());
-			klasaE.setPriceForKids(flightTransferDTO.getEcconomic().getPriceForKids());
+			klasaE.setPrice(flightTransferDTO.getEcconomic().getPrice());
 			klasaE.setDeleted(false);
 			klasaE.setFlight(let);
 			
@@ -186,8 +245,7 @@ public class FlightService {
 			klasaB.setId(null);
 			klasaB.setType("Biznis");
 			klasaB.setNumberOfSeats(flightTransferDTO.getBusiness().getNumberOfSeats());
-			klasaB.setPriceForAdults(flightTransferDTO.getBusiness().getPriceForAdults());
-			klasaB.setPriceForKids(flightTransferDTO.getBusiness().getPriceForKids());
+			klasaB.setPrice(flightTransferDTO.getBusiness().getPrice());
 			klasaB.setDeleted(false);
 			klasaB.setFlight(let);
 			
@@ -202,8 +260,7 @@ public class FlightService {
 			klasaP.setId(null);
 			klasaP.setType("Prva");
 			klasaP.setNumberOfSeats(flightTransferDTO.getFirst().getNumberOfSeats());
-			klasaP.setPriceForAdults(flightTransferDTO.getFirst().getPriceForAdults());
-			klasaP.setPriceForKids(flightTransferDTO.getFirst().getPriceForKids());
+			klasaP.setPrice(flightTransferDTO.getFirst().getPrice());
 			klasaP.setDeleted(false);
 			klasaP.setFlight(let);
 			

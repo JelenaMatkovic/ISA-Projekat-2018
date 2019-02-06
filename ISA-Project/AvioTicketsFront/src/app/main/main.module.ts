@@ -39,6 +39,8 @@ import { AddFlightComponent } from './avio-company/add-flight/add-flight.compone
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RatingDialogComponent } from './rating/rating-dialog/rating-dialog.component';
 import { ActivationComponent } from './activation/activation.component';
+import { SearchFlightsComponent } from './avio-company/search-flights/search-flights.component';
+import { ReservationFlightComponent } from './avio-company/reservation-flight/reservation-flight.component';
 
 @NgModule({
   declarations:[
@@ -73,6 +75,8 @@ import { ActivationComponent } from './activation/activation.component';
     AddFlightComponent,
     RatingDialogComponent,
     ActivationComponent,
+    SearchFlightsComponent,
+    ReservationFlightComponent,
   ],
   imports: [
     CommonModule,

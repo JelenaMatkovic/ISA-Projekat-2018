@@ -21,6 +21,9 @@ import { AddDestinationComponent } from './avio-company/add-destination/add-dest
 import { UpdateDestinationComponent } from './avio-company/update-destination/update-destination.component';
 import { AddFlightComponent } from './avio-company/add-flight/add-flight.component';
 import { ActivationComponent } from './activation/activation.component';
+import { SearchFlightsComponent } from './avio-company/search-flights/search-flights.component'; 
+import { ReservationFlightComponent } from './avio-company/reservation-flight/reservation-flight.component'; 
+
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
     {path : 'register-user', component: HomeComponent},
@@ -40,14 +43,17 @@ export const MainRoutes=[
     {path: 'rent-a-car/:rentACarId/add-quick-ticket', component:AddCarQuickTicketComponent},
     
     {path: 'avio-company/addAvioCompany', component:AddAvioCompanyComponent},
-
     {path: 'avio-company/showAvioCompanies', component:ShowAvioCompaniesComponent},
+    {path: 'avio-company/searchFlights', component:SearchFlightsComponent},
+    {path: 'avio-company/searchFlights/:id', component:ReservationFlightComponent},
     {path: 'avio-company/showAvioCompany/:id', component:ShowAvioCompanyComponent},
     {path: 'avio-company/updateAvioCompany/:id', component:UpdateAvioCompanyComponent},
 
     {path: 'avio-company/showAvioCompany/:id/destination/addDestination', component:AddDestinationComponent},
     {path: 'avio-company/showAvioCompany/:id/destination/updateDestination/:idDes', component:UpdateDestinationComponent},
     
-    {path: 'avio-company/showAvioCompany/:id/flight/addFlight', component:AddFlightComponent}
+    {path: 'avio-company/showAvioCompany/:id/flight/addFlight', component:AddFlightComponent},
+
+   
 
 ]

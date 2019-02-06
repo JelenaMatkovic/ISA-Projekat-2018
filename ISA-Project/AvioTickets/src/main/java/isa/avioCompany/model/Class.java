@@ -30,10 +30,7 @@ public class Class {
 	private Integer numberOfSeats;
 	
 	@Column(nullable=false)
-	private Double priceForAdults;
-	
-	@Column(nullable=false)
-	private Double priceForKids;
+	private Double price;
 	
 	@Column(nullable=false)
 	private Boolean deleted;

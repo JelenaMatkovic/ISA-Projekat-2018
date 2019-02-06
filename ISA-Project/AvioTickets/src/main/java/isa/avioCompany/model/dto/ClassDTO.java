@@ -11,9 +11,7 @@ public class ClassDTO {
 	
 	private Integer numberOfSeats;
 	
-	private Double priceForAdults;
-	
-	private Double priceForKids;
+	private Double price;
 	
 	private Boolean deleted;
 	

@@ -7,7 +7,5 @@ public class ClassTransferDTO {
 	
 	private Integer numberOfSeats;
 	
-	private Double priceForAdults;
-	
-	private Double priceForKids;
+	private Double price;
 }
