@@ -41,6 +41,8 @@ import { RatingDialogComponent } from './rating/rating-dialog/rating-dialog.comp
 import { ActivationComponent } from './activation/activation.component';
 import { SearchFlightsComponent } from './avio-company/search-flights/search-flights.component';
 import { ReservationFlightComponent } from './avio-company/reservation-flight/reservation-flight.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
+import { UserUpdatePasswordComponent } from './user-update-password/user-update-password.component';
 
 @NgModule({
   declarations:[
@@ -77,6 +79,8 @@ import { ReservationFlightComponent } from './avio-company/reservation-flight/re
     ActivationComponent,
     SearchFlightsComponent,
     ReservationFlightComponent,
+    UserUpdateComponent,
+    UserUpdatePasswordComponent,
   ],
   imports: [
     CommonModule,

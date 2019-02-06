@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import isa.user.enums.UserType;
 import isa.user.model.User;
 import isa.user.model.dto.UserDTO;
+import isa.user.model.dto.UserPasswordDTO;
 import isa.user.repository.UserRepository;
 
 @Service
@@ -24,6 +25,8 @@ public class UserService {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	
 	
 	@Autowired
     public JavaMailSender emailSender;
@@ -48,9 +51,10 @@ public class UserService {
 		return convertToDTO(user);
 	}
 	
-	public UserDTO update(Long id, UserDTO userDTO) {
-		User oldUser = userRepository.findById(id)
-				.orElseThrow(()-> new NullPointerException("User with id:" + id + " does not exists."));
+	public UserDTO update(UserDTO userDTO) {
+		User userId =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		User oldUser = userRepository.findById(userId.getId()).orElse(null);
 		User user = convertToEntity(userDTO);
 		oldUser.setEmail(user.getEmail());
 		oldUser.setFirstName(user.getFirstName());
@@ -63,9 +67,28 @@ public class UserService {
 		
 	}
 	
+	public UserPasswordDTO updatePassword(UserPasswordDTO userPasswordDTO) {
+		User userId =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		User oldUser = userRepository.findById(userId.getId()).orElse(null);
+		
+		if(encoder.matches(userPasswordDTO.getOldPassword(), oldUser.getPassword())) {
+			System.out.println("USAO U PRVI");
+			String hash = encoder.encode(userPasswordDTO.getNewPassword());
+			oldUser.setPassword(hash);
+			userRepository.save(oldUser);
+			return userPasswordDTO;
+		}else {
+			System.out.println("USAO U Drugi");
+			return null;
+		}
+	}
+	
 	public UserDTO getById(Long id) {
-		User user = userRepository.findById(id)
-			.orElseThrow(()-> new NullPointerException("User with id:" + id + " does not exists."));
+		User user = userRepository.findById(id).orElse(null);
+		
+			//.orElseThrow(()-> new NullPointerException("User with id:" + id + " does not exists."));
 		return convertToDTO(user);
 	}
 	
@@ -109,6 +132,8 @@ public class UserService {
 		userDTO.setCity(user.getCity());
 		userDTO.setTelephone(user.getTelephone());
 		userDTO.setUserType(user.getUserType().toString());
+		userDTO.setPassword(user.getPassword());
+		
 		return userDTO;
 	}
 

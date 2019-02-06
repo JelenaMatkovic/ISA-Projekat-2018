@@ -1,0 +1,43 @@
+
+<div *ngIf="user && updateUserForm" class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2>User Update</h2>
+                <form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="form-group">
+                        <label>Ime</label>
+                        <input [(ngModel)]="user.firstName" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Prezime</label>
+                        <input [(ngModel)]="user.lastName" type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Grad</label>
+                        <input [(ngModel)]="user.city" type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                            <div *ngIf="f.city.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input [(ngModel)]="user.telephone" type="text" formControlName="telephone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
+                        <div *ngIf="submitted && f.telephone.errors" class="invalid-feedback">
+                            <div *ngIf="f.telephone.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

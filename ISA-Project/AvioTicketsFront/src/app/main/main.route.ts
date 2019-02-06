@@ -1,6 +1,7 @@
 import { HomePageComponent } from "./home-page/home-page.component";
 import { HomeComponent } from "./home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { UserUpdateComponent } from "./user-update/user-update.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AddRentACarComponent } from "./rent-a-car/add-rent-a-car/add-rent-a-car.component";
@@ -23,11 +24,14 @@ import { AddFlightComponent } from './avio-company/add-flight/add-flight.compone
 import { ActivationComponent } from './activation/activation.component';
 import { SearchFlightsComponent } from './avio-company/search-flights/search-flights.component'; 
 import { ReservationFlightComponent } from './avio-company/reservation-flight/reservation-flight.component'; 
+import { UserUpdatePasswordComponent } from './user-update-password/user-update-password.component';
 
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
     {path : 'register-user', component: HomeComponent},
     {path: 'profile', component : ProfileComponent},
+    {path: 'profile/update', component : UserUpdateComponent},
+    {path: 'profile/updatePassword', component : UserUpdatePasswordComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component:RegisterComponent},
     {path: 'activation/:hash', component: ActivationComponent},

@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import isa.avioCompany.model.dto.AvioCompanyDTO;
 import isa.user.model.dto.UserDTO;
+import isa.user.model.dto.UserPasswordDTO;
 import isa.user.service.UserService;
 
 @RestController
@@ -45,9 +47,18 @@ public class UserController {
 	}
 	
 	
-	@PutMapping("{id}")
-	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO){
-		return new ResponseEntity<UserDTO>(userService.update(id, userDTO), HttpStatus.OK);
+	@PutMapping("/update")
+	public ResponseEntity<UserDTO> update(@RequestBody UserDTO userDTO){
+		return new ResponseEntity<UserDTO>(userService.update(userDTO), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updatePassword")
+	public ResponseEntity<UserPasswordDTO> update(@RequestBody UserPasswordDTO userPasswordDTO){
+		if(userService.updatePassword(userPasswordDTO) == null) {
+			return new ResponseEntity<UserPasswordDTO>(HttpStatus.CONFLICT);
+		}else {
+			return new ResponseEntity<UserPasswordDTO>(userService.updatePassword(userPasswordDTO), HttpStatus.OK);
+		}
 	}
 	
 	@PatchMapping("/activation/{hash}")

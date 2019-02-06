@@ -41,15 +41,6 @@
       <hr />
       <div class="row">
           <div class="col-md-5">
-              <label style="font-weight:bold;">Sifra</label>
-          </div>
-          <div class="col-md-7">
-              {{user.password}}
-          </div>
-      </div>
-      <hr />
-      <div class="row">
-          <div class="col-md-5">
               <label style="font-weight:bold;">Grad</label>
           </div>
           <div class="col-md-7">
@@ -67,7 +58,10 @@
       </div>
       <hr />
       <div style="text-align: right">
-              <button class="btn btn-outline-success">Izmeni</button>
+            <button class="btn btn-outline-success mr-2"
+            [routerLink]="'/profile/updatePassword'" >Izmeni sifru</button>
+              <button class="btn btn-outline-success"
+                      [routerLink]="'/profile/update'" >Izmeni profil</button>
       </div>
       </div>
       <div class="col-md-4"></div>
