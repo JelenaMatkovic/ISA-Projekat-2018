@@ -10,6 +10,8 @@ public class FlightDTO {
 	private Long id;
 	
 	private String pathCode;
+	
+	private Integer numberOfSegments;
 
 	private Long starting_point_id;
 

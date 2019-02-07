@@ -47,6 +47,7 @@ export class AddFlightComponent implements OnInit {
     this.addFlightForm = this.formBuilder.group({
       id:[null],
       pathCode:[null],
+      numberOfSegments: [null],
       starting_point_id:[null],
       destination_id:[null],
       dateAndTimeStart:[null],

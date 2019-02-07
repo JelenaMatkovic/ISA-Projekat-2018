@@ -28,6 +28,9 @@ public class Flight {
 	@Column(nullable=false)
 	private String pathCode;
 	
+	@Column(nullable=false)
+	private Integer numberOfSegments;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "starting_point_id")
 	private Destination startingPoint;

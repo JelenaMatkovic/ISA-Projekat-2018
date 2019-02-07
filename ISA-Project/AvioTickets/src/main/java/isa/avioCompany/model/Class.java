@@ -21,6 +21,7 @@ public class Class {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="clas_id")
 	private Long id;
 	
 	@Column(nullable=false,length=100)
@@ -40,6 +41,13 @@ public class Class {
 	private Flight flight;
 	
 	@OneToMany(mappedBy = "clas", cascade = CascadeType.ALL)
-	private Set<Ticket> ticket;
+	private Set<ClassTicket> classTicket;
+	
+	@Column(nullable=false,length=100)
+	private String deletedSeats;
+	
+	@Column(nullable=false,length=100)
+	private String occupiedSeats;
+	
 	
 }

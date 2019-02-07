@@ -58,10 +58,11 @@ public class SearchService {
 					&& flight.getDateAndTimeStart().before(searchDTO.getDateAndTimeEnd())
 					){
 				
-				AvioCompany avio = avioCompanyRepository.findById(flight.getAvioCompany().getId()).orElse(null);
+				
 				FlightTransferDTO transfer = new FlightTransferDTO();
 	 			List<Class> classes = classRepository.findByFlightId(flight.getId());
 	 			List<Luggage> luggage = luggageRepository.findByFlightId(flight.getId());
+	 			AvioCompany avio = avioCompanyRepository.findById(flight.getAvioCompany().getId()).orElse(null);
 				transfer.setNameOfAvioCompany(avio.getName());
 	 			transfer.setId(flight.getId());
 	 			transfer.setPathCode(flight.getPathCode());
@@ -102,7 +103,7 @@ public class SearchService {
 						ClassTransferDTO biznis = new ClassTransferDTO();
 						biznis.setNumberOfSeats(clas.getNumberOfSeats());
 						biznis.setPrice(clas.getPrice());
-						transfer.setEcconomic(biznis);
+						transfer.setBusiness(biznis);
 					}	
 				}
 	 			for (Class clas : classes) {
@@ -111,7 +112,7 @@ public class SearchService {
 						prva.setNumberOfSeats(clas.getNumberOfSeats());
 			 			prva.setPrice(clas.getPrice());
 			 			prva.setPrice(clas.getPrice());
-			 			transfer.setEcconomic(prva);
+			 			transfer.setFirst(prva);
 					}	
 				}
 	 			for (Luggage lug : luggage) {

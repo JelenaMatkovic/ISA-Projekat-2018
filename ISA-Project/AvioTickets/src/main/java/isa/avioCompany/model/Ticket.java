@@ -1,7 +1,9 @@
 package isa.avioCompany.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import isa.user.model.User;
@@ -24,9 +27,10 @@ public class Ticket {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ticket_id")
 	private Long id;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
 	private User user;
 	
@@ -45,8 +49,14 @@ public class Ticket {
 	@Column(nullable=false)
 	private Boolean deleted;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "flight_id")
-	private Class clas;
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+	private Set<ClassTicket> classTicket;
+	
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+	private Set<NoUser> noUser;
+	
+	@Column(nullable=false,length=100)
+	private String passport;
+	
 	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import isa.avioCompany.model.AvioCompany;
 import isa.avioCompany.model.Class;
 import isa.avioCompany.model.Destination;
 import isa.avioCompany.model.Flight;
@@ -48,9 +49,11 @@ public class FlightService {
 			FlightTransferDTO forTransfer = new FlightTransferDTO();
  			List<Class> classes = classRepository.findByFlightId(flightOfAvioCompany.get(i).getId());
  			List<Luggage> luggage = luggageRepository.findByFlightId(flightOfAvioCompany.get(i).getId());
-			
+ 			AvioCompany avio = avioCompanyRepository.findById(flightOfAvioCompany.get(i).getAvioCompany().getId()).orElse(null);
+			forTransfer.setNameOfAvioCompany(avio.getName());
  			forTransfer.setId(flightOfAvioCompany.get(i).getId());
  			forTransfer.setPathCode(flightOfAvioCompany.get(i).getPathCode());
+ 			forTransfer.setNumberOfSegments(flightOfAvioCompany.get(i).getNumberOfSegments());
  			forTransfer.setStarting_point_id(convertToDTO(flightOfAvioCompany.get(i).getStartingPoint()));
  			forTransfer.setDestination_id(convertToDTO(flightOfAvioCompany.get(i).getDestination()));
  			forTransfer.setDateAndTimeStart(flightOfAvioCompany.get(i).getDateAndTimeStart());
@@ -86,7 +89,7 @@ public class FlightService {
 					ClassTransferDTO biznis = new ClassTransferDTO();
 					biznis.setNumberOfSeats(clas.getNumberOfSeats());
 					biznis.setPrice(clas.getPrice());
-		 			forTransfer.setEcconomic(biznis);
+		 			forTransfer.setBusiness(biznis);
 				}	
 			}
  			for (Class clas : classes) {
@@ -94,7 +97,7 @@ public class FlightService {
 					ClassTransferDTO prva = new ClassTransferDTO();
 					prva.setNumberOfSeats(clas.getNumberOfSeats());
 		 			prva.setPrice(clas.getPrice());
-		 			forTransfer.setEcconomic(prva);
+		 			forTransfer.setFirst(prva);
 				}	
 			}
  			for (Luggage lug : luggage) {
@@ -121,9 +124,11 @@ public class FlightService {
 			FlightTransferDTO forTransfer = new FlightTransferDTO();
 			List<Class> classes = classRepository.findByFlightId(flight.getId());
 			List<Luggage> luggage = luggageRepository.findByFlightId(flight.getId());
-		
+			AvioCompany avio = avioCompanyRepository.findById(flight.getAvioCompany().getId()).orElse(null);
+			forTransfer.setNameOfAvioCompany(avio.getName());
 			forTransfer.setId(flight.getId());
 			forTransfer.setPathCode(flight.getPathCode());
+			forTransfer.setNumberOfSegments(flight.getNumberOfSegments());
 			forTransfer.setStarting_point_id(convertToDTO(flight.getStartingPoint()));
 			forTransfer.setDestination_id(convertToDTO(flight.getDestination()));
 			forTransfer.setDateAndTimeStart(flight.getDateAndTimeStart());
@@ -159,7 +164,7 @@ public class FlightService {
 				ClassTransferDTO biznis = new ClassTransferDTO();
 				biznis.setNumberOfSeats(clas.getNumberOfSeats());
 				biznis.setPrice(clas.getPrice());
-	 			forTransfer.setEcconomic(biznis);
+	 			forTransfer.setBusiness(biznis);
 			}	
 		}
 			for (Class clas : classes) {
@@ -167,7 +172,7 @@ public class FlightService {
 				ClassTransferDTO prva = new ClassTransferDTO();
 				prva.setNumberOfSeats(clas.getNumberOfSeats());
 	 			prva.setPrice(clas.getPrice());
-	 			forTransfer.setEcconomic(prva);
+	 			forTransfer.setFirst(prva);
 			}	
 		}
 			for (Luggage lug : luggage) {
@@ -193,6 +198,7 @@ public class FlightService {
 		Flight novi = new Flight();
 		
 		novi.setPathCode(flightTransferDTO.getPathCode());
+		novi.setNumberOfSegments(flightTransferDTO.getNumberOfSegments());
 		novi.setStartingPoint(destinationRepository.findById(flightTransferDTO.getStarting_point_id().getId()).orElse(null));
 		novi.setDestination(destinationRepository.findById(flightTransferDTO.getDestination_id().getId()).orElse(null));
 		novi.setDateAndTimeStart(flightTransferDTO.getDateAndTimeStart());

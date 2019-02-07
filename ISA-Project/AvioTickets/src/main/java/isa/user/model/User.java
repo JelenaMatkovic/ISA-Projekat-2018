@@ -19,7 +19,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -67,9 +67,9 @@ public class User implements UserDetails {
 	@Column(name = "activation_hash", nullable = true)
 	private String activationHash;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-	private Ticket ticket;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+	private List<Ticket> ticket;
 	
 	@Override
 	public String getUsername() {		

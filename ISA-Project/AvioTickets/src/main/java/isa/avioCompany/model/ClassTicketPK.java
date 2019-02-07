@@ -5,12 +5,11 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class OfficePK implements Serializable {
-	
+public class ClassTicketPK implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
-	private Long avioCompany;
+	private Long clas;
 	
-	private Long destination;
-	
+	private Long ticket;
 }

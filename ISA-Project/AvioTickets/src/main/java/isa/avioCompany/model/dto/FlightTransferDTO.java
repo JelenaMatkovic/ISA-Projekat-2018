@@ -15,6 +15,8 @@ public class FlightTransferDTO {
 
 	private String pathCode;
 	
+	private Integer numberOfSegments;
+	
 	private DestinationDTO starting_point_id;
 	
 	private DestinationDTO destination_id;

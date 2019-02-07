@@ -1,3 +1,169 @@
-<p>
-  reservation-flight works!
-</p>
+
+<div class="container" style="margin-top:30px; zoom: 75%;">
+  <table class=" table mt-3 mb-0 table-hover" style="text-align:center">
+          <thead class="thead-dark">
+          <tr>
+              <th scope="col" colspan="5" >
+                  Informacije o letu
+              </th>
+          </tr>
+            <tr>
+              <th scope="col">Avio kompanija</th>
+              <th scope="col">Polaziste</th>
+              <th scope="col">Vreme poletanja</th>
+              <th scope="col">Odrediste</th>
+              <th scope="col">Vreme sletanja</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="flight">
+                  <tr >
+                      <th>{{flight.nameOfAvioCompany}}</th>
+                      <th>{{flight.starting_point_id.nameOfAirPort}}</th>
+                      <th>{{flight.dateAndTimeStart.slice(0,16).replace('T', ' ')}}</th>
+                      <th>{{flight.destination_id.nameOfAirPort}}</th>
+                      <th>{{flight.dateAndTimeEnd.slice(0,16).replace('T', ' ')}}</th>
+                      
+                  </tr>
+          </tbody>
+        </table>
+        <table class="container table mt-0 table-hover" style="text-align:center">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Duzina puta</th>
+              <th scope="col">Trajanje puta(min)</th>
+              <th scope="col">Presedanja</th>
+              <th scope="col">Cena</th>
+              <th scope="col">Prtljag</th>
+              <th scope="col">Dodatne usluge</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="flight">
+                  <tr >
+                    <th>{{flight.lengthOfTravel}}</th>
+                    <th>{{flight.timeOfTravel}}</th>
+                    <th >
+                      <ng-container *ngFor="let dest of flight.destinationOfTransfer; let i = index">
+                          {{i + 1}}.{{dest.nameOfTown}} in {{dest.nameOfCountry}} <br>
+                      </ng-container>
+                    </th>
+                    <th>
+                            <ng-container *ngIf="flight.ecconomic">
+                                Econ:{{flight.ecconomic.price}}
+                            </ng-container>
+                            <ng-container *ngIf="flight.business">
+                                <br>
+                                Bizn:{{flight.business.price}}
+                            </ng-container>
+                            <ng-container *ngIf="flight.first">
+                                <br>
+                                Prva:{{flight.first.price}}
+                            </ng-container>
+                      </th>
+                      <th>
+                              MaxQuan:{{flight.luggage.maxQuantity}}<br>
+                              MaxWeig:{{flight.luggage.maxWeight}}<br>
+                              MaxDime:{{flight.luggage.maxDimensions}}<br>
+                      </th>
+                      <th>{{flight.additionalServices}}</th>
+                  </tr>
+          </tbody>
+        </table>
+</div>
+<hr>
+<div class="container" id="GrafickiPrikaz" style="text-align:center; zoom: 75%; height: 420px!important;">
+      <h1>Izaberite mesto u avionu</h1>
+        <div *ngIf="flight"  class="row">
+          <div class="col-md-4">
+              <span *ngIf="flight.ecconomic" class="badge badge-info">Economic</span>
+          </div>
+          <div class="col-md-4">
+              <span *ngIf="flight.business" class="badge badge-primary">Business</span>
+          </div>
+          <div class="col-md-4">
+              <span *ngIf="flight.first" class="badge badge-danger">First</span>
+          </div>
+        </div>
+        <div class="row"style="  transform: rotate(270deg);
+                                -webkit-transform-origin: 150px 150px;
+                                ">
+            
+            <div class="col-md-4" style="height: 270px!important;">
+                <ng-container *ngFor="let k of tempB;let i = index">
+                    <button 
+                    *ngIf="(i%2 == 0) && i &lt; flight.ecconomic?.numberOfSeats" 
+                    class="btn btn-info mr-1 mb-1 dug"
+                    style="height: 50px;width: 50px;" id="{{i}}"
+                    (click)="change(i)">{{i}}</button>
+                    <button 
+                    *ngIf="(i%2 != 0)  && i &lt; flight.ecconomic?.numberOfSeats" 
+                    class="btn btn-info mr-3 mb-1  dug" id="{{i}}"
+                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    <button 
+                    *ngIf="(i%2 == 0)  && i >= flight.ecconomic?.numberOfSeats
+                    && i &lt; (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)" 
+                    class="btn btn-primary mr-1 mb-1  dug"  id="{{i}}"
+                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    <button 
+                    *ngIf="(i%2 != 0)  && i >= flight.ecconomic.numberOfSeats
+                    && i &lt; (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)"  
+                    class="btn btn-primary mr-3 mb-1  dug" id="{{i}}"
+                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    <button 
+                    *ngIf="(i%2 == 0) && i >= (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)"
+                    class="btn btn-danger mr-1 mb-1  dug" id="{{i}}"
+                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    <button 
+                    *ngIf="(i%2 != 0) && i >= (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)"
+                    class="btn btn-danger mr-3 mb-1  dug" id="{{i}}"
+                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+
+
+                    <br *ngIf="(i==((flight.numberOfSegments*2)-1))">
+                    <br *ngIf="((i+1)%(flight.numberOfSegments*2) == 0 && i!=0 && i!=((flight.numberOfSegments*2)-1))">
+                </ng-container>
+                
+            </div>
+          </div>
+          <div class="row mt-4">
+              <button class="btn btn-success" (click)="next()">Next</button>
+          </div>
+</div>
+<hr>
+    <div class="jumbotron" id="Forma" style="text-align:center; zoom: 75%; visibility: collapse;">
+        <div *ngIf="numberOfSeats || numberOfSeats == 0" class="container">
+            <div class="row">
+                <div class="col-md-7 offset-md-3">
+                    <h2>Popunite licne podatke za sediste broj {{numberOfSeats}}</h2>
+                    <h4 *ngIf="this.numberOfReservation[0] == numberOfSeats">Its for you</h4>
+                    <h4 *ngIf="this.numberOfReservation[0] != numberOfSeats">Its for your friends</h4>
+                    <form [formGroup]="userForm" novalidate>
+                        <div *ngIf="this.numberOfReservation[0] != numberOfSeats" class="form-group">
+                            <label>First name</label>
+                            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                        <div *ngIf="this.numberOfReservation[0] != numberOfSeats" class="form-group">
+                            <label>Last name</label>
+                            <input type="text" formControlName="LasstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LasstName.errors }" />
+                            <div *ngIf="submitted && f.LasstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.LasstName.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Passport</label>
+                            <input type="text" formControlName="Passport" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Passport.errors }" />
+                            <div *ngIf="submitted && f.Passport.errors" class="invalid-feedback">
+                                <div *ngIf="f.Passport.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button [disabled]="loading" class="btn btn-primary" *ngIf="this.numberOfReservation[this.numberOfReservation.length-1] != numberOfSeats" (click)="nextUser()">Next</button>
+                            <button [disabled]="loading" class="btn btn-primary" *ngIf="this.numberOfReservation[this.numberOfReservation.length-1] == numberOfSeats" (click)="rezervacija()">Rezervisi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
