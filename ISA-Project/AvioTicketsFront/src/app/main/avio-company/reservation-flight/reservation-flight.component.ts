@@ -4,6 +4,7 @@ import { pipe } from "rxjs";
 import { mapTo, delay } from 'rxjs/operators';
 import { AvioCompanyService } from '../../services/avio-company.service';
 import { FormBuilder } from '@angular/forms';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-reservation-flight',
@@ -32,7 +33,37 @@ export class ReservationFlightComponent implements OnInit {
               private router:Router,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder) {
-                var element = <HTMLInputElement> document.getElementById("5");
+                
+  }
+
+  ngAfterViewInit(){
+    setTimeout(_=> {
+      if( this.flight.business != null){
+        let s = this.flight.business.occupiedSeats.slice(0,this.flight.business.occupiedSeats.length-1);
+        let toArray =  s.split(",");
+        console.log(toArray);
+        for(let i = 0; i < toArray.length; i++){
+          (<HTMLInputElement> document.getElementById(toArray[i])).disabled = true;
+        } 
+      }
+      if( this.flight.ecconomic != null){
+        let s = this.flight.ecconomic.occupiedSeats.slice(0,this.flight.ecconomic.occupiedSeats.length-1);
+        let toArray =  s.split(",");
+        console.log(toArray);
+        for(let i = 0; i < toArray.length; i++){
+          (<HTMLInputElement> document.getElementById(toArray[i])).disabled = true;
+        } 
+      }
+      if( this.flight.first != null){
+        let s = this.flight.first.occupiedSeats.slice(0,this.flight.first.occupiedSeats.length-1);
+        let toArray =  s.split(",");
+        console.log(toArray);
+        for(let i = 0; i < toArray.length; i++){
+          (<HTMLInputElement> document.getElementById(toArray[i])).disabled = true;
+        } 
+      }
+    },1000);
+   
   }
 
   ngOnInit() {
@@ -91,7 +122,7 @@ export class ReservationFlightComponent implements OnInit {
       this.classOfReservation.push(el.className.slice(8,9))
     }
     this.tempBol = true;
-
+    
     
   }
 

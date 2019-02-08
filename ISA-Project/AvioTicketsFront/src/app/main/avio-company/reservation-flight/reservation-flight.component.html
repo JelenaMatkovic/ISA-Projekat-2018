@@ -72,7 +72,13 @@
 <hr>
 <div class="container" id="GrafickiPrikaz" style="text-align:center; zoom: 75%; height: 550px!important;">
       <h1>Izaberite mesto u avionu</h1>
-        <div *ngIf="flight"  class="row">
+        <div class="row" style="text-align: right;">
+        <div class="col-md-11"></div>
+        <div class="col-md-1">
+            <button class="btn btn-success right" (click)="next()">Next</button>
+        </div>
+        </div>  
+      <div *ngIf="flight"  class="row">
           <div class="col-md-4">
               <span *ngIf="flight.ecconomic" class="badge badge-info">Economic</span>
           </div>
@@ -83,11 +89,11 @@
               <span *ngIf="flight.first" class="badge badge-danger">First</span>
           </div>
         </div>
-        <div class="row"style="  transform: rotate(270deg);
-                                -webkit-transform-origin: 200px 200px;
+        <div class="row"style=" transform: rotate(270deg);
+                                -webkit-transform-origin: 280px 280px;
                                 ">
             
-            <div class="col-md-4" style="height: 400px!important;">
+            <div class="col-md-8" style="height: 400px!important;">
                 <ng-container *ngFor="let k of tempB;let i = index">
                     <button 
                     *ngIf="(i%2 == 0) && i &lt; flight.ecconomic?.numberOfSeats"
@@ -123,12 +129,7 @@
                 </ng-container>
                 
             </div>
-            <div class="col-md-4" style="height: 400px!important;">
-            </div>
-            <div class="col-md-4" style="height: 400px!important;"></div>
-          </div>
-          <div class="row mt-4">
-              <button class="btn btn-success" (click)="next()">Next</button>
+            
           </div>
 </div>
 <hr>
