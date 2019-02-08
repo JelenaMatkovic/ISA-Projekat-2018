@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BranchService } from '../../services/branch.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'branch-list',
@@ -15,10 +16,18 @@ export class BranchListComponent implements OnInit {
   displayedColumns = ['address','id'];
   dataSource:MatTableDataSource<any>;
 
+  canAddBranch:boolean;
+  canEditBranch:boolean;
+  canDeleteBranch:boolean;
+
   constructor(private branchService:BranchService,
-              private router:Router) { }
+              private router:Router,
+              private authService:AuthService) { }
 
   ngOnInit() {
+    this.canAddBranch = this.authService.getUserType() == 'ADMIN_RENT_A_CAR';
+    this.canEditBranch = this.authService.getUserType() == 'ADMIN_RENT_A_CAR';
+    this.canDeleteBranch = this.authService.getUserType() == 'ADMIN_RENT_A_CAR';
     this.branchService.getAllBranchesByRentACar(this.rentACarId).subscribe(
       data =>{ 
         this.branches = data

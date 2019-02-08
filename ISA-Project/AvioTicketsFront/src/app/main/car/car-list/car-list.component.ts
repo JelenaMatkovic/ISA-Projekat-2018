@@ -4,6 +4,7 @@ import { CarService } from '../../services/car.service';
 import { Router } from '@angular/router';
 import { CarReservationComponent } from '../../car-reservation/car-reservation/car-reservation.component';
 import { CarReservationDialogComponent } from '../../car-reservation/car-reservation-dialog/car-reservation-dialog.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'car-list',
@@ -43,12 +44,19 @@ export class CarListComponent implements OnInit {
   cars:any;
   displayedColumns = ['name', 'model_brand','type', 'year', 'seats', 'price','rating', 'id'];
   dataSource:MatTableDataSource<any>;
+  canAddCar:boolean;
+  canEditCar:boolean;
+  canDeleteCar:boolean;
 
   constructor(private carService:CarService,
               public dialog: MatDialog,
-              private router:Router) { }
+              private router:Router,
+              private authService:AuthService) { }
 
   ngOnInit() {
+    this.canAddCar = this.authService.getUserType() == 'ADMIN_RENT_A_CAR';
+    this.canEditCar = this.authService.getUserType() == 'ADMIN_RENT_A_CAR';
+    this.canDeleteCar = this.authService.getUserType() == 'ADMIN_RENT_A_CAR';
     if(this.isReservation) return;
     this.carService.getAllCarsByRentACar(this.rentACarId).subscribe(
       data =>{ 
@@ -64,10 +72,12 @@ export class CarListComponent implements OnInit {
       case 'PASSENGER_CAR': car.carType = 'Passenger'; break;
       case 'FREIGHT_CAR': car.carType = 'Freight'; break;
       }
-      car.rating = [
-        {name:'Rating', value:car.averageRating},
-        {name:'Not rating', value:5-car.averageRating}
-      ]
+      if(car.averageRating){
+        car.rating = [
+          {name:'Rating', value:car.averageRating},
+          {name:'Not rating', value:5-car.averageRating}
+        ]
+      }
       return car;
     });
     this.dataSource = new MatTableDataSource<any>(cars);

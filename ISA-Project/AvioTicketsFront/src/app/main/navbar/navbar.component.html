@@ -29,11 +29,11 @@
         <li class="nav-item">
             <a *ngIf="this.authService.getUserType() == 'USER'" class="nav-link user" [routerLink]="'/profile'">
                 <img class="img" src="assets/Img/user.png" alt="Generic placeholder image" height="24px" width="24px">
-                {{user.firstName}}
+                {{user?.firstName}}
             </a>
             <a *ngIf="this.authService.getUserType() != 'USER'" class="nav-link user" [routerLink]="'/profile'">
                 <img class="img" src="assets/Img/administrator.png" alt="Generic placeholder image" height="24px" width="24px">
-                {{user.firstName}}
+                {{user?.firstName}}
             </a>
         </li>
         <li class="nav-item">
