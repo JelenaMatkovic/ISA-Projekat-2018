@@ -36,6 +36,6 @@
   </table>
 
   <div *ngIf="!isReservation" fxLayout="row" fxLayoutAlign="space-around space-around" class="bottom-container">
-      <button mat-raised-button class="primary-button" [routerLink]="'add-quick-ticket'">Add Car Quick Ticket</button>
+      <button *ngIf="canAddTicket" mat-raised-button class="primary-button" [routerLink]="'add-quick-ticket'">Add Car Quick Ticket</button>
   </div>
 </div>

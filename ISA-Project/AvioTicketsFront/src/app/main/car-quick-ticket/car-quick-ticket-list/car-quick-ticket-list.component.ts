@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CarQuickTicketService } from '../../services/car-quick-ticket.service';
 import { CarReservationDialogComponent } from '../../car-reservation/car-reservation-dialog/car-reservation-dialog.component';
 import { CarService } from '../../services/car.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'car-quick-ticket-list',
@@ -28,13 +29,16 @@ export class CarQuickTicketListComponent implements OnInit {
   tickets:any;
   displayedColumns = ['car', 'price', 'date','place'];
   dataSource:MatTableDataSource<any>;
+  canAddTicket:boolean;
 
   constructor(private ticketService:CarQuickTicketService,
               private carService:CarService,
               public dialog: MatDialog,
-              private router:Router) { }
+              private router:Router,
+              private authService:AuthService) { }
 
   ngOnInit() {
+    this.canAddTicket = this.authService.getUserType() == 'USER';
     if(this.isReservation){
       this.displayedColumns.push('id');
     }

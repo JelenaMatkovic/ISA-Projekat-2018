@@ -9,8 +9,8 @@
       <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-              <button mat-raised-button class="edit-button" [routerLink]="'edit-branch/' + element.id">Edit</button>
-              <button mat-raised-button class="back-button" style="margin-left: 3%;"(click)="deleteBranch(element.id)">Delete</button>
+              <button *ngIf="canEditBranch" mat-raised-button class="edit-button" [routerLink]="'edit-branch/' + element.id">Edit</button>
+              <button *ngIf="canDeleteBranch" mat-raised-button class="back-button" style="margin-left: 3%;"(click)="deleteBranch(element.id)">Delete</button>
           </td>
       </ng-container>
   
@@ -18,7 +18,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
     </table>
   
-    <div fxLayout="row" fxLayoutAlign="space-around space-around" class="bottom-container">
+    <div  *ngIf="canAddBranch" fxLayout="row" fxLayoutAlign="space-around space-around" class="bottom-container">
         <button mat-raised-button class="primary-button" [routerLink]="'add-branch'">Add Branch</button>
     </div>
   </div>

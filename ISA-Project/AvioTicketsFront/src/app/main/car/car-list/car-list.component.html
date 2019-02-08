@@ -47,8 +47,8 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
               <div *ngIf="!isReservation">
-                <button mat-raised-button class="edit-button" [routerLink]="'edit-car/' + element.id">Edit</button>
-                <button mat-raised-button class="back-button" style="margin-left: 3%;"(click)="deleteCar(element.id)">Delete</button>
+                <button *ngIf="canEditCar" mat-raised-button class="edit-button" [routerLink]="'edit-car/' + element.id">Edit</button>
+                <button *ngIf="canDeleteCar" mat-raised-button class="back-button" style="margin-left: 3%;"(click)="deleteCar(element.id)">Delete</button>
               </div>
               <div *ngIf="isReservation">
                   <button mat-raised-button class="edit-button" (click)="reserve(element.id)">Reserve</button>
@@ -61,6 +61,6 @@
     </table>
   
     <div *ngIf="!isReservation" fxLayout="row" fxLayoutAlign="space-around space-around" class="bottom-container">
-        <button mat-raised-button class="primary-button" [routerLink]="'add-car'">Add Car</button>
+        <button *ngIf="canAddCar" mat-raised-button class="primary-button" [routerLink]="'add-car'">Add Car</button>
     </div>
   </div>
