@@ -3,6 +3,7 @@ import { AvioCompanyService } from '../../services/avio-company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { pipe } from "rxjs";
 import { mapTo, delay } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-fast-reservation-flight',
@@ -16,6 +17,7 @@ export class FastReservationFlightComponent implements OnInit {
 
   constructor(private _avioComapnyService : AvioCompanyService,
     private router:Router,
+    private authService:AuthService,
     private activatedRoute: ActivatedRoute) {
   }
 

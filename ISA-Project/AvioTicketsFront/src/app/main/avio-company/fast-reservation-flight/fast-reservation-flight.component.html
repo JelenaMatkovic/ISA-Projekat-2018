@@ -14,7 +14,7 @@
           <th scope="col">Broj mesta</th>
           <th scope="col">Cena</th>
           <th scope="col">Popust</th>
-          <th scope="col">Manipulacija</th>
+          <th *ngIf="this.authService.getUserType() == 'USER' || this.authService.getUserType() == 'ADMIN_AVIO'" scope="col">Manipulacija</th>
         </tr>
       </thead>
       <tbody *ngIf="reservations">
@@ -28,7 +28,7 @@
                   <th>{{reservation.numberOfSeat}}</th>
                   <th>{{reservation.price}}</th>
                   <th>{{reservation.discount}}</th>
-                  <th>
+                  <th *ngIf="this.authService.getUserType() == 'USER' || this.authService.getUserType() == 'ADMIN_AVIO'">
                     <button class="btn btn-secondary mb-2" (click)="rezervisi(reservation.id)">Rezervisi</button>
                   </th>
               </tr>

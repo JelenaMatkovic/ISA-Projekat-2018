@@ -38,7 +38,7 @@ public class UserController {
 	}
 	@GetMapping("/loged")
 	public ResponseEntity<UserDTO> getLoged(){
-		return new ResponseEntity<UserDTO>(userService.getLogedUser(), HttpStatus.OK);
+			return new ResponseEntity<UserDTO>(userService.getLogedUser(), HttpStatus.OK);
 	}
 	
 	@PostMapping

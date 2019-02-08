@@ -287,7 +287,7 @@
             <th scope="col">Trajanje puta(min)</th>
             <th scope="col">Broj presedanja</th>
             <th scope="col">Cena</th>
-            <th scope="col">Manipulacija</th>
+            <th *ngIf="this.authService.getUserType() == 'USER' || this.authService.getUserType() == 'ADMIN_AVIO'" scope="col">Manipulacija</th>
           </tr>
         </thead>
         <tbody *ngIf="searchedFlights">
@@ -315,7 +315,7 @@
                             </div>
                             </th>
                     <th *ngIf="flight.done">
-                            <button class="btn btn-secondary"  [routerLink]="['/avio-company/searchFlights/',flight.id]">Rezervisi</button>
+                            <button *ngIf="this.authService.getUserType() == 'USER' || this.authService.getUserType() == 'ADMIN_AVIO'" class="btn btn-secondary"  [routerLink]="['/avio-company/searchFlights/',flight.id]">Rezervisi</button>
                     </th>
                 </tr>
             </ng-container>
