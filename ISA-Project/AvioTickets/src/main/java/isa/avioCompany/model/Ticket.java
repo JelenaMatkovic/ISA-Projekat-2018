@@ -38,12 +38,15 @@ public class Ticket {
 	private Integer numberOfSeats;
 	
 	@Column(nullable=false)
+	private Long flightId;
+	
+	@Column(nullable=false)
 	private Date dateAndTimeTicket;
 	
-	@Column(nullable=false)
+	@Column
 	private Double discount;
 	
-	@Column(nullable=false)
+	@Column
 	private Boolean fastReservation;
 	
 	@Column(nullable=false)
@@ -55,7 +58,7 @@ public class Ticket {
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
 	private Set<NoUser> noUser;
 	
-	@Column(nullable=false,length=100)
+	@Column
 	private String passport;
 	
 	

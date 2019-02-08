@@ -70,7 +70,7 @@
         </table>
 </div>
 <hr>
-<div class="container" id="GrafickiPrikaz" style="text-align:center; zoom: 75%; height: 420px!important;">
+<div class="container" id="GrafickiPrikaz" style="text-align:center; zoom: 75%; height: 550px!important;">
       <h1>Izaberite mesto u avionu</h1>
         <div *ngIf="flight"  class="row">
           <div class="col-md-4">
@@ -84,38 +84,38 @@
           </div>
         </div>
         <div class="row"style="  transform: rotate(270deg);
-                                -webkit-transform-origin: 150px 150px;
+                                -webkit-transform-origin: 200px 200px;
                                 ">
             
-            <div class="col-md-4" style="height: 270px!important;">
+            <div class="col-md-4" style="height: 400px!important;">
                 <ng-container *ngFor="let k of tempB;let i = index">
                     <button 
-                    *ngIf="(i%2 == 0) && i &lt; flight.ecconomic?.numberOfSeats" 
+                    *ngIf="(i%2 == 0) && i &lt; flight.ecconomic?.numberOfSeats"
                     class="btn btn-info mr-1 mb-1 dug"
                     style="height: 50px;width: 50px;" id="{{i}}"
-                    (click)="change(i)">{{i}}</button>
+                    (click)="change(i)" name="info">{{i}}</button>
                     <button 
                     *ngIf="(i%2 != 0)  && i &lt; flight.ecconomic?.numberOfSeats" 
                     class="btn btn-info mr-3 mb-1  dug" id="{{i}}"
-                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    style="height: 50px;width: 50px;" (click)="change(i)" name="info">{{i}}</button>
                     <button 
                     *ngIf="(i%2 == 0)  && i >= flight.ecconomic?.numberOfSeats
                     && i &lt; (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)" 
                     class="btn btn-primary mr-1 mb-1  dug"  id="{{i}}"
-                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    style="height: 50px;width: 50px;" (click)="change(i)" name="primary">{{i}}</button>
                     <button 
                     *ngIf="(i%2 != 0)  && i >= flight.ecconomic.numberOfSeats
                     && i &lt; (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)"  
                     class="btn btn-primary mr-3 mb-1  dug" id="{{i}}"
-                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    style="height: 50px;width: 50px;" (click)="change(i)" name="primary">{{i}}</button>
                     <button 
                     *ngIf="(i%2 == 0) && i >= (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)"
                     class="btn btn-danger mr-1 mb-1  dug" id="{{i}}"
-                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    style="height: 50px;width: 50px;" (click)="change(i)" name="danger">{{i}}</button>
                     <button 
                     *ngIf="(i%2 != 0) && i >= (flight.business?.numberOfSeats+flight.ecconomic?.numberOfSeats)"
                     class="btn btn-danger mr-3 mb-1  dug" id="{{i}}"
-                    style="height: 50px;width: 50px;" (click)="change(i)">{{i}}</button>
+                    style="height: 50px;width: 50px;" (click)="change(i)" name="danger">{{i}}</button>
 
 
                     <br *ngIf="(i==((flight.numberOfSegments*2)-1))">
@@ -123,6 +123,9 @@
                 </ng-container>
                 
             </div>
+            <div class="col-md-4" style="height: 400px!important;">
+            </div>
+            <div class="col-md-4" style="height: 400px!important;"></div>
           </div>
           <div class="row mt-4">
               <button class="btn btn-success" (click)="next()">Next</button>
@@ -146,16 +149,16 @@
                         </div>
                         <div *ngIf="this.numberOfReservation[0] != numberOfSeats" class="form-group">
                             <label>Last name</label>
-                            <input type="text" formControlName="LasstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LasstName.errors }" />
-                            <div *ngIf="submitted && f.LasstName.errors" class="invalid-feedback">
-                                <div *ngIf="f.LasstName.errors.required">Name is required</div>
+                            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="f.LaslastNamestName.errors.required">Name is required</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Passport</label>
-                            <input type="text" formControlName="Passport" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Passport.errors }" />
-                            <div *ngIf="submitted && f.Passport.errors" class="invalid-feedback">
-                                <div *ngIf="f.Passport.errors.required">Name is required</div>
+                            <input type="text" formControlName="passport" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passport.errors }" />
+                            <div *ngIf="submitted && f.passport.errors" class="invalid-feedback">
+                                <div *ngIf="f.passport.errors.required">Name is required</div>
                             </div>
                         </div>
                         <div class="form-group">

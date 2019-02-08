@@ -1,4 +1,4 @@
-/*package isa.avioCompany.controller;
+package isa.avioCompany.controller;
 
 import java.util.List;
 
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import isa.avioCompany.model.dto.TicketDTO;
+import isa.avioCompany.model.dto.FlightTransferDTO;
+import isa.avioCompany.model.dto.ReservationDTO;
 import isa.avioCompany.service.TicketService;
 
 @RestController
@@ -25,25 +25,24 @@ public class TicketController {
 	private TicketService ticketService;
 	
 	@GetMapping(value = "/getAll")
-	public ResponseEntity<List<TicketDTO>> getAll(){
-		if(ticketService.getAll() == null) {
-			return new ResponseEntity<List<TicketDTO>>(HttpStatus.NO_CONTENT);
+	public ResponseEntity<List<FlightTransferDTO>> getAll(){
+		if(ticketService.getAllOfUser() == null) {
+			return new ResponseEntity<List<FlightTransferDTO>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<TicketDTO>>(ticketService.getAll(),HttpStatus.OK);
+		return new ResponseEntity<List<FlightTransferDTO>>(ticketService.getAllOfUser(),HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getById/{id}")
+	/*@GetMapping(value = "/getById/{id}")
 	public ResponseEntity<TicketDTO> getById(@PathVariable Long id){
 		if(ticketService.getById(id) == null) {
 			return new ResponseEntity<TicketDTO>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<TicketDTO>(ticketService.getById(id),HttpStatus.OK);
-	}
+	}*/
 	
-	@PostMapping(value = "/create/{avio_id}/{flight_id}/{spot_id}")
-	public ResponseEntity<String> create(@PathVariable("avio_id") Long avio_id,@PathVariable("flight_id") Long flight_id,
-											@PathVariable("spot_id") Long spot_id,@RequestBody TicketDTO ticketDTO){
-		if(ticketService.save(avio_id,flight_id,spot_id,ticketDTO)) {
+	@PostMapping(value = "/create/{flight_id}")
+	public ResponseEntity<String> create(@PathVariable("flight_id") Long flight_id,@RequestBody List<ReservationDTO> reservationDTO){
+		if(ticketService.save(flight_id,reservationDTO)) {
 			return new ResponseEntity<String>("Item is created!",HttpStatus.CREATED);
 		}else {
 			return new ResponseEntity<String>("Itme faild to create",HttpStatus.CONFLICT);
@@ -59,7 +58,7 @@ public class TicketController {
 			return new ResponseEntity<String>("Item is not found!",HttpStatus.NOT_FOUND);
 		}
 	}
-	
+	/*
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> update(@PathVariable Long id, @RequestBody TicketDTO ticketDTO){
 		if(ticketService.update(id,ticketDTO)) {
@@ -76,6 +75,5 @@ public class TicketController {
 		}else {
 			return new ResponseEntity<String>("Bounding failed!",HttpStatus.NOT_FOUND);
 		}
-	}
+	}*/
 }
-*/

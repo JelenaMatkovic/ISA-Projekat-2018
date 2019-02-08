@@ -1,6 +1,7 @@
 package isa.avioCompany.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,12 @@ public class FlightService {
  			forTransfer.setDateAndTimeStart(flightOfAvioCompany.get(i).getDateAndTimeStart());
  			forTransfer.setDateAndTimeEnd(flightOfAvioCompany.get(i).getDateAndTimeEnd());
  			forTransfer.setLengthOfTravel(flightOfAvioCompany.get(i).getLengthOfTravel());
+ 			//let obavljen
+ 			Date d = new Date();
+ 			forTransfer.setDone(!d.after(flightOfAvioCompany.get(i).getDateAndTimeStart()));
+ 			forTransfer.setDeleted(flightOfAvioCompany.get(i).getDeleted());
+
+ 			
  			//parsiranje
  			String destinationOfTransfer = flightOfAvioCompany.get(i).getDestinationOfTransfer();
  			destinationOfTransfer = destinationOfTransfer.substring(0, destinationOfTransfer.length()-1);
@@ -134,6 +141,9 @@ public class FlightService {
 			forTransfer.setDateAndTimeStart(flight.getDateAndTimeStart());
 			forTransfer.setDateAndTimeEnd(flight.getDateAndTimeEnd());
 			forTransfer.setLengthOfTravel(flight.getLengthOfTravel());
+			Date d = new Date();
+ 			forTransfer.setDone(!d.after(flight.getDateAndTimeStart()));
+ 			forTransfer.setDeleted(flight.getDeleted());
 			//parsiranje
 			String destinationOfTransfer = flight.getDestinationOfTransfer();
 			destinationOfTransfer = destinationOfTransfer.substring(0, destinationOfTransfer.length()-1);
@@ -156,6 +166,8 @@ public class FlightService {
 				ClassTransferDTO ecconomic = new ClassTransferDTO();
 	 			ecconomic.setNumberOfSeats(clas.getNumberOfSeats());
 	 			ecconomic.setPrice(clas.getPrice());
+	 			ecconomic.setDeletedSeats(clas.getDeletedSeats());
+	 			ecconomic.setOccupiedSeats(clas.getOccupiedSeats());
 	 			forTransfer.setEcconomic(ecconomic);
 			}	
 		}
@@ -164,6 +176,8 @@ public class FlightService {
 				ClassTransferDTO biznis = new ClassTransferDTO();
 				biznis.setNumberOfSeats(clas.getNumberOfSeats());
 				biznis.setPrice(clas.getPrice());
+				biznis.setDeletedSeats(clas.getDeletedSeats());
+				biznis.setOccupiedSeats(clas.getOccupiedSeats());
 	 			forTransfer.setBusiness(biznis);
 			}	
 		}
@@ -172,6 +186,8 @@ public class FlightService {
 				ClassTransferDTO prva = new ClassTransferDTO();
 				prva.setNumberOfSeats(clas.getNumberOfSeats());
 	 			prva.setPrice(clas.getPrice());
+	 			prva.setDeletedSeats(clas.getDeletedSeats());
+	 			prva.setOccupiedSeats(clas.getOccupiedSeats());
 	 			forTransfer.setFirst(prva);
 			}	
 		}
@@ -235,6 +251,8 @@ public class FlightService {
 			Class klasaE = new Class();
 			klasaE.setId(null);
 			klasaE.setType("Ecconomic");
+			klasaE.setDeletedSeats("");
+			klasaE.setOccupiedSeats("");
 			klasaE.setNumberOfSeats(flightTransferDTO.getEcconomic().getNumberOfSeats());
 			klasaE.setPrice(flightTransferDTO.getEcconomic().getPrice());
 			klasaE.setDeleted(false);
@@ -250,6 +268,8 @@ public class FlightService {
 			Class klasaB = new Class();
 			klasaB.setId(null);
 			klasaB.setType("Biznis");
+			klasaB.setDeletedSeats("");
+			klasaB.setOccupiedSeats("");
 			klasaB.setNumberOfSeats(flightTransferDTO.getBusiness().getNumberOfSeats());
 			klasaB.setPrice(flightTransferDTO.getBusiness().getPrice());
 			klasaB.setDeleted(false);
@@ -265,6 +285,8 @@ public class FlightService {
 			Class klasaP = new Class();
 			klasaP.setId(null);
 			klasaP.setType("Prva");
+			klasaP.setDeletedSeats("");
+			klasaP.setOccupiedSeats("");
 			klasaP.setNumberOfSeats(flightTransferDTO.getFirst().getNumberOfSeats());
 			klasaP.setPrice(flightTransferDTO.getFirst().getPrice());
 			klasaP.setDeleted(false);

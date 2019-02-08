@@ -15,6 +15,10 @@ public class FlightTransferDTO {
 
 	private String pathCode;
 	
+	private Boolean done;
+	
+	private Boolean deleted;
+	
 	private Integer numberOfSegments;
 	
 	private DestinationDTO starting_point_id;

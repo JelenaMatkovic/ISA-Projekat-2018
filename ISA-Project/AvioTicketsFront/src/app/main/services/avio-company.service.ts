@@ -61,4 +61,16 @@ export class AvioCompanyService {
     return this.http.post(SERVER_URL + '/search/searchFlights',search);
   }
   
+  addReservation(idFlight:number,users:any){
+    return this.http.post(SERVER_URL + '/ticket/create/' + idFlight,users,{responseType: 'text'});
+  }
+
+  getAllReservationOfUser(){
+    return this.http.get(SERVER_URL + '/ticket/getAll/')
+  }
+
+  removeReservation(id:any){
+    return this.http.delete(SERVER_URL + '/ticket/delete/' + id);
+  }
+
 }

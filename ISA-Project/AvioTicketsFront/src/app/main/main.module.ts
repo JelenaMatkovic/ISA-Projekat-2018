@@ -43,6 +43,7 @@ import { SearchFlightsComponent } from './avio-company/search-flights/search-fli
 import { ReservationFlightComponent } from './avio-company/reservation-flight/reservation-flight.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { UserUpdatePasswordComponent } from './user-update-password/user-update-password.component';
+import { FastReservationFlightComponent } from './avio-company/fast-reservation-flight/fast-reservation-flight.component';
 
 @NgModule({
   declarations:[
@@ -81,6 +82,7 @@ import { UserUpdatePasswordComponent } from './user-update-password/user-update-
     ReservationFlightComponent,
     UserUpdateComponent,
     UserUpdatePasswordComponent,
+    FastReservationFlightComponent,
   ],
   imports: [
     CommonModule,

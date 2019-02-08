@@ -67,3 +67,57 @@
       <div class="col-md-4"></div>
   </div>
 </div>
+
+<div style="margin-top:30px;">
+        <table class="container table mt-3 table-hover" style="text-align:center">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col" colspan="10" >
+                        Rezervisani Letovi
+                    </th>
+                </tr>
+                  <tr>
+                    <th scope="col">Avio kompanija</th>
+                    <th scope="col">Polaziste</th>
+                    <th scope="col">Odrediste</th>
+                    <th scope="col">Vreme poletanja</th>
+                    <th scope="col">Vreme sletanja</th>
+                    <th scope="col">Duzina puta</th>
+                    <th scope="col">Trajanje puta(min)</th>
+                    <th scope="col">Broj presedanja</th>
+                    <th scope="col">Cena</th>
+                    <th scope="col">Manipulaciyja</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="searchedFlights">
+                    <ng-container *ngFor="let flight of searchedFlights.slice().reverse(); let i = index">
+                        <tr *ngIf="flight?.nameOfAvioCompany">
+                            <th>{{flight.nameOfAvioCompany}}</th>
+                            <th>{{flight.starting_point_id.nameOfAirPort}}</th>
+                            <th>{{flight.destination_id.nameOfAirPort}}</th>
+                            <th>{{flight.dateAndTimeStart.slice(0,16).replace('T', ' ')}}</th>
+                            <th>{{flight.dateAndTimeEnd.slice(0,16).replace('T', ' ')}}</th>
+                            <th>{{flight.lengthOfTravel}}</th>
+                            <th>{{flight.timeOfTravel}}</th>
+                            <th>{{flight.destinationOfTransfer.length}}</th>
+                            <th>
+                                    <div *ngIf="flight.ecconomic">
+                                        Econ:{{flight.ecconomic.price}}
+                                    </div>
+                                    <div *ngIf="flight.business">
+                                        <br>
+                                        Bizn:{{flight.business.price}}
+                                    </div>
+                                    <div *ngIf="flight.first">
+                                        <br>
+                                        Prva:{{flight.first.price}}
+                                    </div>
+                                    </th>
+                            <th>
+                                    <button *ngIf="flight.done" class="btn btn-secondary" (click)="otkazi(flight.id)">Otkazi</button>
+                            </th>
+                        </tr>
+                    </ng-container>
+                </tbody>
+              </table>
+            </div>

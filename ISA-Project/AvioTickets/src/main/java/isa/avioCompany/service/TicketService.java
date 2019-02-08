@@ -1,19 +1,26 @@
-/*package isa.avioCompany.service;
+package isa.avioCompany.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import isa.avioCompany.model.AvioCompany;
+import isa.avioCompany.model.Class;
+import isa.avioCompany.model.ClassTicket;
 import isa.avioCompany.model.Flight;
-import isa.avioCompany.model.SpotInTheAirPlane;
+import isa.avioCompany.model.NoUser;
 import isa.avioCompany.model.Ticket;
-import isa.avioCompany.model.dto.TicketDTO;
-import isa.avioCompany.repository.AvioCompanyRepository;
+import isa.avioCompany.model.dto.FlightTransferDTO;
+import isa.avioCompany.model.dto.ReservationDTO;
+import isa.avioCompany.repository.ClassRepository;
+import isa.avioCompany.repository.ClassTicketRepository;
 import isa.avioCompany.repository.FlightRepository;
-import isa.avioCompany.repository.SpotInTheAirPlaneRepository;
+import isa.avioCompany.repository.NoUserRepository;
 import isa.avioCompany.repository.TicketRepository;
 import isa.user.model.User;
 import isa.user.repository.UserRepository;
@@ -28,56 +35,130 @@ public class TicketService {
 	private FlightRepository flightRepository;
 	
 	@Autowired
-	private SpotInTheAirPlaneRepository spotInTheAirPlaneRepository;
-	
-	@Autowired
-	private AvioCompanyRepository avioCompanyRepository;
-	
-	@Autowired
 	private UserRepository userRepository;
 	
-	public List<TicketDTO> getAll() {
-		return ticketRepository.findAll()
-				.stream()
-				.map(this::convertToDTO)
-				.collect(Collectors.toList());
+	@Autowired
+	private NoUserRepository noUserRepository;
+	
+	@Autowired
+	private ClassRepository classRepository;
+	
+	@Autowired
+	private ClassTicketRepository classTicketRepository;
+	
+	@Autowired
+	private FlightService flightService;
+	
+	@Autowired
+    public JavaMailSender emailSender;
+	
+	public List<FlightTransferDTO> getAllOfUser() {
+		
+		User userId =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		User user = userRepository.findById(userId.getId()).orElse(null);
+		List<Ticket> tickets = ticketRepository.findByUserId(user.getId());
+		List<FlightTransferDTO> flight = new ArrayList<>();
+		for(Ticket t : tickets) {
+			if(t.getDeleted() == false) {
+				FlightTransferDTO d = flightService.getById(t.getFlightId());
+			
+				flight.add(d);
+			}
+		}
+		
+		return flight;
 	}
 	
-	public TicketDTO getById(Long id) {
+	/*public TicketDTO getById(Long id) {
 		if(!ticketRepository.existsById(id)) {
 			return null;
 		}
 		Ticket ticket = ticketRepository.findById(id).orElse(null);
 		return convertToDTO(ticket);
-	}
+	}*/
 	
-	public Boolean save(Long avio_id,Long flight_id,Long spot_id,TicketDTO ticketDTO) {
-		if(!avioCompanyRepository.existsById(avio_id)) {
-			return false;
+	public Boolean save(Long flight_id,List<ReservationDTO> reservationDTO) {
+		
+		Ticket ticket = new Ticket();
+		User userId =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		User user = userRepository.findById(userId.getId()).orElse(null);
+		ticket.setUser(user);
+		ticket.setNumberOfSeats(reservationDTO.get(0).getNumberOfSeats());
+		ticket.setDateAndTimeTicket(new Date());
+		ticket.setDeleted(false);
+		ticket.setFlightId(flight_id);
+		ticket.setPassport(reservationDTO.get(0).getPassport());
+		
+		ticket = ticketRepository.save(ticket);
+		
+		for(int i = 1;i < reservationDTO.size();i++) {
+			NoUser noUser = new NoUser();
+			noUser.setDeleted(false);
+			noUser.setFirstName(reservationDTO.get(i).getFirstName());
+			noUser.setLastName(reservationDTO.get(i).getLastName());
+			noUser.setPassport(reservationDTO.get(i).getPassport());
+			noUser.setNumberOfSeat(reservationDTO.get(i).getNumberOfSeats());
+			noUser.setTicket(ticket);
+			noUserRepository.save(noUser);
 		}
-		if(!flightRepository.existsById(flight_id)) {
-			return false;
+		
+		//Flight flight = flightRepository.findById(flight_id).orElse(null);
+		List<Class> cla = classRepository.findByFlightId(flight_id);
+		for(int i = 0;i < reservationDTO.size();i++) {
+			for (Class clas : cla) {
+				System.out.println("FRst");
+				if(reservationDTO.get(i).getClassType().equals(clas.getType())) {
+					Class c = clas;
+					String s = clas.getOccupiedSeats();
+					s += (Integer.toString(reservationDTO.get(i).getNumberOfSeats())+",");
+					c.setOccupiedSeats(s);
+					classRepository.save(c);
+					ClassTicket ct = new ClassTicket();
+					ct.setDeleted(false);
+					ct.setTicket(ticket);
+					ct.setClas(c);
+					classTicketRepository.save(ct);
+				}
+			}
+			System.out.println("Drugo");
 		}
-		if(!spotInTheAirPlaneRepository.existsById(spot_id)) {
-			return false;
-		}
-		ticketDTO.setId(null);
-		ticketDTO.setAvio_company_id(avio_id);
-		ticketDTO.setFlight_id(flight_id);
-		ticketDTO.setSpot_id(spot_id);
-		ticketDTO.setUser_id((long) -1);
-		ticketRepository.save(convertToEntity(ticketDTO));
+		Flight fli = flightRepository.findById(flight_id).orElse(null);
+		
+		SimpleMailMessage message = new SimpleMailMessage(); 
+        message.setTo(user.getEmail()); 
+        message.setSubject("Reservation success"); 
+        message.setText("You reserved flight from " +  fli.getStartingPoint().getNameOfTown() + " to " 
+        				+ fli.getDestination().getNameOfTown() + " at " + fli.getDateAndTimeStart() + ".");
+        emailSender.send(message);
+		
+		
+		
 		return true;
 	}
-	
+
 	public Boolean delete(Long id) {
-		if(!ticketRepository.existsById(id)) {
-			return false;
+		User userId =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		User user = userRepository.findById(userId.getId()).orElse(null);
+		List<Ticket> tickets = ticketRepository.findByUserId(user.getId());
+		for(Ticket t : tickets) {
+			if(t.getFlightId() == id) {
+				Ticket s = t;
+				s.setDeleted(true);
+				ticketRepository.save(s);
+				//Li
+				//List<Class> c = classRepository.findByFlightId(t.getFlightId());
+				
+			}
 		}
-		ticketRepository.deleteById(id);
 		return true;
 	}
-	
+/*	
 	public Boolean update(Long id, TicketDTO ticketDTO) {
 		if(!ticketRepository.existsById(id)) {
 			return false;
@@ -94,15 +175,7 @@ public class TicketService {
 		}
 	}
 	
-	*//**
-	 * 
-	 * @param id
-	 * @param user_id
-	 * @param ticketDTO
-	 * @return
-	 * 
-	 * Prilikom kupovine karte dodaje se user ....
-	 *//*
+
 	public Boolean updateAddUser(Long id, Long user_id, TicketDTO ticketDTO) {
 		if(!ticketRepository.existsById(id)) {
 			return false;
@@ -153,7 +226,6 @@ public class TicketService {
 		ticketDTO.setUser_id(ticket.getUser().getId());
 
 		return ticketDTO;
-	}
+	}*/
 
 }
-*/

@@ -17,6 +17,7 @@ export class ShowAvioCompanyComponent implements OnInit {
   destinations : any;
   flights : any;
   temp: number;
+  tempLet:any;
 
   constructor(private _avioComapnyService : AvioCompanyService,
               private router:Router,
@@ -38,6 +39,11 @@ export class ShowAvioCompanyComponent implements OnInit {
             data =>{
              this.flights = data
              console.log(this.flights)
+             for (let index = 0; index < this.flights.length; index++) {
+              this.tempLet = Date.parse(this.flights[index].dateAndTimeEnd) 
+                      - Date.parse(this.flights[index].dateAndTimeStart);
+              this.flights[index].timeOfTravel = Math.round(this.tempLet / 1000 / 60);
+            }
           }
           );
           

@@ -25,6 +25,7 @@ import { ActivationComponent } from './activation/activation.component';
 import { SearchFlightsComponent } from './avio-company/search-flights/search-flights.component'; 
 import { ReservationFlightComponent } from './avio-company/reservation-flight/reservation-flight.component'; 
 import { UserUpdatePasswordComponent } from './user-update-password/user-update-password.component';
+import { FastReservationFlightComponent } from './avio-company/fast-reservation-flight/fast-reservation-flight.component';
 
 export const MainRoutes=[
     {path : '', component: HomePageComponent},
@@ -51,6 +52,7 @@ export const MainRoutes=[
     {path: 'avio-company/searchFlights', component:SearchFlightsComponent},
     {path: 'avio-company/searchFlights/:id', component:ReservationFlightComponent},
     {path: 'avio-company/showAvioCompany/:id', component:ShowAvioCompanyComponent},
+    {path: 'avio-company/fastReservation/:id', component:FastReservationFlightComponent},
     {path: 'avio-company/updateAvioCompany/:id', component:UpdateAvioCompanyComponent},
 
     {path: 'avio-company/showAvioCompany/:id/destination/addDestination', component:AddDestinationComponent},

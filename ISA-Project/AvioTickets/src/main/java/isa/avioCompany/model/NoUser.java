@@ -31,6 +31,12 @@ public class NoUser {
 	@Column(nullable=false,length=100)
 	private String passport;
 	
+	@Column(nullable=false,length=100)
+	private Integer numberOfSeat;
+	
+	@Column(nullable=false)
+	private Boolean deleted;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;

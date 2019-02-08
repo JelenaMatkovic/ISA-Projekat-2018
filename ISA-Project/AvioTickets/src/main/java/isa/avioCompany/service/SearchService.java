@@ -2,6 +2,7 @@ package isa.avioCompany.service;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,8 @@ public class SearchService {
 	 			transfer.setDateAndTimeStart(flight.getDateAndTimeStart());
 	 			transfer.setDateAndTimeEnd(flight.getDateAndTimeEnd());
 	 			transfer.setLengthOfTravel(flight.getLengthOfTravel());
+	 			Date d = new Date();
+	 			transfer.setDone(!d.after(flight.getDateAndTimeStart()));
 	 			//parsiranje
 		 			String destinationOfTransfer = flight.getDestinationOfTransfer();
 		 			destinationOfTransfer = destinationOfTransfer.substring(0, destinationOfTransfer.length()-1);

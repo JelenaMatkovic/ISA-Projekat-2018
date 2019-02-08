@@ -19,10 +19,12 @@ export class ReservationFlightComponent implements OnInit {
   tempCount:any = 0;
   tempBol:boolean = true;
   numberOfReservation: number[] = [];
+  classOfReservation: string[] = [];
   numberOfSeats: number;
   userForm:any;
   userArray: any[] = [];
   counter:number = 0;
+  
 
   
 
@@ -30,6 +32,7 @@ export class ReservationFlightComponent implements OnInit {
               private router:Router,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder) {
+                var element = <HTMLInputElement> document.getElementById("5");
   }
 
   ngOnInit() {
@@ -64,9 +67,13 @@ export class ReservationFlightComponent implements OnInit {
 
     this.userForm = this.formBuilder.group({
       firstName:[null],
-      LasstName:[null],
-      Passport: [null],
+      lastName:[null],
+      passport: [null],
+      numberOfSeats: [null],
+      classType: [null]
     });
+
+    
 
     
   }
@@ -79,10 +86,13 @@ export class ReservationFlightComponent implements OnInit {
           this.tempBol = false;
         }
     });
-    if(this.tempBol)
+    if(this.tempBol){
       this.numberOfReservation.push(i);
-
+      this.classOfReservation.push(el.className.slice(8,9))
+    }
     this.tempBol = true;
+
+    
   }
 
   next(){
@@ -106,9 +116,22 @@ export class ReservationFlightComponent implements OnInit {
 
   rezervacija(){
     //na kraju ...
-    this.userArray.push(this.userForm.getRawValue());
+    if(  this.userArray.length != this.numberOfReservation.length)
+         this.userArray.push(this.userForm.getRawValue());
+    for (let index = 0; index < this.numberOfReservation.length; index++) {
+      this.userArray[index].numberOfSeats = this.numberOfReservation[index];
+      if(this.classOfReservation[index] == "i")
+        this.userArray[index].classType = "Ecconomic";
+      if(this.classOfReservation[index] == "p")
+        this.userArray[index].classType = "Biznis";
+      if(this.classOfReservation[index] == "d")
+        this.userArray[index].classType = "Prva";
+    }
+    this.avioService.addReservation(this.avioFlightId,this.userArray).subscribe(
+      data =>{
+                    this.router.navigateByUrl("profile");
+      });
     
-    console.log(this.userArray + " GOTOVOOOO");
   }
 
   getNumber(num:any){

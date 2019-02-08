@@ -1,23 +1,37 @@
-<div *ngIf="avioCompany" class="card mt-2 ml-2" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{avioCompany.name}} <span class="badge badge-warning">{{avioCompany.rating}}</span></h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{avioCompany.address}}</h6>
-      <p class="card-text">{{avioCompany.description}}</p>
-      <a href="#" class="card-link" [routerLink]="['/avio-company/updateAvioCompany/',avioCompany.id]">Update</a>
+<div class="container row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8">
+    <div *ngIf="avioCompany" class="card mt-2" style="text-align:center;">
+      <div class="card-body">
+        <h5 class="card-title">{{avioCompany.name}} <span class="badge badge-warning">{{avioCompany.rating}}</span></h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{avioCompany.address}}</h6>
+        <p class="card-text">{{avioCompany.description}}</p>
+        <a href="#" class="card-link" [routerLink]="['/avio-company/updateAvioCompany/',avioCompany.id]">Update</a><br>
+        <a href="#" class="card-link" [routerLink]="['/avio-company/fastReservation/',avioCompany.id]">Fast reservation</a>
+      </div>
     </div>
+  </div>
+  <div class="col-md-2">
+
+  </div>
 </div>
+
 
   <table class="container table mt-3 table-hover" style="text-align:center;">
       <thead class="thead-dark">
           <tr>
-              <th scope="col" colspan="4" >
+              <th scope="col" colspan="6" >
                   Destinacije    <a class="btn btn-secondary" href="#" role="button" [routerLink]="'destination/addDestination'">Dodaj</a>
               
               </th>
             </tr>
         <tr>
           <th scope="col">id</th>
-          <th scope="col">Naziv</th>
+          <th scope="col">Grad</th>
+          <th scope="col">Drzava</th>
+          <th scope="col">Aerodrom</th>
           <th scope="col">Opis</th>
           <th scope="col">Manipulacija</th>
         </tr>
@@ -25,7 +39,9 @@
       <tbody>
         <tr *ngFor="let destination of destinations; let i = index">
           <th scope="row" >{{i + 1}}</th>
-          <th>{{destination.name}}</th>
+          <th>{{destination.nameOfTown}}</th>
+          <th>{{destination.nameOfCountry}}</th>
+          <th>{{destination.nameOfAirPort}}</th>
           <th>{{destination.description}}</th>
           <th>
             <button class="btn btn-secondary"  (click)="deleteDestination(destination.id,i)">Obrisi</button>
@@ -38,33 +54,53 @@
     <table class="container table mt-3 table-hover" style="text-align:center;">
         <thead class="thead-dark">
             <tr>
-                <th scope="col" colspan="9" >
+                <th scope="col" colspan="10" >
                     Letovi
                     <a class="btn btn-secondary" href="#" role="button" [routerLink]="'flight/addFlight'">Dodaj</a>
                 </th>
               </tr>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">Polaziste</th>
-            <th scope="col">Odrediste</th>
-            <th scope="col">Vreme poletanja</th>
-            <th scope="col">Vreme sletanja</th>
-            <th scope="col">Duzina puta</th>
-            <th scope="col">Manipulacija</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="flights">
-          <tr *ngFor="let flight of flights; let i = index">
-            <th scope="row" >{{i + 1}}</th>
-            <th>{{flight.starting_point_id.nameOfAirPort}}</th>
-            <th>{{flight.destination_id.nameOfAirPort}}</th>
-            <th>{{flight.dateAndTimeStart}}</th>
-            <th>{{flight.dateAndTimeEnd}}</th>
-            <th>{{flight.lengthOfTravel}}</th>
+              <tr>
+                <th scope="col">Avio kompanija</th>
+                <th scope="col">Polaziste</th>
+                <th scope="col">Odrediste</th>
+                <th scope="col">Vreme poletanja</th>
+                <th scope="col">Vreme sletanja</th>
+                <th scope="col">Duzina puta</th>
+                <th scope="col">Trajanje puta(min)</th>
+                <th scope="col">Broj presedanja</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Manipulacija</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="flights">
+                <ng-container *ngFor="let flight of flights; let i = index">
+                    <tr *ngIf="flight?.nameOfAvioCompany">
+                        <th>{{flight.nameOfAvioCompany}}</th>
+                        <th>{{flight.starting_point_id.nameOfAirPort}}</th>
+                        <th>{{flight.destination_id.nameOfAirPort}}</th>
+                        <th>{{flight.dateAndTimeStart.slice(0,16).replace('T', ' ')}}</th>
+                        <th>{{flight.dateAndTimeEnd.slice(0,16).replace('T', ' ')}}</th>
+                        <th>{{flight.lengthOfTravel}}</th>
+                        <th>{{flight.timeOfTravel}}</th>
+                        <th>{{flight.destinationOfTransfer.length}}</th>
+                        <th>
+                                <div *ngIf="flight.ecconomic">
+                                    Econ:{{flight.ecconomic.price}}
+                                </div>
+                                <div *ngIf="flight.business">
+                                    <br>
+                                    Bizn:{{flight.business.price}}
+                                </div>
+                                <div *ngIf="flight.first">
+                                    <br>
+                                    Prva:{{flight.first.price}}
+                                </div>
+                                </th>
             <th>
-              <button class="btn btn-secondary">Obrisi</button>
+              <button class="btn btn-secondary mb-2">Obrisi</button>
               <button class="btn btn-secondary">izmeni</button>
             </th>
           </tr>
+        </ng-container>
         </tbody>
       </table>

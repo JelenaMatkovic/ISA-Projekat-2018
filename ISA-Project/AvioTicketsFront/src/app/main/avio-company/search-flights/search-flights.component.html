@@ -291,7 +291,7 @@
           </tr>
         </thead>
         <tbody *ngIf="searchedFlights">
-            <ng-container *ngFor="let flight of searchedFlights; let i = index">
+            <ng-container *ngFor="let flight of searchedFlights.slice().reverse(); let i = index">
                 <tr *ngIf="flight?.nameOfAvioCompany">
                     <th>{{flight.nameOfAvioCompany}}</th>
                     <th>{{flight.starting_point_id.nameOfAirPort}}</th>
@@ -314,7 +314,7 @@
                                 Prva:{{flight.first.price}}
                             </div>
                             </th>
-                    <th>
+                    <th *ngIf="flight.done">
                             <button class="btn btn-secondary"  [routerLink]="['/avio-company/searchFlights/',flight.id]">Rezervisi</button>
                     </th>
                 </tr>
