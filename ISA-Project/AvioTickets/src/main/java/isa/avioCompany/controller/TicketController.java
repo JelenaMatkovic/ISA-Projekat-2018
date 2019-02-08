@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import isa.avioCompany.model.dto.FastReservationDTO;
 import isa.avioCompany.model.dto.FlightTransferDTO;
 import isa.avioCompany.model.dto.ReservationDTO;
 import isa.avioCompany.service.TicketService;
@@ -32,6 +33,23 @@ public class TicketController {
 		return new ResponseEntity<List<FlightTransferDTO>>(ticketService.getAllOfUser(),HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/getAllFast/{avio_id}")
+	public ResponseEntity<List<FastReservationDTO>> getAllFast(@PathVariable("avio_id") Long avio_id){
+		if(ticketService.getAllFastReservation(avio_id) == null) {
+			return new ResponseEntity<List<FastReservationDTO>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<FastReservationDTO>>(ticketService.getAllFastReservation(avio_id),HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/addFast/{ticket_id}")
+	public ResponseEntity<String> addFastReservation(@PathVariable("ticket_id") Long ticket_id){
+		if(ticketService.addFastReservation(ticket_id) != null) {
+			return new ResponseEntity<String>("Item is created!",HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<String>("Itme faild to create",HttpStatus.CONFLICT);
+		}
+			
+	}
 	/*@GetMapping(value = "/getById/{id}")
 	public ResponseEntity<TicketDTO> getById(@PathVariable Long id){
 		if(ticketService.getById(id) == null) {

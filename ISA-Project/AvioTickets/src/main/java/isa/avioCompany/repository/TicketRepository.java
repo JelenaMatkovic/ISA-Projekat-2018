@@ -8,4 +8,6 @@ import isa.avioCompany.model.Ticket;
 
 public interface TicketRepository extends JpaRepository<Ticket,Long>{
 	List<Ticket> findByUserId(Long id);
+	List<Ticket> findByFastReservation(Boolean b);
+	
 }

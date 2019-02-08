@@ -44,6 +44,7 @@ import { ReservationFlightComponent } from './avio-company/reservation-flight/re
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { UserUpdatePasswordComponent } from './user-update-password/user-update-password.component';
 import { FastReservationFlightComponent } from './avio-company/fast-reservation-flight/fast-reservation-flight.component';
+import { UpdateFlightComponent } from './avio-company/update-flight/update-flight.component';
 
 @NgModule({
   declarations:[
@@ -83,6 +84,7 @@ import { FastReservationFlightComponent } from './avio-company/fast-reservation-
     UserUpdateComponent,
     UserUpdatePasswordComponent,
     FastReservationFlightComponent,
+    UpdateFlightComponent,
   ],
   imports: [
     CommonModule,

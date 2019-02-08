@@ -1,3 +1,38 @@
-<p>
-  fast-reservation-flight works!
-</p>
+<table class="container table mt-3 table-hover" style="text-align:center;">
+  <thead class="thead-dark">
+      <tr>
+          <th scope="col" colspan="9" >
+              Brze rezervacije
+              <a class="btn btn-secondary" href="#" role="button" [routerLink]="'flight/addFlight'">Dodaj</a>
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">Avio kompanija</th>
+          <th scope="col">Polaziste</th>
+          <th scope="col">Odrediste</th>
+          <th scope="col">Vreme poletanja</th>
+          <th scope="col">Vreme sletanja</th>
+          <th scope="col">Broj mesta</th>
+          <th scope="col">Cena</th>
+          <th scope="col">Popust</th>
+          <th scope="col">Manipulacija</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="reservations">
+          <ng-container *ngFor="let reservation of reservations; let i = index">
+              <tr>
+                  <th>{{reservation.nameOfAvioCompany}}</th>
+                  <th>{{reservation.starting_point_id.nameOfAirPort}}</th>
+                  <th>{{reservation.destination_id.nameOfAirPort}}</th>
+                  <th>{{reservation.dateAndTimeStart.slice(0,16).replace('T', ' ')}}</th>
+                  <th>{{reservation.dateAndTimeEnd.slice(0,16).replace('T', ' ')}}</th>
+                  <th>{{reservation.numberOfSeat}}</th>
+                  <th>{{reservation.price}}</th>
+                  <th>{{reservation.discount}}</th>
+                  <th>
+                    <button class="btn btn-secondary mb-2" (click)="rezervisi(reservation.id)">Rezervisi</button>
+                  </th>
+              </tr>
+          </ng-container>
+  </tbody>
+</table>

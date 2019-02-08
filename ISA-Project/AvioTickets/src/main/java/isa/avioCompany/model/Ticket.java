@@ -47,6 +47,9 @@ public class Ticket {
 	private Double discount;
 	
 	@Column
+	private Double price;
+	
+	@Column
 	private Boolean fastReservation;
 	
 	@Column(nullable=false)

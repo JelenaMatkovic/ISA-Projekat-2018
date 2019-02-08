@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AvioCompanyService } from '../../services/avio-company.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { pipe } from "rxjs";
+import { mapTo, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fast-reservation-flight',
@@ -7,9 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FastReservationFlightComponent implements OnInit {
 
-  constructor() { }
+  avioCompanyId:any;
+  reservations:any;
+
+  constructor(private _avioComapnyService : AvioCompanyService,
+    private router:Router,
+    private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
+                      
+    this.activatedRoute.paramMap.pipe(delay(350)).subscribe(
+      params => {
+          this.avioCompanyId = params.get('id');
+          this._avioComapnyService.getFastReservationOfAvio(this.avioCompanyId).subscribe(
+              data => {
+                        this.reservations = data;
+              }
+          );
+      });
+  }
+
+  rezervisi(id:any){
+    this._avioComapnyService.addFastReservationOfAvio(id).subscribe(
+          data =>{
+            this.router.navigateByUrl("profile");
+    });
   }
 
 }

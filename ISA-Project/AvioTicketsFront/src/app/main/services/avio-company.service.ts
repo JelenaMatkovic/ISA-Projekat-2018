@@ -57,6 +57,14 @@ export class AvioCompanyService {
     return this.http.post(SERVER_URL + '/flight/create/' + avioId,flight,{responseType: 'text'});
   }
 
+  uppdateFlight(avioId:number,flightId:number,flight:any){
+    return this.http.post(SERVER_URL + '/flight/update/' + avioId + "/" + flightId,flight,{responseType: 'text'});
+  }
+
+  deleteFlight(idFlig:number){
+    return this.http.delete(SERVER_URL + '/flight/delete/'+ idFlig,{responseType: 'text'});
+  }
+
   searchFlights(search:any){
     return this.http.post(SERVER_URL + '/search/searchFlights',search);
   }
@@ -71,6 +79,14 @@ export class AvioCompanyService {
 
   removeReservation(id:any){
     return this.http.delete(SERVER_URL + '/ticket/delete/' + id);
+  }
+
+  getFastReservationOfAvio(id:any){
+    return this.http.get(SERVER_URL + '/ticket/getAllFast/' + id);
+  }
+
+  addFastReservationOfAvio(id:any){
+    return this.http.delete(SERVER_URL + '/ticket/addFast/' + id);
   }
 
 }

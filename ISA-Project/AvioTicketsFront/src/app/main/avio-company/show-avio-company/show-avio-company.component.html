@@ -8,7 +8,7 @@
         <h5 class="card-title">{{avioCompany.name}} <span class="badge badge-warning">{{avioCompany.rating}}</span></h5>
         <h6 class="card-subtitle mb-2 text-muted">{{avioCompany.address}}</h6>
         <p class="card-text">{{avioCompany.description}}</p>
-        <a href="#" class="card-link" [routerLink]="['/avio-company/updateAvioCompany/',avioCompany.id]">Update</a><br>
+        <a *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'" href="#" class="card-link" [routerLink]="['/avio-company/updateAvioCompany/',avioCompany.id]">Update</a><br>
         <a href="#" class="card-link" [routerLink]="['/avio-company/fastReservation/',avioCompany.id]">Fast reservation</a>
       </div>
     </div>
@@ -23,7 +23,7 @@
       <thead class="thead-dark">
           <tr>
               <th scope="col" colspan="6" >
-                  Destinacije    <a class="btn btn-secondary" href="#" role="button" [routerLink]="'destination/addDestination'">Dodaj</a>
+                  Destinacije    <a *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'" class="btn btn-secondary" href="#" role="button" [routerLink]="'destination/addDestination'">Dodaj</a>
               
               </th>
             </tr>
@@ -33,7 +33,7 @@
           <th scope="col">Drzava</th>
           <th scope="col">Aerodrom</th>
           <th scope="col">Opis</th>
-          <th scope="col">Manipulacija</th>
+          <th *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'" scope="col">Manipulacija</th>
         </tr>
       </thead>
       <tbody>
@@ -43,9 +43,9 @@
           <th>{{destination.nameOfCountry}}</th>
           <th>{{destination.nameOfAirPort}}</th>
           <th>{{destination.description}}</th>
-          <th>
+          <th *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'">
             <button class="btn btn-secondary"  (click)="deleteDestination(destination.id,i)">Obrisi</button>
-            <button class="btn btn-secondary" (click)="updateDestination(destination.id,i)" [routerLink]="['destination/updateDestination/',destination.id]">izmeni</button>
+            <button class="btn btn-secondary" [routerLink]="['destination/updateDestination/',destination.id]">izmeni</button>
           </th>
         </tr>
       </tbody>
@@ -56,7 +56,7 @@
             <tr>
                 <th scope="col" colspan="10" >
                     Letovi
-                    <a class="btn btn-secondary" href="#" role="button" [routerLink]="'flight/addFlight'">Dodaj</a>
+                    <a *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'" class="btn btn-secondary" href="#" role="button" [routerLink]="'flight/addFlight'">Dodaj</a>
                 </th>
               </tr>
               <tr>
@@ -69,7 +69,7 @@
                 <th scope="col">Trajanje puta(min)</th>
                 <th scope="col">Broj presedanja</th>
                 <th scope="col">Cena</th>
-                <th scope="col">Manipulacija</th>
+                <th *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'" scope="col">Manipulacija</th>
               </tr>
             </thead>
             <tbody *ngIf="flights">
@@ -96,9 +96,9 @@
                                     Prva:{{flight.first.price}}
                                 </div>
                                 </th>
-            <th>
-              <button class="btn btn-secondary mb-2">Obrisi</button>
-              <button class="btn btn-secondary">izmeni</button>
+            <th *ngIf="this.authService.getUserType() == 'ADMIN_AVIO'">
+              <button class="btn btn-secondary mb-2" (click)="obrisi(flight.id,i)">Obrisi</button>
+              <button class="btn btn-secondary" [routerLink]="['flight/updateFlight/',flight.id]">izmeni</button>
             </th>
           </tr>
         </ng-container>

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ShowAvioCompaniesComponent } from '../show-avio-companies/show-avio-companies.component';
 import { pipe } from "rxjs";
 import { mapTo, delay } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-show-avio-company',
@@ -20,6 +21,7 @@ export class ShowAvioCompanyComponent implements OnInit {
   tempLet:any;
 
   constructor(private _avioComapnyService : AvioCompanyService,
+              private authService:AuthService,
               private router:Router,
               private activatedRoute: ActivatedRoute) {
   }
@@ -59,6 +61,13 @@ export class ShowAvioCompanyComponent implements OnInit {
 
     );
     this.destinations.splice(i,1);
+  }
+
+  obrisi(id:number,i:number){
+    this._avioComapnyService.deleteFlight(id).subscribe(
+
+      );
+      this.flights.splice(i,1);
   }
 
 }

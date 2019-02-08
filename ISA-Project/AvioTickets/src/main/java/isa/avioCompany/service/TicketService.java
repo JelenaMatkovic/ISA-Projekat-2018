@@ -10,13 +10,18 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import isa.avioCompany.model.AvioCompany;
 import isa.avioCompany.model.Class;
 import isa.avioCompany.model.ClassTicket;
+import isa.avioCompany.model.Destination;
 import isa.avioCompany.model.Flight;
 import isa.avioCompany.model.NoUser;
 import isa.avioCompany.model.Ticket;
+import isa.avioCompany.model.dto.DestinationDTO;
+import isa.avioCompany.model.dto.FastReservationDTO;
 import isa.avioCompany.model.dto.FlightTransferDTO;
 import isa.avioCompany.model.dto.ReservationDTO;
+import isa.avioCompany.repository.AvioCompanyRepository;
 import isa.avioCompany.repository.ClassRepository;
 import isa.avioCompany.repository.ClassTicketRepository;
 import isa.avioCompany.repository.FlightRepository;
@@ -71,6 +76,59 @@ public class TicketService {
 		return flight;
 	}
 	
+	public List<FastReservationDTO> getAllFastReservation(Long idAvio) {
+		List<Ticket> tickets = ticketRepository.findByFastReservation(true);
+		List<Flight> flight = new ArrayList<>();
+		for(Ticket t : tickets) {
+			if(t.getDeleted() == false) {
+				Flight d = flightRepository.findById(t.getFlightId()).orElse(null);
+			
+				flight.add(d);
+			}
+		}
+		List<Ticket> tickets1 = new ArrayList<>();
+		List<Flight> flight1  = new ArrayList<>();
+		for(int i = 0;i< flight.size();i++){
+			if(flight.get(i).getAvioCompany().getId() == idAvio) {
+				flight1.add(flight.get(i));
+				tickets1.add(tickets.get(i));
+			}
+		}
+		List<FastReservationDTO> forTransfers = new ArrayList<>();
+		
+		for(int i = 0;i< flight1.size();i++){
+			FastReservationDTO forTransfer = new FastReservationDTO();
+			forTransfer.setId(tickets1.get(i).getId());
+			forTransfer.setNameOfAvioCompany(flight1.get(i).getAvioCompany().getName());
+			forTransfer.setStarting_point_id(convertToDTO(flight1.get(i).getStartingPoint()));
+			forTransfer.setDestination_id(convertToDTO(flight1.get(i).getDestination()));
+			forTransfer.setDateAndTimeStart(flight1.get(i).getDateAndTimeStart());
+			forTransfer.setDateAndTimeEnd(flight1.get(i).getDateAndTimeEnd());
+			forTransfer.setNumberOfSeat(tickets1.get(i).getNumberOfSeats());
+			forTransfer.setPrice(tickets1.get(i).getPrice());
+			forTransfer.setDiscount(tickets1.get(i).getDiscount());
+			forTransfers.add(forTransfer);
+		}
+		return forTransfers;
+	}
+	
+	public FastReservationDTO addFastReservation(Long idTicket) {
+		FastReservationDTO fastReservationDTO = new FastReservationDTO();
+		
+		User userId =(User)SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		User user = userRepository.findById(userId.getId()).orElse(null);
+		
+		Ticket t = ticketRepository.findById(idTicket).orElse(null);
+		
+		t.setUser(user);
+		t.setFastReservation(false);
+		
+		ticketRepository.save(t);
+		
+		return fastReservationDTO;
+	}
 	/*public TicketDTO getById(Long id) {
 		if(!ticketRepository.existsById(id)) {
 			return null;
@@ -227,5 +285,15 @@ public class TicketService {
 
 		return ticketDTO;
 	}*/
+	private DestinationDTO convertToDTO(Destination destination) {
+		DestinationDTO destinationDTO = new DestinationDTO();
+		destinationDTO.setId(destination.getId());
+		destinationDTO.setNameOfAirPort(destination.getNameOfAirPort());
+		destinationDTO.setNameOfTown(destination.getNameOfTown());
+		destinationDTO.setNameOfCountry(destination.getNameOfCountry());
+		destinationDTO.setDescription(destination.getDescription());
+		destinationDTO.setDeleted(destination.getDeleted());
+		return destinationDTO;
+	}
 
 }

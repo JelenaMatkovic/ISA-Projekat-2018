@@ -47,6 +47,9 @@ public class FlightService {
 		List<Flight> flightOfAvioCompany = flightRepository.findByAvioCompanyId(idAvio);
 		
 		for (int i = 0; i < flightOfAvioCompany.size(); i++) {
+			if(flightOfAvioCompany.get(i).getDeleted() == true) {
+				continue;
+			}
 			FlightTransferDTO forTransfer = new FlightTransferDTO();
  			List<Class> classes = classRepository.findByFlightId(flightOfAvioCompany.get(i).getId());
  			List<Luggage> luggage = luggageRepository.findByFlightId(flightOfAvioCompany.get(i).getId());
@@ -297,6 +300,8 @@ public class FlightService {
 		}
 		
 		System.out.println("cetvrti PROLAZ");
+		
+		
 		Luggage luggage = new Luggage();
 		if(flightTransferDTO.getLuggage().getMaxQuantity() != null) {
 			luggage.setId(null);
@@ -314,82 +319,142 @@ public class FlightService {
 		return true;
 	}
 	
-	/*
+	
 	public Boolean delete(Long id) {
 		if(!flightRepository.existsById(id)) {
 			return false;
 		}
-		flightRepository.deleteById(id);
+		Flight f = flightRepository.findById(id).orElse(null);
+		f.setDeleted(true);
+		flightRepository.save(f);
 		return true;
 	}
 	
-	public Boolean update(Long id, FlightDTO flightDTO) {
-		if(!flightRepository.existsById(id)) {
+	public Boolean update(Long id,Long idFlight, FlightTransferDTO flightTransferDTO) {
+		/*if(!avioCompanyRepository.existsById(id)) {
 			return false;
 		}
-		Flight oldFlight = flightRepository.findById(id).orElse(null);
-		if(oldFlight != null) {
-			Flight newTicket = convertToEntity(flightDTO);
-			oldFlight.setDateAndTimeStart(newTicket.getDateAndTimeStart());
-			oldFlight.setDateAndTimeEnd(newTicket.getDateAndTimeEnd());
-			oldFlight.setLengthOfTravel(newTicket.getLengthOfTravel());
-			oldFlight.setPathCode(newTicket.getPathCode());
-			oldFlight.setRating(newTicket.getRating());
-			oldFlight.setTimeOfTravel(newTicket.getTimeOfTravel());
-			oldFlight.setTypeOfTravel(newTicket.getTypeOfTravel());
-			flightRepository.save(oldFlight);
-			return true;
-		}else {
-			return false;
+		System.out.println(idFlight);
+		Flight novi = new Flight();
+		novi.setId(idFlight);
+		novi.setPathCode(flightTransferDTO.getPathCode());
+		novi.setNumberOfSegments(flightTransferDTO.getNumberOfSegments());
+		System.out.println(flightTransferDTO.getStarting_point_id().getNameOfAirPort());
+		Destination d = destinationRepository.findByNameOfAirPort("Rim");
+		System.out.println(d);
+		novi.setStartingPoint(destinationRepository.findById(flightTransferDTO.getStarting_point_id().getId()).orElse(null));
+		novi.setDestination(destinationRepository.findById(flightTransferDTO.getDestination_id().getId()).orElse(null));
+		
+		novi.setDateAndTimeStart(flightTransferDTO.getDateAndTimeStart());
+		novi.setDateAndTimeEnd(flightTransferDTO.getDateAndTimeEnd());
+		novi.setLengthOfTravel(flightTransferDTO.getLengthOfTravel());
+		
+		String s = "";
+		for (int i = 0; i < flightTransferDTO.getDestinationOfTransfer().size(); i++) {
+			if(i == flightTransferDTO.getDestinationOfTransfer().size()-1) {
+				s += flightTransferDTO.getDestinationOfTransfer().get(i).getId() + "." + flightTransferDTO.getDestinationOfTransfer().get(i).getNameOfAirPort() + ".";
+			}else {
+				s += flightTransferDTO.getDestinationOfTransfer().get(i).getId() + "." + flightTransferDTO.getDestinationOfTransfer().get(i).getNameOfAirPort() + ",";
+			}
+			
 		}
+		novi.setDestinationOfTransfer(s);
+		novi.setTypeOfPath(flightTransferDTO.getTypeOfPath());
+		novi.setAdditionalServices(flightTransferDTO.getAdditionalServices());
+		novi.setDateAndTimeStartReturn(flightTransferDTO.getDateAndTimeStartReturn());
+		novi.setDateAndTimeEndReturn(flightTransferDTO.getDateAndTimeEndReturn());
+		
+		novi.setAvioCompany(avioCompanyRepository.findById(id).orElse(null));
+		novi.setTimeOfTravel(null);
+		novi.setRating(null);
+		novi.setDeleted(false);
+		novi.setNumberOfTransfer(flightTransferDTO.getDestinationOfTransfer().size());
+		
+		
+		//Flight let = flightRepository.save(novi);
+		
+		System.out.println("PRIV PROLAZ");
+		//List<Class> clis = classRepository.findByFlightId(idFlight);
+		/*
+		if(flightTransferDTO.getEcconomic().getNumberOfSeats() != null) {
+			Class klasaE = new Class();
+			for(int i)
+			for (Class class1 : clis) {
+				if(class1.getType().equals("Ecconomic"))
+					klasaE.setId(class1.getId());
+			}
+			klasaE.setType("Ecconomic");
+			klasaE.setDeletedSeats("");
+			klasaE.setOccupiedSeats("");
+			klasaE.setNumberOfSeats(flightTransferDTO.getEcconomic().getNumberOfSeats());
+			klasaE.setPrice(flightTransferDTO.getEcconomic().getPrice());
+			klasaE.setDeleted(false);
+			klasaE.setFlight(let);
+			
+			classRepository.save(klasaE);
+			
+		}
+		
+		System.out.println("Drugi PROLAZ");
+		
+		if(flightTransferDTO.getBusiness().getNumberOfSeats() != null) {
+			Class klasaB = new Class();
+			for (Class class1 : clis) {
+				if(class1.getType().equals("Biznis"))
+					klasaB.setId(class1.getId());
+			}
+			klasaB.setType("Biznis");
+			klasaB.setDeletedSeats("");
+			klasaB.setOccupiedSeats("");
+			klasaB.setNumberOfSeats(flightTransferDTO.getBusiness().getNumberOfSeats());
+			klasaB.setPrice(flightTransferDTO.getBusiness().getPrice());
+			klasaB.setDeleted(false);
+			klasaB.setFlight(let);
+			
+			classRepository.save(klasaB);
+			
+		}
+		
+		System.out.println("treci PROLAZ");
+		
+		if(flightTransferDTO.getFirst().getNumberOfSeats() != null) {
+			Class klasaP = new Class();
+			for (Class class1 : clis) {
+				if(class1.getType().equals("Prva"))
+					klasaP.setId(class1.getId());
+			}
+			klasaP.setType("Prva");
+			klasaP.setDeletedSeats("");
+			klasaP.setOccupiedSeats("");
+			klasaP.setNumberOfSeats(flightTransferDTO.getFirst().getNumberOfSeats());
+			klasaP.setPrice(flightTransferDTO.getFirst().getPrice());
+			klasaP.setDeleted(false);
+			klasaP.setFlight(let);
+			
+			classRepository.save(klasaP);
+			
+		}
+		
+		List<Luggage> Luggage1 = luggageRepository.findByFlightId(idFlight);
+		
+		System.out.println("cetvrti PROLAZ");
+		Luggage luggage = new Luggage();
+		if(flightTransferDTO.getLuggage().getMaxQuantity() != null) {
+			luggage.setId(Luggage1.get(0).getId());
+			luggage.setMaxQuantity(flightTransferDTO.getLuggage().getMaxQuantity());
+			luggage.setMaxWeight(flightTransferDTO.getLuggage().getMaxWeight());
+			luggage.setMaxDimensions(flightTransferDTO.getLuggage().getMaxDimensions());
+			luggage.setDeleted(false);
+			luggage.setFlight(let);
+			
+			luggageRepository.save(luggage);
+		}
+		
+		System.out.println("BLA BLA " + flightTransferDTO);
+		*/
+		return true;
 	}
 	
-	private Flight convertToEntity(FlightDTO flightDTO) {
-		Flight flight = new Flight();
-		flight.setId(flightDTO.getId());
-		flight.setDateAndTimeStart(flightDTO.getDateAndTimeStart());
-		flight.setDateAndTimeEnd(flightDTO.getDateAndTimeEnd());
-		flight.setLengthOfTravel(flightDTO.getLengthOfTravel());
-		flight.setPathCode(flightDTO.getPathCode());
-		flight.setRating(flightDTO.getRating());
-		flight.setTimeOfTravel(flightDTO.getTimeOfTravel());
-		flight.setTypeOfTravel(flightDTO.getTypeOfTravel());
-		
-		AvioCompany avioCompany = avioCompanyRepository.findById(flightDTO.getAvio_company_id()).orElse(null);
-		flight.setAvioCompany(avioCompany);
-		
-		AirPlane airPlane = airPlaneRepository.findById(flightDTO.getAir_plane_id()).orElse(null);
-		flight.setAirPlane(airPlane);
-		
-		Path path = pathRepository.findById(flightDTO.getPath_id()).orElse(null);
-		flight.setPath(path);
-		
-		return flight;
-	}*/
-	
-	private FlightDTO convertToDTO(Flight flight) {
-		FlightDTO flightDTO = new FlightDTO();
-		
-		flightDTO.setId(flight.getId());
-		flightDTO.setPathCode(flight.getPathCode());
-		flightDTO.setStarting_point_id(flight.getStartingPoint().getId());
-		flightDTO.setDestination_id(flight.getDestination().getId());
-		flightDTO.setDateAndTimeStart(flight.getDateAndTimeStart());
-		flightDTO.setDateAndTimeEnd(flight.getDateAndTimeEnd());
-		flightDTO.setLengthOfTravel(flight.getLengthOfTravel());
-		flightDTO.setTimeOfTravel(flight.getTimeOfTravel());
-		flightDTO.setNumberOfTransfer(flight.getNumberOfTransfer());
-		flightDTO.setDestinationOfTransfer(flight.getDestinationOfTransfer());
-		flightDTO.setTypeOfPath(flight.getTypeOfPath());
-		flightDTO.setAdditionalServices(flight.getAdditionalServices());
-		flightDTO.setDateAndTimeStartReturn(flight.getDateAndTimeStartReturn());
-		flightDTO.setDateAndTimeEndReturn(flight.getDateAndTimeEndReturn());
-		flightDTO.setRating(flight.getRating());
-		flightDTO.setDeleted(flight.getDeleted());
-		flightDTO.setAvio_company_id(flight.getAvioCompany().getId());
-
-		return flightDTO;
-	}
 	
 	private DestinationDTO convertToDTO(Destination destination) {
 		DestinationDTO destinationDTO = new DestinationDTO();
